@@ -5,7 +5,7 @@ import './Section.css';
 function Section() {
     return (
         <div className='hero-container'>
-        <video src='/videos/video.mp4' autoPlay loop muted/>
+        <img src='images/bg.jpg' className="hero-bg" alt="img"/>
         <h1>Khám phá du lịch</h1>
         <p>Bạn đang chờ đợi điều gì?</p>
         <div className='hero-btns'>
