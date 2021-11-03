@@ -76,7 +76,7 @@ function Header() {
               </Link>
             </li> */}
           </ul>
-          {button && <Button buttonStyle='btn--primary-outline'>Đăng ký</Button>}
+          {button && <Button buttonStyle='btn--primary-outline' >Đăng ký</Button>}
         </div>
       </nav>
       </>
