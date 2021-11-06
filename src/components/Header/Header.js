@@ -29,7 +29,7 @@ function Header() {
         <div className='navbar-container'>
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
           <img
-            src='images/logo.png'
+            src='/images/logo.png'
             alt="logo"
             style={{ width: "50px", height: "50px" }}
           />

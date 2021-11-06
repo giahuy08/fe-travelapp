@@ -4,16 +4,21 @@ import Home from './pages/Home/Home';
 import SignUp from './pages/Authen/SignUp';
 import LogIn from './pages/Authen/LogIn';
 import ForgetPassword from './pages/Authen/ForgetPassword';
-import Booking from './pages/Booking/Booking'
+import Profile from './pages/Profile/Account';
+import ChangePassword from './pages/Profile/ChangePassword';
+import Booking from './pages/Booking/Booking';
 function App() {
   return (
     <Router>
       <Switch>
-          <Route path= "/" exact component={Home}/>
-          <Route path= "/sign-up" exact component={SignUp}/>
-          <Route path= "/login" exact component={LogIn}/>
-          <Route path= "/forgetpassword" exact component={ForgetPassword}/>
-          <Route path= "/booking" exact component={Booking}/>
+          <Route path = "/" exact component={Home}/>
+          <Route path = "/sign-up" exact component={SignUp}/>
+          <Route path = "/login" exact component={LogIn}/>
+          <Route path = "/forgetpassword" exact component={ForgetPassword}/>
+          <Route path = "/user/profile" exact component={Profile}/>
+          <Route path = "/user/changepassword" exact component={ChangePassword}/>
+          <Route path = "/booking" exact component={Booking}/>
+
       </Switch>
     </Router>
   );
