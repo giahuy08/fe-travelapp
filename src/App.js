@@ -4,6 +4,7 @@ import Home from './pages/Home/Home';
 import SignUp from './pages/Authen/SignUp';
 import LogIn from './pages/Authen/LogIn';
 import ForgetPassword from './pages/Authen/ForgetPassword';
+import Booking from './pages/Booking/Booking'
 function App() {
   return (
     <Router>
@@ -12,6 +13,7 @@ function App() {
           <Route path= "/sign-up" exact component={SignUp}/>
           <Route path= "/login" exact component={LogIn}/>
           <Route path= "/forgetpassword" exact component={ForgetPassword}/>
+          <Route path= "/booking" exact component={Booking}/>
       </Switch>
     </Router>
   );
