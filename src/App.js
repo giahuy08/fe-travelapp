@@ -6,6 +6,8 @@ import LogIn from './pages/Authen/LogIn';
 import ForgetPassword from './pages/Authen/ForgetPassword';
 import Profile from './pages/Profile/Account';
 import ChangePassword from './pages/Profile/ChangePassword';
+import Tour from './pages/Tour/Tour'
+import TourDetail from './pages/Tour/TourDetail';
 import Booking from './pages/Booking/Booking';
 function App() {
   return (
@@ -17,7 +19,9 @@ function App() {
           <Route path = "/forgetpassword" exact component={ForgetPassword}/>
           <Route path = "/user/profile" exact component={Profile}/>
           <Route path = "/user/changepassword" exact component={ChangePassword}/>
-          <Route path = "/booking" exact component={Booking}/>
+          <Route path= "/tour" exact component={Tour}/>
+          <Route path= "/tourdetail" exact component={TourDetail}/>
+          <Route path= "/booking" exact component={Booking}/>
 
       </Switch>
     </Router>
