@@ -8,7 +8,7 @@ function Booking() {
       <Header />
       <div className="booking-card">
         <div className="booking-item">
-          <img src="images/bg.jpg" className="booking-item__img" />
+          <img src="/images/bg.jpg" className="booking-item__img" alt="" />
           <div className="booking__content">
             <p className="booking__content-name">
               Căn hộ Nikko - Cuộc sống quý phái (Nikko Apartments - The Classy
@@ -24,7 +24,7 @@ function Booking() {
           </div>
         </div>
         <div className="booking-item">
-          <img src="images/bg.jpg" className="booking-item__img" />
+          <img src="images/bg.jpg" className="booking-item__img"  alt=""/>
           <div className="booking__content">
             <p className="booking__content-name">
               Căn hộ Nikko - Cuộc sống quý phái (Nikko Apartments - The Classy
