@@ -6,28 +6,22 @@ import CardTour from '../../components/Card/CardTour'
 
 
 function Tour() {
-    var type={
-        background: "#e4e6f1"
-    }
+   
     return (
         <>
         <Header/>
-        <h2>Tour đi CHÂU ÂU</h2>  
+        <h2 className='h2-detail'>Tour đi CHÂU ÂU</h2>  
         <div className='body'>
          
         <div className='card'>
         
            <div className='cards__container_tour'> 
-           <div class="search">
                 Tìm Kiếm
-                <div>
-                    <form>
+                    <div>
                     <input className='input-seach' type="text" name="search" placeholder="Nhập ký tự ..."/>
                     
                     <button class='tiktok'>Tìm</button>
-                    </form>
-                </div>
-            </div> 
+                    </div>
                <div clss='cards__wrapper_tour'>
                    <div className='cards__items_tour'>
                    <CardTour

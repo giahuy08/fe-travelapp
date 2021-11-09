@@ -1,12 +1,12 @@
-body {
+/* body {
     font-family: 'Montserrat', 'Open Sans', sans-serif;
     font-size: 14px;
     line-height: 21px;
     color: black;
     font-weight: 400;
-}
+} */
 
-h2 {
+.h2-detail {
   margin-top:5px;  
   text-align: center;
 }
@@ -180,7 +180,7 @@ h2 {
     top:45px;
   }
   .input-seach {
-      width: 130px;
+      width: 450px;
       box-sizing: border-box;
       border: 1px solid black;
       border-radius: 4px;
@@ -189,19 +189,15 @@ h2 {
       padding: 12px 14px;
       transition: width 0.4s ease-in-out;
   }
-  nav li:hover{
+  /* nav li:hover{
     background-color:orange;
-  }
+  } */
   .search:hover{
     /* background-color:lightpink; */
     color:black;
   }
   .search:hover .search-bar{
     display:block;
-  }
-  form input[type="text"]:focus{
-    width:500px;
-    /* background-color:lightpink; */
   }
 
 
