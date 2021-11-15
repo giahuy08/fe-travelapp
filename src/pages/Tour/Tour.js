@@ -1,11 +1,82 @@
-import React from 'react'
+import React, {SyntheticEvent, useEffect, useRef, useState} from 'react'
 import '../../components/ListTour/ListTour.css'
 import CardTour from '../../components/Card/CardTour'
 import Head from '../../components/Head/Head'
 import Foot from '../../components/Foot/Foot'
 
+import { Link, Redirect, useParams } from "react-router-dom";
+
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 function Tour() {
+    const [allTour, setAllTour] = useState([]);
+    const [wordSearch, setwordSearch] = useState('');
+
+    
+    
+
+    // const params = useParams<{ n: string }>();
+    // const currentPage = parseInt(params.n);
+    const [currentPage, setcurrentPage] = useState(1);
+
+    const [page, setPage] = React.useState(1);
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+
+    
+    let defaultUrl = 'http://localhost:5000/tour/getAllTour?skip='+page+'&limit=6'
+
+    useEffect(() => {
+        (       
+                async () => {
+
+                const response = await fetch(defaultUrl,{
+                    method: 'GET',
+                    headers: {'Content-Type': 'application/json'}
+                });
+                
+                const content = await response.json();
+                console.log(content.data)
+                if(content.message === 'Successfully Get All Tour')
+                {
+                    setAllTour(content.data)                                  
+                }
+          }    
+        )();
+    },[page])
+
+    const add = () =>{
+        setcurrentPage(currentPage+1)
+    }
+
+    const minus = () =>{
+        setcurrentPage(currentPage-1)
+    }
+
+    const search = async ()=>{
+        if(!wordSearch)
+        {
+            setcurrentPage(1)
+        }else{
+            let link = 'http://localhost:5000/tour/findTourByName?name='+ wordSearch
+        const response = await fetch(link,{
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'},
+            
+        });
+        const content = await response.json();
+                console.log(content.data)
+                if(content.message === 'Successfully Get One Tour')
+                {
+                    setAllTour(content.data)                                  
+                }
+                else{
+                    setAllTour()
+                }
+        }                  
+    }
    
     return (
         <div className="tours__container">
@@ -18,62 +89,36 @@ function Tour() {
            <div className='cards__container_tour'> 
                 Tìm Kiếm
                     <div>
-                    <input className='input-seach' type="text" name="search" placeholder="Nhập ký tự ..."/>
+                    <input className='input-seach' type="text" name="search" placeholder="Nhập ký tự ..." onChange = {e => setwordSearch(e.target.value)}/>
                     
-                    <button class='tiktok'>Tìm</button>
+                    <button class='tiktok' onClick={search}>Tìm</button>
                     </div>
-               <div clss='cards__wrapper_tour'>
+               <div className='cards__wrapper_tour'>
                    <div className='cards__items_tour'>
-                   <CardTour
-                    img='images/img-3.jpg'
-                    text='Du Lịch Phú Quốc 3N2Đ [ Khởi hành từ Vinh]'
-                    days='3 ngày 2 đêm'
-                    price='5.100.000'>             
-                   </CardTour>
-
-                   <CardTour
-                    img='images/img-3.jpg'
-                    text='Du Lịch Phú Quốc 3N2Đ [ Khởi hành từ Vinh]'
-                    days='3 ngày 2 đêm'
-                    price='5.100.000'>             
-                   </CardTour>
-
-                   <CardTour
-                    img='images/img-3.jpg'
-                    text='Du Lịch Phú Quốc 3N2Đ [ Khởi hành từ Vinh]'
-                    days='3 ngày 2 đêm'
-                    price='5.100.000'>             
-                   </CardTour>
-
-                   <CardTour
-                    img='images/img-3.jpg'
-                    text='Du Lịch Phú Quốc 3N2Đ [ Khởi hành từ Vinh]'
-                    days='3 ngày 2 đêm'
-                    price='5.100.000'>             
-                   </CardTour>
-
-                   <CardTour
-                    img='images/img-3.jpg'
-                    text='Du Lịch Phú Quốc 3N2Đ [ Khởi hành từ Vinh]'
-                    days='3 ngày 2 đêm'
-                    price='5.100.000'>             
-                   </CardTour>
-                    
+                   
+                      {
+                           
+                           allTour&&allTour.map((tour)=>{
+                           return <CardTour
+                           img={tour.imagesTour[0]}
+                           text={tour.name}
+                           days={tour.time}
+                           price={tour.payment}>             
+                          </CardTour>
+                        })
+                      }                                                     
              
                    </div>
                    
             
                </div>
-               <div class="quantity-input">
-                <div class="add">
-                    <i class="fa fa-plus"></i>
+                <div style={{margin: 'auto'}}>
+                <Stack spacing={2} >
+                    <Pagination count={10} variant="outlined" page={page} onChange={handleChange}/>
+                </Stack>
                 </div>
-                <input type="number" class="number" value="1"/>
-                <div class="minus">
-                    <i class="fa fa-minus"></i>
-                </div>
-            </div>
-            </div>             
+                
+            </div>            
             
         </div>
         </div>      
