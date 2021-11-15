@@ -1,6 +1,5 @@
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Home from './pages/Home/Home';
 import SignUp from './pages/Authen/SignUp';
 import LogIn from './pages/Authen/LogIn';
 import ForgetPassword from './pages/Authen/ForgetPassword';
@@ -8,11 +7,13 @@ import Profile from './pages/Profile/Account';
 import ChangePassword from './pages/Profile/ChangePassword';
 import Tour from './pages/Tour/Tour'
 import TourDetail from './pages/Tour/TourDetail';
+import Booking from './pages/Booking/Booking';
+import HomePage from './pages/HomePage/HomePage';
 function App() {
   return (
     <Router>
       <Switch>
-          <Route path = "/" exact component={Home}/>
+          <Route path = "/" exact component={HomePage}/>
           <Route path = "/sign-up" exact component={SignUp}/>
           <Route path = "/login" exact component={LogIn}/>
           <Route path = "/forgetpassword" exact component={ForgetPassword}/>
@@ -20,6 +21,8 @@ function App() {
           <Route path = "/user/changepassword" exact component={ChangePassword}/>
           <Route path= "/tour" exact component={Tour}/>
           <Route path= "/tourdetail" exact component={TourDetail}/>
+          <Route path= "/booking" exact component={Booking}/>
+
       </Switch>
     </Router>
   );

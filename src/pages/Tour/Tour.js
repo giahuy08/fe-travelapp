@@ -1,9 +1,8 @@
 import React, {SyntheticEvent, useEffect, useRef, useState} from 'react'
-import Footer from '../../components/Footer/Footer'
-import Header from '../../components/Header/Header'
 import '../../components/ListTour/ListTour.css'
 import CardTour from '../../components/Card/CardTour'
-import axios from 'axios';
+import Head from '../../components/Head/Head'
+import Foot from '../../components/Foot/Foot'
 
 import { Link, Redirect, useParams } from "react-router-dom";
 
@@ -80,8 +79,8 @@ function Tour() {
     }
    
     return (
-        <>
-        <Header/>
+        <div className="tours__container">
+        <Head/>
         <h2 className='h2-detail'>Tour đi CHÂU ÂU</h2>  
         <div className='body'>
          
@@ -119,25 +118,14 @@ function Tour() {
                 </Stack>
                 </div>
                 
-
-               <div class="quantity-input">
-                <div class="minus" onClick={minus}>
-                    <i class="fa fa-minus"></i>
-                </div>
-                <input type="number" class="number" value={currentPage}/>
-                <div class="add" onClick={add}>
-                    <i class="fa fa-plus">                  
-                    </i>
-                </div>
-            </div>
             </div>            
             
         </div>
         </div>      
         
         
-        <Footer/>   
-        </>
+        <Foot/>   
+        </div>
     )
 }
 

@@ -5,11 +5,12 @@ import {
 } from '@mui/material';
 import AccountProfile from '../../components/Account/AccountProfile';
 import AccountProfileDetails from '../../components/Account/AccountProfileDetails';
-import Header from '../../components/Header/Header';
+import Head from '../../components/Head/Head';
+
 
 const Account = () => (
   <>
-  <Header/>
+  <Head/>
     <Box
     style = {{marginTop:'30px'}}
       sx={{
