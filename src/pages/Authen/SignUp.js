@@ -15,7 +15,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
-import Header from '../../components/Header/Header';
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props} >
@@ -45,21 +44,26 @@ export default function SignUp() {
   return (
 
     <ThemeProvider theme={theme} >
-      <Header />
+    
       <Container component="main" maxWidth="xs" >
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 2,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
 
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }} style={{backgroundColor: "#F1786a"}}>
-            <LockOutlinedIcon />
-          </Avatar>
+           <Link href="/">
+             
+             <img
+               src="./images/logo.png"
+               alt=""
+               style={{ width: 50, height: 50 }}
+             />
+             </Link>
           <Typography component="h1" variant="h5">
             Đăng ký
           </Typography>
@@ -183,7 +187,7 @@ export default function SignUp() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+   
       </Container>
     </ThemeProvider>
   );

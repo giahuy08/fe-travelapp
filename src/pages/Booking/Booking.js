@@ -1,11 +1,11 @@
 import React from "react";
 import "./Booking.css";
-import Header from "../../components/Header/Header";
 import { Button, Chip } from "@mui/material";
+import Head from "../../components/Head/Head";
 function Booking() {
   return (
     <>
-      <Header />
+      <Head />
       <div className="booking-card">
         <div className="booking-item">
           <img src="/images/bg.jpg" className="booking-item__img" alt="" />

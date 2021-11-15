@@ -1,11 +1,12 @@
 import React from 'react'
 import '../../components/ListTour/TourDetail.css';
-import Footer from '../../components/Footer/Footer'
-import Header from '../../components/Header/Header'
+
+import Head from '../../components/Head/Head';
+import Foot from '../../components/Foot/Foot';
 function TourDetail() {
     return (
         <>
-        <Header/>
+        <Head/>
         <div className='hero-container-tourdetail'>
         <img src='images/img-3.jpg' className="hero-bg-detail" alt="img"/>
         <h1>Du Lịch Phú Quốc 3N2Đ [ Khởi hành từ Vinh]</h1>
@@ -25,39 +26,39 @@ function TourDetail() {
             <div className='list-img'>
             <div class="cards-detail-1">
         <a href="images/img-3.jpg" target="_blank">
-           <img class="img-detail" src="images/img-3.jpg"/>
+           <img class="img-detail" src="images/img-3.jpg" alt=""/>
         </a>
         <div class="desc">Đặt tiêu đề cho hình ảnh tại đây</div>
     </div>
     <div class="cards-detail-1">
         <a className='link-card' href="images/img-3.jpg" target="_blank">
-           <img class="img-detail" src="images/img-3.jpg"/>
+           <img class="img-detail" src="images/img-3.jpg" alt=""/>
         </a>
         <div class="desc">Đặt tiêu đề cho hình ảnh tại đây</div>
     </div>
     <div class="cards-detail-1">
         <a href="images/img-3.jpg" target="_blank">
-           <img class="img-detail" src="images/img-3.jpg"/>
+           <img class="img-detail" src="images/img-3.jpg" alt=""/>
         </a>
         <div class="desc">Đặt tiêu đề cho hình ảnh tại đây</div>
     </div>
     <div class="cards-detail-1">
         <a href="images/img-3.jpg" target="_blank">
-           <img class="img-detail" src="images/img-3.jpg"/>
+           <img class="img-detail" src="images/img-3.jpg" alt=""/>
         </a>
         <div class="desc">Đặt tiêu đề cho hình ảnh tại đây</div>
     </div>
             </div>
                 <h3>Đánh Giá: </h3>
                 <button className='button-cmt'>Gữi đánh giá</button>
-                <input type='text' className='input-cmt' placeholder='Viết đánh giá ở đây ....'></input>                  
+                <input type='text' className='input-cmt' placeholder='Viết đánh giá ở đây ....'/>                 
                
 
                 <h3 className='cmt'>Huy</h3>             
                 <div>Đi mà không có tiền đi làm gì :(</div>
                 <div className='list-img-cmt'>
-                    <img className='cmt-img'src="images/img-3.jpg"/>
-                    <img className='cmt-img'src="images/img-3.jpg"/>
+                    <img className='cmt-img'src="images/img-3.jpg" alt=""/>
+                    <img className='cmt-img'src="images/img-3.jpg" alt=""/>
                 </div>
                 
                 
@@ -69,7 +70,7 @@ function TourDetail() {
 
            
         </div>
-      <Footer/> 
+      <Foot/> 
       </>
     )
 }
