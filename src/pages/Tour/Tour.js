@@ -1,15 +1,15 @@
 import React from 'react'
-import Footer from '../../components/Footer/Footer'
-import Header from '../../components/Header/Header'
 import '../../components/ListTour/ListTour.css'
 import CardTour from '../../components/Card/CardTour'
+import Head from '../../components/Head/Head'
+import Foot from '../../components/Foot/Foot'
 
 
 function Tour() {
    
     return (
-        <>
-        <Header/>
+        <div className="tours__container">
+        <Head/>
         <h2 className='h2-detail'>Tour đi CHÂU ÂU</h2>  
         <div className='body'>
          
@@ -79,8 +79,8 @@ function Tour() {
         </div>      
         
         
-        <Footer/>   
-        </>
+        <Foot/>   
+        </div>
     )
 }
 
