@@ -86,8 +86,7 @@ const ChangePasswordDetails = (props) => {
                                                 aria-label="toggle password visibility"
                                                 onClick={handleClickShowOldPassword}
                                                 onMouseDown={handleMouseDownPassword}
-                                                edge="end"
-                                            >
+                                                edge="end">
                                                 {values.showoldPassword ? <VisibilityOff /> : <Visibility />}
                                             </IconButton>
                                         </InputAdornment>

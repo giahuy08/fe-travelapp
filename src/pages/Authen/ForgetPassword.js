@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from 'react';
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,6 +10,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import callApi from "../../api/apiService";
+import { useHistory } from "react-router";
+
 function Copyright(props) {
   return (
     <Typography
@@ -31,19 +34,69 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function ForgetPassword() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  const [user, setUser] = useState({
+    activeStep: 0,
+    labelWidth: 0,
+    error: false, //<---- here
+    errorMessage: {} //<-----here
+  });
+
+  const handleNext = (e) => {
+    const data = new FormData(e.currentTarget);
+    let isError = false;
+    if (data.get("email") === '') {
+      isError = true;
+      setUser(prev => ({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, email: "Nhập địa chỉ Email của bạn" }
+      }));
+    }
+    else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.get("email"))) {
+      isError = true;
+      setUser(prev => ({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, email: "Email không hợp lệ" }
+      }));
+    } else {
+      setUser(prev => ({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, email: "" }
+      }));
+    }
+    if (!isError) {
+      //add else if for validating other fields (if any)
+      setUser(prevState => ({
+        activeStep: prevState.activeStep + 1,
+        error: false,
+        errorMessage: {}
+      }));
+    }
+  }
+  const history = useHistory()
+  const handleSubmit = (e) => {
+    const data = new FormData(e.currentTarget);
+    handleNext(e)
+    e.preventDefault();
+    if (data.get("email") !== "" && data.get("password") !== "") {
+      const email = data.get("email")
+      console.log(user);
+      callApi(`user/forgotPassword?email=` + email.toString(), "GET")
+        .then((res) => {
+          console.log(res);
+          history.push("/");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (
     <ThemeProvider theme={theme}>
-    
+
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -79,6 +132,11 @@ export default function ForgetPassword() {
               </Typography>
               <Grid item xs={12}>
                 <TextField
+                  error={!!user.errorMessage.email}
+                  helperText={
+                    user.errorMessage.email &&
+                    user.errorMessage.email
+                  }
                   required
                   fullWidth
                   id="email"
