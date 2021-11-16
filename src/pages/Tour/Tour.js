@@ -1,10 +1,12 @@
-import React, { useEffect,  useState} from 'react'
+import React, {SyntheticEvent, useEffect, useRef, useState} from 'react'
 import '../../components/ListTour/ListTour.css'
 import CardTour from '../../components/Card/CardTour'
+import Header from '../../components/Header/Header'
 import Foot from '../../components/Foot/Foot'
+
+
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import Header from '../../components/Header/Header'
 
 function Tour() {
     const [allTour, setAllTour] = useState([]);
@@ -24,6 +26,26 @@ function Tour() {
 
     
     let defaultUrl = 'http://localhost:5000/tour/getAllTour?skip='+page+'&limit=6'
+    let defaultUrl1 = 'localhost:5000/tour/getPageNumbers?limit=6'
+
+    useEffect(() => {
+        (       
+                async () => {
+
+                const response = await fetch(defaultUrl,{
+                    method: 'GET',
+                    headers: {'Content-Type': 'application/json'}
+                });
+                
+                const content = await response.json();
+                console.log(content.data)
+                if(content.message === 'Successfully Get All Tour')
+                {
+                    setAllTour(content.data)                                  
+                }
+          }    
+        )();
+    },[page])
 
     useEffect(() => {
         (       
@@ -77,7 +99,6 @@ function Tour() {
    
     return (
         <div className="tours__container">
-        {/* <Head/> */}
         <Header/>
         <h2 className='h2-detail'>Tour đi CHÂU ÂU</h2>  
         <div className='body'>
