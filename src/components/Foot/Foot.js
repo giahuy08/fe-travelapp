@@ -224,21 +224,21 @@ function Foot() {
               <ul className="home__footer__transaction-list">
                 <li className="home__footer__transaction-item">
                   <img
-                    src="./images/visa.svg"
+                    src="../images/visa.svg"
                     alt="VISA CARD"
                     className="home__footer__transaction-img"
                   />
                 </li>
                 <li className="home__footer__transaction-item">
                   <img
-                    src="./images/mastercard.svg"
+                    src="../images/mastercard.svg"
                     alt="MASTER CARD"
                     className="home__footer__transaction-img"
                   />
                 </li>
                 <li className="home__footer__transaction-item">
                   <img
-                    src="./images/maestro.svg"
+                    src="../images/maestro.svg"
                     alt="MAESTRO CARD"
                     className="home__footer__transaction-img"
                   />
@@ -252,7 +252,7 @@ function Foot() {
                 <li className="certification-item">
                   <a href="" className="certification-item-link">
                     <img
-                      src="./images/bct.png"
+                      src="../images/bct.png"
                       alt=""
                       className="mr-20 certification-item-img"
                     />
@@ -261,7 +261,7 @@ function Foot() {
                 <li className="certification-item">
                   <a href="" className="certification-item-link">
                     <img
-                      src="./images/dmca.png"
+                      src="../images/dmca.png"
                       alt=""
                       className="certification-item-img"
                     />

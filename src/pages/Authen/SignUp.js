@@ -20,13 +20,18 @@ import { useHistory } from "react-router";
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props} >
-      {'Copyright © '}
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
         Your Website
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
@@ -216,14 +221,12 @@ export default function SignUp() {
         <Box
           sx={{
             marginTop: 2,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
           <Link href="/">
-
             <img
               src="./images/logo.png"
               alt=""
@@ -233,7 +236,12 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Đăng ký
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 3 }}
+          >
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -284,7 +292,10 @@ export default function SignUp() {
               <Grid item xs={12} sm={4}>
                 <Box sx={{ minWidth: 120 }}>
                   <FormControl fullWidth>
-                    <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                    <InputLabel
+                      variant="standard"
+                      htmlFor="uncontrolled-native"
+                    >
                       Quốc gia
                     </InputLabel>
                     <NativeSelect
@@ -292,8 +303,8 @@ export default function SignUp() {
                       value={value}
                       onChange={handleValue}
                       inputProps={{
-                        name: 'firstphone',
-                        id: 'uncontrolled-native',
+                        name: "firstphone",
+                        id: "uncontrolled-native",
                       }}
                     >
                       <option value="376">AD +376</option>
@@ -536,6 +547,7 @@ export default function SignUp() {
                   id="phone"
                   label="Số điện thoại"
                   autoFocus
+                  
                 />
               </Grid>
               <Grid item xs={12}>
@@ -588,7 +600,9 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
+                  control={
+                    <Checkbox value="allowExtraEmails" color="primary" />
+                  }
                   label="Tôi đã đọc và chập nhận với các điều khoản"
                 />
               </Grid>
@@ -611,7 +625,6 @@ export default function SignUp() {
             </Grid>
           </Box>
         </Box>
-
       </Container>
     </ThemeProvider>
   );

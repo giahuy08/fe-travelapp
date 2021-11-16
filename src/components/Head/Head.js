@@ -15,7 +15,6 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 
 function Head() {
-
   const [user, setUser] = useState('');
   let defaultUrl = 'http://localhost:5000/user/findUserByToken'
   useEffect(() => {
@@ -48,6 +47,9 @@ const logout = ()=>{
     setAnchorEl(null);
   };
 
+  
+
+  
   if(!user) 
   {
     return (
