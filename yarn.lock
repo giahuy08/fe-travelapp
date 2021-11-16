@@ -35,7 +35,7 @@
   "resolved" "https://registry.npmjs.org/@babel/compat-data/-/compat-data-7.16.0.tgz"
   "version" "7.16.0"
 
-"@babel/core@^7.0.0", "@babel/core@^7.1.0", "@babel/core@^7.12.3", "@babel/core@^7.7.5", "@babel/core@^7.8.4", "@babel/core@7.12.3":
+"@babel/core@^7.1.0", "@babel/core@^7.12.3", "@babel/core@^7.7.5", "@babel/core@^7.8.4", "@babel/core@7.12.3":
   "integrity" "sha512-0qXcZYKZp3/6N2jKYVxZv0aNCsxTSVCiK72DTiTYZAu7sjg73W0/aynWjMbiGd87EQL4WyA8reiJVh92AVla9g=="
   "resolved" "https://registry.npmjs.org/@babel/core/-/core-7.12.3.tgz"
   "version" "7.12.3"
@@ -1259,7 +1259,7 @@
   "resolved" "https://registry.npmjs.org/@emotion/memoize/-/memoize-0.7.5.tgz"
   "version" "0.7.5"
 
-"@emotion/react@^11.0.0-rc.0", "@emotion/react@^11.5.0":
+"@emotion/react@^11.5.0":
   "integrity" "sha512-MYq/bzp3rYbee4EMBORCn4duPQfgpiEB5XzrZEBnUZAL80Qdfr7CEv/T80jwaTl/dnZmt9SnTa8NkTrwFNpLlw=="
   "resolved" "https://registry.npmjs.org/@emotion/react/-/react-11.5.0.tgz"
   "version" "11.5.0"
@@ -1590,7 +1590,7 @@
   dependencies:
     "@babel/runtime" "^7.15.4"
 
-"@mui/material@^5.0.0", "@mui/material@^5.0.6":
+"@mui/material@^5.0.6":
   "integrity" "sha512-1NmLel2Q+PnSfhFhdrhTbZFLfGpGKcPbu8onwGJu+vbD3YMTjr8gXvQ/sYZC0Motfu8jLnQdlq4FD4fRhqndnw=="
   "resolved" "https://registry.npmjs.org/@mui/material/-/material-5.0.6.tgz"
   "version" "5.0.6"
@@ -1912,6 +1912,11 @@
   "resolved" "https://registry.npmjs.org/@tootallnate/once/-/once-1.1.2.tgz"
   "version" "1.1.2"
 
+"@trendyol-js/react-carousel@^2.0.0":
+  "integrity" "sha512-AS/2cYZp4bXErECV6c49CsFeWxxd6J7xsRqRPUL5j1BF2Ga0rcIZog7wDRQr6WYaUbVRa/8Z5BKtg7kTk0s0+w=="
+  "resolved" "https://registry.npmjs.org/@trendyol-js/react-carousel/-/react-carousel-2.0.0.tgz"
+  "version" "2.0.0"
+
 "@types/aria-query@^4.2.0":
   "integrity" "sha512-HnYpAE1Y6kRyKM/XkEuiRQhTHvkzMBurTHnpFLYLBGPIylZNPs9jJcuOOYWxPLJCSEtmZT0Y8rHDokKN7rRTig=="
   "resolved" "https://registry.npmjs.org/@types/aria-query/-/aria-query-4.2.2.tgz"
@@ -2074,7 +2079,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.8.6 || ^17.0.0":
+"@types/react@*":
   "integrity" "sha512-pLWntxXpDPaU+RTAuSGWGSEL2FRTNyRQOjSWDke/rxRg14ncsZvx8AKWMWZqvc1UOaJIAoObdZhAWvRaHFi5rw=="
   "resolved" "https://registry.npmjs.org/@types/react/-/react-17.0.33.tgz"
   "version" "17.0.33"
@@ -9733,7 +9738,7 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@^16.3.0 || ^17.0.0", "react@^17.0.2", "react@>=16.3.0", "react@>=16.8.0":
+"react@^17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
@@ -11642,10 +11647,10 @@
   "resolved" "https://registry.npmjs.org/watchpack/-/watchpack-1.7.5.tgz"
   "version" "1.7.5"
   dependencies:
+    "chokidar" "^3.4.1"
     "graceful-fs" "^4.1.2"
     "neo-async" "^2.5.0"
   optionalDependencies:
-    "chokidar" "^3.4.1"
     "watchpack-chokidar2" "^2.0.1"
 
 "wbuf@^1.1.0", "wbuf@^1.7.3":
