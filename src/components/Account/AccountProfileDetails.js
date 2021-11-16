@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box,
   Button,
@@ -24,27 +24,52 @@ import IconButton from '@mui/material/IconButton';
 const AccountProfileDetails = (props) => {
   const [values, setValues] = useState({
     name: 'Huỳnh Nhựt Thiên',
-    password: '123456789AsZx',
+    password: '123456789AsZx1',
     email: 'thienhn7761311@gmail.com',
     phone: '0968892926',
     address: 'Lai Vung, Đồng Tháp',
     showPassword: false,
   });
 
+  const [user, setUser] = useState('');
+  const [showPassword, setShowPassword] = useState(false)
+  let defaultUrl = 'http://localhost:5000/user/findUserByToken'
+  useEffect(() => {
+    (       
+            async () => {
+
+            const response = await fetch(defaultUrl,{
+                method: 'GET',
+                headers: {'Content-Type': 'application/json',  "Authorization":"Bearer " + localStorage.getItem("accessToken")}
+            });
+            
+            const content = await response.json();
+            console.log(content.data)
+            setUser(content.data)
+      }    
+    )();
+},[])
+
 
   const handleChange = (event) => {
-    setValues({
-      ...values,
+    setUser({
+      ...user,
       [event.target.name]: event.target.value
     });
   };
 
   const handleClickShowPassword = () => {
+    
     setValues({
-      ...values,
+      ...user,
       showPassword: !values.showPassword,
     });
   };
+
+  const handleClick = () => {
+    setShowPassword(!showPassword);
+  };
+
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
@@ -56,7 +81,7 @@ const AccountProfileDetails = (props) => {
       noValidate
       {...props}
     >
-      <Card>
+      <Card style={{marginTop: '60px'}}>
         <CardHeader
           subheader="Cập nhật thông tin cá nhân"
           title="Thông tin tài khoản"
@@ -78,7 +103,7 @@ const AccountProfileDetails = (props) => {
                 label="Họ và tên"
                 name="name"
                 onChange={handleChange}
-                value={values.name}
+                value={user.name}
                 variant="outlined"
                 InputProps={{
                   startAdornment: (
@@ -99,7 +124,7 @@ const AccountProfileDetails = (props) => {
                 label="Địa chỉ"
                 name="address"
                 onChange={handleChange}
-                value={values.address}
+                value={user.address}
                 variant="outlined"
                 InputProps={{
                   startAdornment: (
@@ -121,7 +146,7 @@ const AccountProfileDetails = (props) => {
                 label="E-mail"
                 name="email"
                 onChange={handleChange}
-                value={values.email}
+                value={user.email}
                 variant="outlined"
                 InputProps={{
                   startAdornment: (
@@ -142,7 +167,7 @@ const AccountProfileDetails = (props) => {
                 label="Số điện thoại"
                 name="phone"
                 onChange={handleChange}
-                value={values.phone}
+                value={user.phone}
                 variant="outlined"
                 InputProps={{
                   startAdornment: (
@@ -164,8 +189,9 @@ const AccountProfileDetails = (props) => {
                 label="Mật khẩu"
                 name="password"
                 onChange={handleChange}
-                type={values.showPassword ? 'text' : 'password'}
-                value={values.password}
+                // type={showPassword ? 'text' : 'password'}
+                type='password'
+                value={user.password}
                 variant="outlined"
                 InputProps={{
                   startAdornment: (
@@ -177,11 +203,11 @@ const AccountProfileDetails = (props) => {
                     <InputAdornment position="end">
                       <IconButton
                         aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
+                        onClick={handleClick}
                         onMouseDown={handleMouseDownPassword}
                         edge="end"
                       >
-                        {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                        {user.showPassword ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
                     </InputAdornment>
                   ),

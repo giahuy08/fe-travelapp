@@ -20,7 +20,7 @@ const user = {
 };
 
 const AccountProfile = (props) => (
-  <Card {...props}>
+  <Card style={{marginTop: '60px'}} {...props}>
     <CardContent>
       <Box
         sx={{
