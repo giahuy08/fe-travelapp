@@ -9,6 +9,8 @@ import Tour from './pages/Tour/Tour'
 import TourDetail from './pages/Tour/TourDetail';
 import Booking from './pages/Booking/Booking';
 import HomePage from './pages/HomePage/HomePage';
+import Page404 from './pages/404/Page404';
+
 function App() {
   return (
     <Router>
@@ -22,6 +24,7 @@ function App() {
           <Route path= "/tour" exact component={Tour}/>
           <Route path= "/tourdetail" exact component={TourDetail}/>
           <Route path= "/booking" exact component={Booking}/>
+          <Route path= "/404" exact component={Page404}/>
 
       </Switch>
     </Router>
