@@ -17,6 +17,7 @@
     top: 0;
     border-bottom: 1px solid var(--border-color);
     background-color: var(--white-color);
+  
 }
 
 .header__wrapper {
@@ -125,12 +126,14 @@
 .header__list {
     display: flex;
     align-items: center;
+ 
 }
 
 .header__item {
     list-style: none;
     margin-left: 30px;
     position: relative;
+
 }
 
 

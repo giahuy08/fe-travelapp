@@ -60,15 +60,15 @@ function TourItem() {
         </div>
         <div className="touritem__content-wrap">
           <div className="touritem__content-wrap-info">
-            <h3 className="touritem__name">
+            <h2 className="touritem__name">
               Hanoi Home 3 - Beautiful apartment for you (no. 22) - miễn phí xe đạp
-            </h3>
+            </h2>
             <div className="touritem__place">
               <i class="fas fa-map-marker-alt"></i>
               Tây Hồ, Hà Nội, Vietnam
             </div>
             <div className="touritem__detail">
-              Căn hộ nằm ở một vị trí lý tưởng, nơi này là một con phố đông đúc
+              Căn hộ nằm ở một vị trí lý tưởng,\n  nơi này là một con phố đông đúc
               của cộng đồng nước ngoài. Có rất nhiều nhà hàng, quán bar, quán cà
               phê, phòng tập thể dục, tất cả đều được làm cho người nước ngoài.
               Khu vực xung quanh có nhiều cảnh quan đẹp như Hồ Kiếm, Hồ Trúc
