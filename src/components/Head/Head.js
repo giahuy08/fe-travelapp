@@ -15,7 +15,7 @@ function Head() {
                 className='header__logo-link'
               
               >
-                <img src="./images/logo.png" alt="" className="logo" />
+                <img src="../images/logo.png" alt="" className="logo" />
               </Link>
             </div>
             <div className="header__search-box">

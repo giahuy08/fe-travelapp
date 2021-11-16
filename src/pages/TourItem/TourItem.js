@@ -14,42 +14,42 @@ function TourItem() {
           <Carousel show={2.5} slide={2} swiping={true} transition={0.5}>
             <div className="touritem__content-slider-item">
               <img
-                src="./images/apartment_1_1614660728.jpg"
+                src="../images/apartment_1_1614660728.jpg"
                 alt=""
                 className="touritem__content-slider-img"
               />
             </div>
             <div className="touritem__content-slider-item">
               <img
-                src="./images/apartment_2_1614588617.jpg"
+                src="../images/apartment_2_1614588617.jpg"
                 alt=""
                 className="touritem__content-slider-img"
               />
             </div>
             <div className="touritem__content-slider-item">
               <img
-                src="./images/apartment_2_1614588617.jpg"
+                src="../images/apartment_2_1614588617.jpg"
                 alt=""
                 className="touritem__content-slider-img"
               />
             </div>
             <div className="touritem__content-slider-item">
               <img
-                src="./images/apartment_2_1614588617.jpg"
+                src="../images/apartment_2_1614588617.jpg"
                 alt=""
                 className="touritem__content-slider-img"
               />
             </div>
             <div className="touritem__content-slider-item">
               <img
-                src="./images/apartment_2_1614588617.jpg"
+                src="../images/apartment_2_1614588617.jpg"
                 alt=""
                 className="touritem__content-slider-img"
               />
             </div>
             <div className="touritem__content-slider-item">
               <img
-                src="./images/apartment_2_1614588617.jpg"
+                src="../images/apartment_2_1614588617.jpg"
                 alt=""
                 className="touritem__content-slider-img"
               />
@@ -143,7 +143,7 @@ function TourItem() {
             <div class="touritem__some__hotel-container">
               <a href="#" class="touritem__some__hotel-link">
                 <img
-                  src="./images/apartment_1_1625465608.jpg"
+                  src="../images/apartment_1_1625465608.jpg"
                   alt=""
                   class="touritem__some__hotel-img"
                 />
@@ -160,7 +160,7 @@ function TourItem() {
             <div class="touritem__some__hotel-container">
               <a href="#" class="touritem__some__hotel-link">
                 <img
-                  src="./images/apartment_1_1625465608.jpg"
+                  src="../images/apartment_1_1625465608.jpg"
                   alt=""
                   class="touritem__some__hotel-img"
                 />
@@ -177,7 +177,7 @@ function TourItem() {
             <div class="touritem__some__hotel-container">
               <a href="#" class="touritem__some__hotel-link">
                 <img
-                  src="./images/apartment_1_1625465608.jpg"
+                  src="../images/apartment_1_1625465608.jpg"
                   alt=""
                   class="touritem__some__hotel-img"
                 />

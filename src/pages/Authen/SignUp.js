@@ -1,20 +1,23 @@
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
-import NativeSelect from "@mui/material/NativeSelect";
+import React, { useState } from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import NativeSelect from '@mui/material/NativeSelect';
+import callApi from "../../api/apiService";
+import { useHistory } from "react-router";
+
 function Copyright(props) {
   return (
     <Typography
@@ -35,22 +38,185 @@ function Copyright(props) {
 
 const theme = createTheme();
 
+
 export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  const [user, setUser] = useState({
+    activeStep: 0,
+    labelWidth: 0,
+    error: false, //<---- here
+    errorMessage: {} //<-----here
+  })
+  const [value, setValue] = useState()
+  const handleValue = (e) => {
+
+    setValue(e.target.value)
+    console.log(e.target.value)
+  }
+
+
+  const handleNext = (e) => {
+    const data = new FormData(e.currentTarget);
+    let isError = false;
+    if (data.get('firstName') === '') {
+      isError = true;
+      setUser(prev =>({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, firstName: "Không được bỏ trống" }
+      }));
+    }else {
+      setUser(prev =>({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, firstName: "" }
+      }));
+    }
+    if (data.get('lastName') === '')  {
+      isError = true;
+      setUser(prev =>({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, lastName: "Không được bỏ trống" }
+      }));
+    }else {
+      setUser(prev =>({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, lastName: "" }
+      }));
+    }
+    if (data.get("email") === '') {
+      isError = true;
+      setUser(prev => ({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, email: "Nhập địa chỉ Email của bạn" }
+      }));
+    }
+    else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.get("email"))) {
+      isError = true;
+      setUser(prev => ({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, email: "Email không hợp lệ" }
+      }));
+    } else {
+      setUser(prev => ({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, email: "" }
+      }));
+    }
+    
+    if (data.get('phone') === '') {
+      isError = true;
+      setUser(prev =>({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, phone: "Nhập số điện thoại của bạn" }
+      }));
+    } else {
+      setUser(prev =>({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, phone: "" }
+      }));
+    }
+    if (data.get('address') === '') {
+      isError = true;
+      setUser(prev =>({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, address: "Nhập địa chỉ của bạn" }
+      }));
+    }else {
+      setUser(prev =>({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, address: "" }
+      }));
+    }
+    if (data.get('password') === '') {
+      isError = true;
+      setUser(prev =>({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, password: "Nhập mật khẩu" }
+      }));
+    }else {
+      setUser(prev =>({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, password: "" }
+      }));
+    }
+    if (data.get('confirm-password') === '') {
+      isError = true;
+      setUser(prev =>({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, confirmpassword: "Xác nhận lại mật khẩu" }
+      }));
+    }else if (data.get('confirm-password') !== data.get('password')) {
+      isError = true;
+      setUser(prev =>({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, confirmpassword: "Xác nhận lại mật khẩu không đúng" }
+      }));
+    } else {
+      setUser(prev =>({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, confirmpassword: ""}
+      }));
+    }
+    if(!isError){
+      //add else if for validating other fields (if any)
+      setUser(prevState => ({
+        activeStep: prevState.activeStep + 1,
+        error: false,
+        errorMessage: {}
+      }));
+    }
+  }
+
+  const history = useHistory()
+  const handleSubmit = (e) => {
+    
+    const data = new FormData(e.currentTarget);
+    handleNext(e);
+    e.preventDefault();
+    console.log(data.get('firstName'));
+    if (data.get('firstName') !== "" && data.get('lastName') !== "" &&
+      data.get("email") !== "" && data.get("password") !== "" &&
+      data.get('phone') !== "" && data.get('address') !== "" &&
+      data.get('password') == data.get('confirm-password')) {
+      let user = {
+        email: data.get('email'),
+        password: data.get('password'),
+        phone: "0" + data.get('phone'),
+        name: data.get('firstName') + " " + data.get('lastName'),
+        address: data.get('address'),
+      };
+      console.log(user);
+      callApi(`user/register`, "POST", user)
+        .then((res) => {
+          console.log(res);
+          console.log(res.data.data.token)
+          localStorage.setItem("accessToken", res.data.data.token)
+          history.push("/");
+
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
-
-
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+    <ThemeProvider theme={theme} >
+      <Container component="main" maxWidth="xs" >
         <CssBaseline />
         <Box
           sx={{
@@ -79,6 +245,11 @@ export default function SignUp() {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  error={!!user.errorMessage.firstName}
+                  helperText={
+                    user.errorMessage.firstName &&
+                    user.errorMessage.firstName
+                  }
                   autoComplete="given-name"
                   name="firstName"
                   required
@@ -90,6 +261,11 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  error={!!user.errorMessage.lastName}
+                  helperText={
+                    user.errorMessage.lastName &&
+                    user.errorMessage.lastName
+                  }
                   required
                   fullWidth
                   id="lastName"
@@ -100,6 +276,11 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  error={!!user.errorMessage.email}
+                  helperText={
+                    user.errorMessage.email &&
+                    user.errorMessage.email
+                  }
                   required
                   fullWidth
                   id="email"
@@ -118,7 +299,9 @@ export default function SignUp() {
                       Quốc gia
                     </InputLabel>
                     <NativeSelect
-                      defaultValue={30}
+                      defaultValue={84}
+                      value={value}
+                      onChange={handleValue}
                       inputProps={{
                         name: "firstphone",
                         id: "uncontrolled-native",
@@ -351,7 +534,14 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12} sm={8}>
                 <TextField
-                
+                  error={!!user.errorMessage.phone}
+                  helperText={
+                    user.errorMessage.phone &&
+                    user.errorMessage.phone
+                  }
+                  type="number"
+                  autoComplete="given-phone"
+                  name="phone"
                   required
                   fullWidth
                   id="phone"
@@ -362,6 +552,11 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  error={!!user.errorMessage.address}
+                  helperText={
+                    user.errorMessage.address &&
+                    user.errorMessage.address
+                  }
                   required
                   fullWidth
                   name="address"
@@ -373,6 +568,11 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  error={!!user.errorMessage.password}
+                  helperText={
+                    user.errorMessage.password &&
+                    user.errorMessage.password
+                  }
                   required
                   fullWidth
                   name="password"
@@ -384,6 +584,11 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  error={!!user.errorMessage.confirmpassword}
+                  helperText={
+                    user.errorMessage.confirmpassword &&
+                    user.errorMessage.confirmpassword
+                  }
                   required
                   fullWidth
                   name="confirm-password"
