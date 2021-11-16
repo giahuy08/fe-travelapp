@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "../../components/Head/Head";
+import TextField from "@mui/material/TextField";
 import { Carousel } from "@trendyol-js/react-carousel";
 import CardImage from "../../components/CardImage/CardImage";
 import "./TourItem.css";
@@ -82,8 +83,25 @@ function TourItem() {
             <div className="touritem__content-booking-price">
               690,000đ / 1 ngày
             </div>
+
             <div className="touritem__content-booking-vehicle">
               Phương tiện: Xe khách
+            </div>
+
+            <TextField
+               
+                margin="normal"
+                required
+                fullWidth
+                id="code"
+                label="Mã khuyến mãi"
+                name="code"
+                 autoFocus
+              />
+
+              
+            <div className="touritem__content-booking-vehicle">
+              Tổng tiền: 200,000đ
             </div>
 
             <button className="touritem__content-booking-btn">Đặt ngay</button>

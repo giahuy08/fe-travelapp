@@ -38,7 +38,7 @@
 
 .touritem__content-wrap-booking {
   width: 350px;
-  height: 270px;
+  height: 300px;
   padding: 20px;
   border: 2px solid rgb(240, 236, 236);
   position: relative;
@@ -52,7 +52,7 @@
 }
 
 .touritem__content-booking-btn{
-    width: 300px;
+    width: 305px;
     height:50px;
     font-size: 16px;
     font-weight: bold;
@@ -70,7 +70,7 @@
 
 .touritem__content-booking-btn {background-image: linear-gradient(to right, #FF512F 0%, #F09819  51%, #FF512F  100%)}
 .touritem__content-booking-btn{
-    margin: 10px;
+    margin: 10px 0px;
     padding: 10px 45px;
     text-align: center;
 
@@ -167,4 +167,8 @@
   margin-top: 10px;
   transition: all 0.5s;
 
+}
+
+.touritem__content-booking-vehicle{
+  margin-top: 10px;
 }
