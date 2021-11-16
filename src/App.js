@@ -9,6 +9,7 @@ import Tour from './pages/Tour/Tour'
 import TourDetail from './pages/Tour/TourDetail';
 import Booking from './pages/Booking/Booking';
 import HomePage from './pages/HomePage/HomePage';
+import TourItem from './pages/TourItem/TourItem';
 function App() {
   return (
     <Router>
@@ -22,6 +23,11 @@ function App() {
           <Route path= "/tour" exact component={Tour}/>
           <Route path= "/tourdetail" exact component={TourDetail}/>
           <Route path= "/booking" exact component={Booking}/>
+          <Route path= "/tour-item" exact component={TourItem}/>
+
+
+          
+
 
       </Switch>
     </Router>

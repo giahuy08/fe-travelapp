@@ -1,10 +1,9 @@
-import React, {SyntheticEvent, useEffect, useRef, useState} from 'react'
+import React, { useEffect,  useState} from 'react'
 import '../../components/ListTour/ListTour.css'
 import CardTour from '../../components/Card/CardTour'
 import Head from '../../components/Head/Head'
 import Foot from '../../components/Foot/Foot'
 
-import { Link, Redirect, useParams } from "react-router-dom";
 
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
