@@ -27,6 +27,26 @@ function Tour() {
 
     
     let defaultUrl = 'http://localhost:5000/tour/getAllTour?skip='+page+'&limit=6'
+    let defaultUrl1 = 'localhost:5000/tour/getPageNumbers?limit=6'
+
+    useEffect(() => {
+        (       
+                async () => {
+
+                const response = await fetch(defaultUrl,{
+                    method: 'GET',
+                    headers: {'Content-Type': 'application/json'}
+                });
+                
+                const content = await response.json();
+                console.log(content.data)
+                if(content.message === 'Successfully Get All Tour')
+                {
+                    setAllTour(content.data)                                  
+                }
+          }    
+        )();
+    },[page])
 
     useEffect(() => {
         (       
