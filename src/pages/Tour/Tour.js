@@ -99,7 +99,7 @@ function Tour() {
    
     return (
         <div className="tours__container">
-        <Head/>
+        <Header/>
         <h2 className='h2-detail'>Tour đi CHÂU ÂU</h2>  
         <div className='body'>
          

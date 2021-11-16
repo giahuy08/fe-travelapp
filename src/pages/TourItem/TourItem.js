@@ -61,8 +61,7 @@ function TourItem() {
         <div className="touritem__content-wrap">
           <div className="touritem__content-wrap-info">
             <h3 className="touritem__name">
-              Hanoi Home 3 - Beautiful apartment for you (no. 22) - miễn phí xe
-              đạp
+              Hanoi Home 3 - Beautiful apartment for you (no. 22) - miễn phí xe đạp
             </h3>
             <div className="touritem__place">
               <i class="fas fa-map-marker-alt"></i>
