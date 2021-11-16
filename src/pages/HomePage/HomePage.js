@@ -14,7 +14,7 @@ function HomePage() {
 
   useEffect(() => {
     callApi(
-      `tour/getAllTour?skip=1&limit=5`,
+      `tour/getAllTour?skip=1&limit=4`,
       "GET"
     ).then((res) => {
       console.log(res.data.data)
@@ -122,11 +122,14 @@ function HomePage() {
                     alt=""
                     className="home__some__idea-img"
                   />
-                  <p className="home__some__idea-label">{tour.name}</p>
-                  <p className="home__some__idea-decs">
-                  {tour.detail}
-                  </p>
                 </a>
+                <div className="home__some__idea-info">
+
+                  <div className="home__some__idea-label">{tour.name}</div>
+                  <div className="home__some__idea-decs">
+                  {tour.detail}
+                  </div>
+                </div>
               </div>)})
               }
 
