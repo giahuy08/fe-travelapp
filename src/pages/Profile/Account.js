@@ -6,11 +6,12 @@ import {
 import AccountProfile from '../../components/Account/AccountProfile';
 import AccountProfileDetails from '../../components/Account/AccountProfileDetails';
 import Head from '../../components/Head/Head';
+import Header from '../../components/Header/Header';
 
 
 const Account = () => (
   <>
-  <Head/>
+  <Header/>
     <Box
     style = {{marginTop:'30px'}}
       sx={{

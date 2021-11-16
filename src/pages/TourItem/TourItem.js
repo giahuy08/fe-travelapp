@@ -4,11 +4,12 @@ import { Carousel } from "@trendyol-js/react-carousel";
 import CardImage from "../../components/CardImage/CardImage";
 import "./TourItem.css";
 import Comment from "./Comment/Comment"
+import Header from "../../components/Header/Header";
 
 function TourItem() {
   return (
     <div>
-      <Head />
+      <Header />
       <div className="touritem__content">
         <div className="touritem__content-slider">
           <Carousel show={2.5} slide={2} swiping={true} transition={0.5}>

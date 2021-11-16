@@ -1,12 +1,10 @@
 import React, { useEffect,  useState} from 'react'
 import '../../components/ListTour/ListTour.css'
 import CardTour from '../../components/Card/CardTour'
-import Head from '../../components/Head/Head'
 import Foot from '../../components/Foot/Foot'
-
-
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import Header from '../../components/Header/Header'
 
 function Tour() {
     const [allTour, setAllTour] = useState([]);
@@ -79,7 +77,8 @@ function Tour() {
    
     return (
         <div className="tours__container">
-        <Head/>
+        {/* <Head/> */}
+        <Header/>
         <h2 className='h2-detail'>Tour đi CHÂU ÂU</h2>  
         <div className='body'>
          
