@@ -55,7 +55,7 @@ const ChangePasswordDetails = (props) => {
     };
 
     return (
-        <form autoComplete="off" noValidate {...props}>
+        <form autoComplete="off" noValidate {...props} style={{marginTop: '60px'}}>
             <Card>
                 <CardHeader
                     subheader="Nhập mật khẩu hiện tại và mật khẩu mới bạn muốn thay đổi"
