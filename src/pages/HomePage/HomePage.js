@@ -1,9 +1,48 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import "./homepage.css";
 import Head from "../../components/Head/Head";
 import CardImage from "../../components/CardImage/CardImage";
 import Foot from "../../components/Foot/Foot";
+import callApi from "../../api/apiService";
+import { Carousel } from "@trendyol-js/react-carousel";
+
 function HomePage() {
+  const [sea, setSeas] = useState([]);
+  const [highland, setHighLands] = useState([]);
+  const [others, setOthers] = useState([]);
+  const [alltours, setTours] = useState([]);
+
+  useEffect(() => {
+    callApi(
+      `tour/getAllTour?skip=1&limit=4`,
+      "GET"
+    ).then((res) => {
+      console.log(res.data.data)
+      setTours(res.data.data);
+    });
+    callApi(
+      `tour/findAllTourByCategory?category=1`,
+      "GET"
+    ).then((res) => {
+      console.log(res.data.data)
+      setSeas(res.data.data);
+    });
+    callApi(
+      `tour/findAllTourByCategory?category=2`,
+      "GET"
+    ).then((res) => {
+      console.log(res.data.data)
+      setHighLands(res.data.data);
+    });
+    callApi(
+      `tour/findAllTourByCategory?category=0`,
+      "GET"
+    ).then((res) => {
+      console.log(res.data.data)
+      setOthers(res.data.data);
+    });
+  }, []);
+
   return (
     <div className="home">
       <Head />
@@ -53,11 +92,11 @@ function HomePage() {
           </div>
 
           <div className="home__pro_place_wrapper">
-            <CardImage />
-            <CardImage />
-            <CardImage />
-            <CardImage />
-            <CardImage />
+            {/* <Carousel show={2.5} slide={2} swiping={true}> */}
+              <CardImage name="Biển - Đảo" numbers={sea.length} image="/images/biendep.jpg"/>
+              <CardImage name="Vùng cao" numbers={highland.length} image="/images/vungcao.jpg"/>
+              <CardImage name="Khác" numbers={others.length} image="/images/dulichkhac.jpg"/>
+            {/* </Carousel> */}
           </div>
 
           <div className="home__content grid wide">
@@ -74,65 +113,26 @@ function HomePage() {
 
           <div className="home_some__idea-container-box">
             <div className="home__some__idea">
+            {
+            alltours&&alltours.map((tour)=>{  return(
               <div className="home__some__idea-container">
                 <a href="#" className="home__some__idea-link">
                   <img
-                    src="./images/apartment_1_1625465608.jpg"
+                    src={tour.imagesTour[0]}
                     alt=""
                     className="home__some__idea-img"
                   />
-                  <p className="home__some__idea-label">VI VU NGOẠI THÀNH HÀ NỘI</p>
-                  <p className="home__some__idea-decs">
-                    Trải nghiệm không gian thoáng đãng cho chuyến đi ngay gần Hà
-                    Nội
-                  </p>
                 </a>
-              </div>
+                <div className="home__some__idea-info">
 
-              <div className="home__some__idea-container">
-                <a href="#" className="home__some__idea-link">
-                  <img
-                    src="./images/apartment_1_1614660728.jpg"
-                    alt=""
-                    className="home__some__idea-img"
-                  />
-                  <p className="home__some__idea-label">
-                    HÀ NỘI NỘI THÀNH LÃNG MẠN
-                  </p>
-                  <p className="home__some__idea-decs">
-                    Không gian lãng mạn dành cho cặp đôi tại trung tâm Hà Nội
-                  </p>
-                </a>
-              </div>
+                  <div className="home__some__idea-label">{tour.name}</div>
+                  <div className="home__some__idea-decs">
+                  {tour.detail}
+                  </div>
+                </div>
+              </div>)})
+              }
 
-              <div className="home__some__idea-container">
-                <a href="#" className="home__some__idea-link">
-                  <img
-                    src="./images/apartment_2_1614588617.jpg"
-                    alt=""
-                    className="home__some__idea-img"
-                  />
-                  <p className="home__some__idea-label">vũng tàu biệt thự hồ bơi</p>
-                  <p className="home__some__idea-decs">
-                    Không gian lãng mạn dành cho cặp đôi tại trung tâm Hà Nội
-                  </p>
-                </a>
-              </div>
-
-              <div className="home__some__idea-container">
-                <a href="" className="home__some__idea-link">
-                  <img
-                    src="./images/apartment_2_1615794965.jpg"
-                    alt=""
-                    className="home__some__idea-img"
-                  />
-                  <p className="home__some__idea-label">Sài Gòn cần là có ngay</p>
-                  <p className="home__some__idea-decs">
-                    Những căn homestay có 01 phòng ngủ tại Sài Gòn có thể đặt
-                    nhanh chóng
-                  </p>
-                </a>
-              </div>
             </div>
           </div>
 
@@ -246,7 +246,7 @@ function HomePage() {
                         </a>
                       </div>
                     </div>
-                    
+
                   </div>
                 </div>
                 <div className="col l-6 m-12">
@@ -263,7 +263,7 @@ function HomePage() {
           </div>
 
 
-            <Foot/>
+          <Foot />
 
         </div>
       </div>
