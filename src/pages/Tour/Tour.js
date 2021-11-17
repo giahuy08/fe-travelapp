@@ -22,6 +22,7 @@ function Tour() {
     // const params = useParams<{ n: string }>();
     // const currentPage = parseInt(params.n);
     const [currentPage, setcurrentPage] = useState(1);
+    const [pageNumbers, setPageNumbers] = useState(1);
 
     const [page, setPage] = React.useState(1);
     const handleChange = (event, value) => {
@@ -29,26 +30,30 @@ function Tour() {
     };
 
 
+
     let defaultUrl = 'http://localhost:5000/tour/getAllTour?skip=' + page + '&limit=6'
-    let defaultUrl1 = 'localhost:5000/tour/getPageNumbers?limit=6'
+    let defaultUrl1 = 'http://localhost:5000/tour/getPageNumbers'
 
     useEffect(() => {
         (
             async () => {
 
-                const response = await fetch(defaultUrl, {
+                const response = await fetch(defaultUrl1, {
                     method: 'GET',
-                    headers: { 'Content-Type': 'application/json' }
+                    params: { 'limit': 6 },
+                    headers: { 'Content-Type': 'application/json' },
+
                 });
 
                 const content = await response.json();
                 console.log(content.data)
-                if (content.message === 'Successfully Get All Tour') {
-                    setAllTour(content.data)
+                if (content.message === 'Successfully Get Page Numbers') {
+                    setPageNumbers(content.data)
                 }
             }
         )();
-    }, [page])
+    }, [])
+
 
     useEffect(() => {
         (
@@ -129,8 +134,6 @@ function Tour() {
                                 }
 
                             </div>
-
-
                         </div>
                         <div style={{ margin: 'auto' }}>
                             <Stack spacing={2} >
@@ -139,11 +142,8 @@ function Tour() {
                         </div>
 
                     </div>
-
                 </div>
             </div>
-
-
             <Foot />
         </div>
     )

@@ -210,7 +210,7 @@ const AccountProfileDetails = (props) => {
                 onChange={handleChange}
                 // type={showPassword ? 'text' : 'password'}
                 type='password'
-                value={user.password}
+                value='0123456789'
                 variant="outlined"
                 InputProps={{
                   startAdornment: (
