@@ -22,14 +22,6 @@ import IconButton from '@mui/material/IconButton';
 
 
 const AccountProfileDetails = (props) => {
-  const [values, setValues] = useState({
-    name: 'Huỳnh Nhựt Thiên',
-    password: '123456789AsZx1',
-    email: 'thienhn7761311@gmail.com',
-    phone: '0968892926',
-    address: 'Lai Vung, Đồng Tháp',
-    showPassword: false,
-  });
 
   const [user, setUser] = useState('');
   const [showPassword, setShowPassword] = useState(false)
@@ -58,13 +50,6 @@ const AccountProfileDetails = (props) => {
     });
   };
 
-  const handleClickShowPassword = () => {
-    
-    setValues({
-      ...user,
-      showPassword: !values.showPassword,
-    });
-  };
 
   const handleClick = () => {
     setShowPassword(!showPassword);
@@ -191,7 +176,7 @@ const AccountProfileDetails = (props) => {
                 onChange={handleChange}
                 // type={showPassword ? 'text' : 'password'}
                 type='password'
-                value={user.password}
+                value='0123456789'
                 variant="outlined"
                 InputProps={{
                   startAdornment: (
@@ -207,7 +192,7 @@ const AccountProfileDetails = (props) => {
                         onMouseDown={handleMouseDownPassword}
                         edge="end"
                       >
-                        {user.showPassword ? <VisibilityOff /> : <Visibility />}
+                        {1234567890 ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
                     </InputAdornment>
                   ),
