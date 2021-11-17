@@ -5,6 +5,7 @@ import CardImage from "../../components/CardImage/CardImage";
 import Foot from "../../components/Foot/Foot";
 import callApi from "../../api/apiService";
 import { Carousel } from "@trendyol-js/react-carousel";
+import { Link } from "react-router-dom"
 
 function HomePage() {
   const [sea, setSeas] = useState([]);
@@ -68,11 +69,11 @@ function HomePage() {
                 trên Travel
               </div>
               <span className="home__content__container-auth">
-                <a href="#" className="home__content__container-auth-link">
+                <a href="/login" className="home__content__container-auth-link">
                   Đăng nhập
                 </a>
                 hoặc
-                <a href="#" className="home__content__container-auth-link">
+                <a href="/sign-up" className="home__content__container-auth-link">
                   Đăng ký
                 </a>
                 để trải nghiệm
@@ -93,9 +94,17 @@ function HomePage() {
 
           <div className="home__pro_place_wrapper">
             {/* <Carousel show={2.5} slide={2} swiping={true}> */}
-              <CardImage name="Biển - Đảo" numbers={sea.length} image="/images/biendep.jpg"/>
-              <CardImage name="Vùng cao" numbers={highland.length} image="/images/vungcao.jpg"/>
-              <CardImage name="Khác" numbers={others.length} image="/images/dulichkhac.jpg"/>
+            <Link to={{
+              pathname: `/tour`,
+              state: {
+                type:sea
+              },
+            }}>
+
+              <CardImage link="/tour" name="Biển - Đảo" numbers={sea.length} image="/images/biendep.jpg" />
+            </Link>
+            <CardImage name="Vùng cao" numbers={highland.length} image="/images/vungcao.jpg" />
+            <CardImage name="Khác" numbers={others.length} image="/images/dulichkhac.jpg" />
             {/* </Carousel> */}
           </div>
 
@@ -105,7 +114,7 @@ function HomePage() {
                 Ưu đãi độc quyền
               </h4>
               <div className="home__content__container-desc">
-                Chỉ có tại Luxstay, hấp dẫn và hữu hạn, book ngay!
+                Chỉ có tại TRAVEL, hấp dẫn và hữu hạn, book ngay!
               </div>
             </div>
           </div>
@@ -113,24 +122,26 @@ function HomePage() {
 
           <div className="home_some__idea-container-box">
             <div className="home__some__idea">
-            {
-            alltours&&alltours.map((tour)=>{  return(
-              <div className="home__some__idea-container">
-                <a href="#" className="home__some__idea-link">
-                  <img
-                    src={tour.imagesTour[0]}
-                    alt=""
-                    className="home__some__idea-img"
-                  />
-                </a>
-                <div className="home__some__idea-info">
+              {
+                alltours && alltours.map((tour) => {
+                  return (
+                    <div className="home__some__idea-container">
+                      <a href="#" className="home__some__idea-link">
+                        <img
+                          src={tour.imagesTour[0]}
+                          alt=""
+                          className="home__some__idea-img"
+                        />
+                      </a>
+                      <div className="home__some__idea-info">
 
-                  <div className="home__some__idea-label">{tour.name}</div>
-                  <div className="home__some__idea-decs">
-                  {tour.detail}
-                  </div>
-                </div>
-              </div>)})
+                        <div className="home__some__idea-label">{tour.name}</div>
+                        <div className="home__some__idea-decs">
+                          {tour.detail}
+                        </div>
+                      </div>
+                    </div>)
+                })
               }
 
             </div>
@@ -212,10 +223,10 @@ function HomePage() {
                     <img src="./images/logo.png" alt="" className="download__app-logo-img" />
                   </div>
                   <div className="download__app-heading">
-                    TÌM KIẾM CHỖ Ở GIÁ TỐT NHẤT
+                    TÌM KIẾM ĐỊA ĐIỂM DU LỊCH GIÁ TỐT NHẤT
                   </div>
                   <div className="download__app-decs">
-                    TRAVEL hiện là nền tảng đặt tour trực tuyến tại Việt Nam.
+                    TRAVEL hiện là nền tảng đặt Tour trực tuyến tại Việt Nam.
                     Đồng hành cùng chúng tôi, bạn có những chuyến đi mang đầy
                     trải nghiệm. Với TRAVEL, việc đặt tour trở nên nhanh
                     chóng, thuận tiện và dễ dàng.

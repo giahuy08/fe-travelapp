@@ -12,6 +12,10 @@ body {
   margin-top:5px;  
   text-align: center;
 }
+.h3-detail {
+  margin-top:5px;  
+  text-align: start;
+}
 .row{
     margin-right: -15px;
     margin-left: -15px;
