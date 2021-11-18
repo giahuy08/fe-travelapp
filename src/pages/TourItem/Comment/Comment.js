@@ -25,7 +25,7 @@ function Comment(props) {
     type: "",
   });
 
-  console.log("hello",idCommentCurrent)
+
 
   const handleDataEdit = (e) => {
     setDataEdit(e.target.value);

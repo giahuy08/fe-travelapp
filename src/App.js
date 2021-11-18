@@ -11,6 +11,7 @@ import Booking from './pages/Booking/Booking';
 import HomePage from './pages/HomePage/HomePage';
 import Page404 from './pages/404/Page404';
 import TourItem from './pages/TourItem/TourItem';
+import Payment from './pages/Payment/Payment'
 function App() {
   return (
     <Router>
@@ -26,6 +27,7 @@ function App() {
           <Route path= "/booking" exact component={Booking}/>
           <Route path= "/404" exact component={Page404}/>
           <Route path= "/tour-item" exact component={TourItem}/>
+          <Route path= "/payment" exact component={Payment}/>
 
 
       </Switch>

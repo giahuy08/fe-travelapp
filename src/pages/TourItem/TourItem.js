@@ -1,86 +1,60 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Head from "../../components/Head/Head";
 import TextField from "@mui/material/TextField";
-import { Carousel } from "@trendyol-js/react-carousel";
+import { Carousel, ScrollingCarousel } from "@trendyol-js/react-carousel";
 import CardImage from "../../components/CardImage/CardImage";
 import "./TourItem.css";
-import Comment from "./Comment/Comment"
+import Comment from "./Comment/Comment";
 import Header from "../../components/Header/Header";
+import { Link } from "react-router-dom";
+import callApi from "../../api/apiService";
+import ReactDOM from "react-dom";
 
 function TourItem() {
+  const [tour, setTour] = useState({});
+  const [image,setImage] = useState([]);
+  
+  useEffect(() => {
+    callApi(`tour/getOneTour?id=618e0aef597d514940c4a610`, "GET")
+      .then((res) => {
+        setTour(res.data.data);
+        setImage( res.data.data.imagesTour)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+
   return (
     <div>
       <Header />
       <div className="touritem__content">
         <div className="touritem__content-slider">
-          <Carousel show={2.5} slide={2} swiping={true} transition={0.5}>
-            <div className="touritem__content-slider-item">
-              <img
-                src="../images/apartment_1_1614660728.jpg"
-                alt=""
-                className="touritem__content-slider-img"
-              />
-            </div>
-            <div className="touritem__content-slider-item">
-              <img
-                src="../images/apartment_2_1614588617.jpg"
-                alt=""
-                className="touritem__content-slider-img"
-              />
-            </div>
-            <div className="touritem__content-slider-item">
-              <img
-                src="../images/apartment_2_1614588617.jpg"
-                alt=""
-                className="touritem__content-slider-img"
-              />
-            </div>
-            <div className="touritem__content-slider-item">
-              <img
-                src="../images/apartment_2_1614588617.jpg"
-                alt=""
-                className="touritem__content-slider-img"
-              />
-            </div>
-            <div className="touritem__content-slider-item">
-              <img
-                src="../images/apartment_2_1614588617.jpg"
-                alt=""
-                className="touritem__content-slider-img"
-              />
-            </div>
-            <div className="touritem__content-slider-item">
-              <img
-                src="../images/apartment_2_1614588617.jpg"
-                alt=""
-                className="touritem__content-slider-img"
-              />
-            </div>
-          </Carousel>
+          <div className="touritem__content-slider-item">
+            <img
+              src={image[0]}
+              alt=""
+              className="touritem__content-slider-img"
+            />
+          </div>
+          {/* <Carousel show={1.5} slide={1} swiping={true}> */}
+
+          {/* </Carousel> */}
         </div>
         <div className="touritem__content-wrap">
           <div className="touritem__content-wrap-info">
-            <h2 className="touritem__name">
-              Hanoi Home 3 - Beautiful apartment for you (no. 22) - miễn phí xe đạp
-            </h2>
+            <h2 className="touritem__name">{tour.name}</h2>
             <div className="touritem__place">
               <i class="fas fa-map-marker-alt"></i>
-              Tây Hồ, Hà Nội, Vietnam
+              {tour.place}
             </div>
-            <div className="touritem__detail">
-              Căn hộ nằm ở một vị trí lý tưởng,\n  nơi này là một con phố đông đúc
-              của cộng đồng nước ngoài. Có rất nhiều nhà hàng, quán bar, quán cà
-              phê, phòng tập thể dục, tất cả đều được làm cho người nước ngoài.
-              Khu vực xung quanh có nhiều cảnh quan đẹp như Hồ Kiếm, Hồ Trúc
-              Bạch, Chùa Quán Thành, Sông Hồng, Làng hoa Quang An, Làng hoa Nhật
-              Tân và đặc biệt là Hồ Tây rộng lớn, rộng lớn, nơi bạn có thể đi xe
-              đạp ( miễn phí) quanh Hồ và uống cà phê dọc đường.
-            </div>
+            <div className="touritem__detail">{tour.detail}</div>
           </div>
 
           <div className="touritem__content-wrap-booking">
             <div className="touritem__content-booking-price">
-              690,000đ / 1 ngày
+              {tour.payment} / {tour.time}
             </div>
 
             <div className="touritem__content-booking-vehicle">
@@ -88,22 +62,23 @@ function TourItem() {
             </div>
 
             <TextField
-               
-                margin="normal"
-                required
-                fullWidth
-                id="code"
-                label="Mã khuyến mãi"
-                name="code"
-                 autoFocus
-              />
+              margin="normal"
+              required
+              fullWidth
+              id="code"
+              label="Mã khuyến mãi"
+              name="code"
+              autoFocus
+            />
 
-              
             <div className="touritem__content-booking-vehicle">
               Tổng tiền: 200,000đ
             </div>
-
-            <button className="touritem__content-booking-btn">Đặt ngay</button>
+            <Link to="/payment">
+              <button className="touritem__content-booking-btn">
+                Đặt ngay
+              </button>
+            </Link>
           </div>
         </div>
 
@@ -147,10 +122,10 @@ function TourItem() {
             <div className="touritem-feature__name__desc">
               Giá có thể tăng vào cuối tuần hoặc ngày lễ
             </div>
-            <div className="touritem-feature-price">690,000đ / 1 ngày</div>
+            <div className="touritem-feature-price">
+              {tour.payment} / {tour.time}
+            </div>
           </div>
-
-        
         </div>
 
         {/* Hotel */}
@@ -212,24 +187,16 @@ function TourItem() {
         {/* Tabel */}
 
         <div className="touritem__content-wrap-feature">
-           <h3 className="touritem-feature__name">Bàn</h3>
-           <div className="touritem-feature__table">
-            <div className="touritem-feature__table-name">
-              Tên: A-3
-            </div>
-            <div className="touritem-feature__table-size">
-              Size: 1
-            </div>
-            <div className="touritem-feature__table-floor">
-              Tầng: 1
-            </div>
+          <h3 className="touritem-feature__name">Bàn</h3>
+          <div className="touritem-feature__table">
+            <div className="touritem-feature__table-name">Tên: A-3</div>
+            <div className="touritem-feature__table-size">Size: 1</div>
+            <div className="touritem-feature__table-floor">Tầng: 1</div>
             <div className="touritem-feature__table-detail">
               Chi tiết: Bàn ăn vừa dành cho 1 người
             </div>
-            <div className="touritem-feature__table-price">
-                Giá: 750000đ
-            </div>
-           </div>
+            <div className="touritem-feature__table-price">Giá: 750000đ</div>
+          </div>
         </div>
 
         {/* ---- */}
@@ -237,11 +204,10 @@ function TourItem() {
         {/* Đánh giá */}
 
         <div className="touritem__content-wrap-feature">
-           <h3 className="touritem-feature__name">Đánh giá</h3>
-           <Comment id="1"/>
-         
+          <h3 className="touritem-feature__name">Đánh giá</h3>
+          <Comment id="1" />
         </div>
-      {/* ---- */}
+        {/* ---- */}
       </div>
     </div>
   );
