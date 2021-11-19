@@ -13,6 +13,7 @@ import Page404 from './pages/404/Page404';
 import TourItem from './pages/TourItem/TourItem';
 import Payment from './pages/Payment/Payment'
 import BookTour from './pages/BookTour/BookTour';
+import AllTour from './pages/Tour/AllTour';
 function App() {
   return (
     <Router>
@@ -31,7 +32,7 @@ function App() {
           <Route path= "/payment" exact component={Payment}/>
 
           <Route path= "/booktour" exact component={BookTour}/>
-
+          <Route path= "/alltour" exact component={AllTour}/>
       </Switch>
     </Router>
   );
