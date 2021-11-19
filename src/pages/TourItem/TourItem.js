@@ -12,35 +12,49 @@ import ReactDOM from "react-dom";
 
 function TourItem() {
   const [tour, setTour] = useState({});
-  const [image,setImage] = useState([]);
-  
+  const [image, setImage] = useState([]);
+
   useEffect(() => {
     callApi(`tour/getOneTour?id=618e0aef597d514940c4a610`, "GET")
       .then((res) => {
+        setImage(res.data.data.imagesTour);
         setTour(res.data.data);
-        setImage( res.data.data.imagesTour)
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-
   return (
     <div>
       <Header />
       <div className="touritem__content">
         <div className="touritem__content-slider">
-          <div className="touritem__content-slider-item">
+          <Carousel show={1.5} slide={1} swiping={true}>
+            {/* <div className="touritem__content-slider-item">
+              <img
+                src={image[0]}
+                alt=""
+                className="touritem__content-slider-img"
+              />
+            </div> */}
+
+            <div className="touritem__content-slider-item">
             <img
               src={image[0]}
               alt=""
               className="touritem__content-slider-img"
             />
           </div>
-          {/* <Carousel show={1.5} slide={1} swiping={true}> */}
+          <div className="touritem__content-slider-item">
+            <img
+              src="../images/apartment_1_1625465608.jpg"
+              alt=""
+              className="touritem__content-slider-img"
+            />
+          </div>
 
-          {/* </Carousel> */}
+          </Carousel>
         </div>
         <div className="touritem__content-wrap">
           <div className="touritem__content-wrap-info">

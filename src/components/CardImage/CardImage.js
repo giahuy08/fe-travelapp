@@ -3,7 +3,7 @@ import './CardImage.css'
 function CardImage(props) {
   return (
     <div>
-      <a href="" class="home__pro__place-link">
+      <a href={props.link} class="home__pro__place-link">
         <img
           src={props.image}
           alt={props.name}

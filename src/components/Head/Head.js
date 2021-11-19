@@ -13,6 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
+import Button from '@mui/material/Button';
 
 function Head() {
   const [user, setUser] = useState('');
@@ -46,8 +47,16 @@ const logout = ()=>{
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   
+
+  const [anchorEl1, setAnchorEl1] = React.useState(null);
+  const open1 = Boolean(anchorEl1);
+  const handleClick1 = (event) => {
+    setAnchorEl1(event.currentTarget);
+  };
+  const handleClose1 = () => {
+    setAnchorEl1(null);
+  };
 
   
   if(!user) 
@@ -155,7 +164,33 @@ const logout = ()=>{
                  
                   <Link to="/tour" className="header__item-link header__item-link--notify">Tour</Link>
               
-                </li>           
+                </li>
+
+                <div>
+                <li className="header__item"
+                  id="basic-button"
+                  aria-controls="basic-menu"
+                  aria-haspopup="true"
+                  aria-expanded={open ? 'true' : undefined}
+                  onClick={handleClick1}
+                >
+                  <div className="header__item-link ">Tour</div>
+                </li>
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl1}
+                  open={open1}
+                  onClose={handleClose1}
+                  MenuListProps={{
+                    'aria-labelledby': 'basic-button',
+                  }}
+                >
+                  <MenuItem onClick={handleClose1}>Biển-Đảo</MenuItem>
+                  <MenuItem onClick={handleClose1}>Vùng Cao</MenuItem>
+                  <MenuItem onClick={handleClose1}>Khác</MenuItem>
+                </Menu>
+              </div>
+                    
 
             <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
@@ -206,7 +241,10 @@ const logout = ()=>{
           </Link>
         </MenuItem>
         <MenuItem>
-          <Avatar /> My account
+          <Avatar /> 
+          <Link to="/booktour">
+          Book Tour
+          </Link>
         </MenuItem>
         <Divider />
         <MenuItem>

@@ -19,36 +19,33 @@ import HomeIcon from '@mui/icons-material/Home';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
+import { useHistory } from "react-router";
+import callApi from '../../api/apiService';
 
 
 const AccountProfileDetails = (props) => {
   const [values, setValues] = useState({
-    name: 'Huỳnh Nhựt Thiên',
-    password: '123456789AsZx1',
-    email: 'thienhn7761311@gmail.com',
-    phone: '0968892926',
-    address: 'Lai Vung, Đồng Tháp',
     showPassword: false,
   });
 
   const [user, setUser] = useState('');
   const [showPassword, setShowPassword] = useState(false)
-  let defaultUrl = 'http://localhost:5000/user/findUserByToken'
   useEffect(() => {
-    (       
-            async () => {
-
-            const response = await fetch(defaultUrl,{
-                method: 'GET',
-                headers: {'Content-Type': 'application/json',  "Authorization":"Bearer " + localStorage.getItem("accessToken")}
-            });
-            
-            const content = await response.json();
-            console.log(content.data)
-            setUser(content.data)
-      }    
+    (
+      async () => {
+        callApi(`user/findUserByToken`, "GET")
+          .then((res) => {
+            console.log(res);
+            console.log(res.data.data.token)
+            localStorage.getItem("accessToken", res.data.data.token)
+            setUser(res.data.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     )();
-},[])
+  }, [])
 
 
   const handleChange = (event) => {
@@ -59,7 +56,7 @@ const AccountProfileDetails = (props) => {
   };
 
   const handleClickShowPassword = () => {
-    
+
     setValues({
       ...user,
       showPassword: !values.showPassword,
@@ -74,14 +71,36 @@ const AccountProfileDetails = (props) => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+  const history = useHistory()
+  const handleSubmit = (e) => {
 
+    const data = new FormData(e.currentTarget);
+    //handleNext(e);
+    e.preventDefault();
+    if (data.get('name') !== "" &&
+      data.get('phone') !== "" && data.get('address') !== "") {
+      let user = {
+        name: data.get('name'),
+        address: data.get('address'),
+        phone: data.get('phone'),
+      }
+      console.log(user);
+      callApi(`/user/editProfile`, "PUT", user)
+        .then((res) => {
+          console.log(res);
+          console.log(res.data.data.token)
+          localStorage.getItem("accessToken", res.data.data.token)
+          history.push("user/profile");
+
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
   return (
-    <form
-      autoComplete="off"
-      noValidate
-      {...props}
-    >
-      <Card style={{marginTop: '60px'}}>
+    <form autoComplete="off" noValidate {...props} style={{ marginTop: '60px' }} onSubmit={handleSubmit}>
+      <Card style={{ marginTop: '60px' }}>
         <CardHeader
           subheader="Cập nhật thông tin cá nhân"
           title="Thông tin tài khoản"
@@ -191,7 +210,7 @@ const AccountProfileDetails = (props) => {
                 onChange={handleChange}
                 // type={showPassword ? 'text' : 'password'}
                 type='password'
-                value={user.password}
+                value='0123456789'
                 variant="outlined"
                 InputProps={{
                   startAdornment: (
@@ -207,7 +226,7 @@ const AccountProfileDetails = (props) => {
                         onMouseDown={handleMouseDownPassword}
                         edge="end"
                       >
-                        {user.showPassword ? <VisibilityOff /> : <Visibility />}
+                        {user.showPassword ? <VisibilityOff /> : <VisibilityOff />}
                       </IconButton>
                     </InputAdornment>
                   ),
@@ -228,27 +247,6 @@ const AccountProfileDetails = (props) => {
             >
                 Đổi mật khẩu
               </Button>
-
-              {/* <TextField
-                fullWidth
-                label="Select State"
-                name="state"
-                onChange={handleChange}
-                required
-                select
-                SelectProps={{ native: true }}
-                value={values.state}
-                variant="outlined"
-              >
-                {states.map((option) => (
-                  <option
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </option>
-                ))}
-              </TextField> */}
             </Grid>
           </Grid>
         </CardContent>
