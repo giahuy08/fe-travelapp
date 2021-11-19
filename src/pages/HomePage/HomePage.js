@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import "./homepage.css";
 import Head from "../../components/Head/Head";
 import CardImage from "../../components/CardImage/CardImage";
 import Foot from "../../components/Foot/Foot";
 import callApi from "../../api/apiService";
 import { Carousel } from "@trendyol-js/react-carousel";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 function HomePage() {
   const [sea, setSeas] = useState([]);
@@ -14,32 +14,20 @@ function HomePage() {
   const [alltours, setTours] = useState([]);
 
   useEffect(() => {
-    callApi(
-      `tour/getAllTour?skip=1&limit=4`,
-      "GET"
-    ).then((res) => {
-      console.log(res.data.data)
+    callApi(`tour/getAllTour?skip=1&limit=4`, "GET").then((res) => {
+      console.log(res.data.data);
       setTours(res.data.data);
     });
-    callApi(
-      `tour/findAllTourByCategory?category=1`,
-      "GET"
-    ).then((res) => {
-      console.log(res.data.data)
+    callApi(`tour/findAllTourByCategory?category=1`, "GET").then((res) => {
+      console.log(res.data.data);
       setSeas(res.data.data);
     });
-    callApi(
-      `tour/findAllTourByCategory?category=2`,
-      "GET"
-    ).then((res) => {
-      console.log(res.data.data)
+    callApi(`tour/findAllTourByCategory?category=2`, "GET").then((res) => {
+      console.log(res.data.data);
       setHighLands(res.data.data);
     });
-    callApi(
-      `tour/findAllTourByCategory?category=0`,
-      "GET"
-    ).then((res) => {
-      console.log(res.data.data)
+    callApi(`tour/findAllTourByCategory?category=0`, "GET").then((res) => {
+      console.log(res.data.data);
       setOthers(res.data.data);
     });
   }, []);
@@ -73,7 +61,10 @@ function HomePage() {
                   Đăng nhập
                 </a>
                 hoặc
-                <a href="/sign-up" className="home__content__container-auth-link">
+                <a
+                  href="/sign-up"
+                  className="home__content__container-auth-link"
+                >
                   Đăng ký
                 </a>
                 để trải nghiệm
@@ -94,17 +85,31 @@ function HomePage() {
 
           <div className="home__pro_place_wrapper">
             {/* <Carousel show={2.5} slide={2} swiping={true}> */}
-            <Link to={{
-              pathname: `/tour`,
-              state: {
-                type:sea
-              },
-            }}>
-
-              <CardImage link="/tour" name="Biển - Đảo" numbers={sea.length} image="/images/biendep.jpg" />
+            <Link
+              to={{
+                pathname: `/tour`,
+                state: {
+                  type: sea,
+                },
+              }}
+            >
+              <CardImage
+                link="/tour"
+                name="Biển - Đảo"
+                numbers={sea.length}
+                image="/images/biendep.jpg"
+              />
             </Link>
-            <CardImage name="Vùng cao" numbers={highland.length} image="/images/vungcao.jpg" />
-            <CardImage name="Khác" numbers={others.length} image="/images/dulichkhac.jpg" />
+            <CardImage
+              name="Vùng cao"
+              numbers={highland.length}
+              image="/images/vungcao.jpg"
+            />
+            <CardImage
+              name="Khác"
+              numbers={others.length}
+              image="/images/dulichkhac.jpg"
+            />
             {/* </Carousel> */}
           </div>
 
@@ -122,8 +127,8 @@ function HomePage() {
 
           <div className="home_some__idea-container-box">
             <div className="home__some__idea">
-              {
-                alltours && alltours.map((tour) => {
+              {alltours &&
+                alltours.map((tour) => {
                   return (
                     <div className="home__some__idea-container">
                       <a href="#" className="home__some__idea-link">
@@ -134,16 +139,16 @@ function HomePage() {
                         />
                       </a>
                       <div className="home__some__idea-info">
-
-                        <div className="home__some__idea-label">{tour.name}</div>
+                        <div className="home__some__idea-label">
+                          {tour.name}
+                        </div>
                         <div className="home__some__idea-decs">
                           {tour.detail}
                         </div>
                       </div>
-                    </div>)
-                })
-              }
-
+                    </div>
+                  );
+                })}
             </div>
           </div>
 
@@ -220,7 +225,11 @@ function HomePage() {
               <div className="download__app_wrap">
                 <div className="col l-6 m-12">
                   <div className="download__app-logo">
-                    <img src="./images/logo.png" alt="" className="download__app-logo-img" />
+                    <img
+                      src="./images/logo.png"
+                      alt=""
+                      className="download__app-logo-img"
+                    />
                   </div>
                   <div className="download__app-heading">
                     TÌM KIẾM ĐỊA ĐIỂM DU LỊCH GIÁ TỐT NHẤT
@@ -228,8 +237,8 @@ function HomePage() {
                   <div className="download__app-decs">
                     TRAVEL hiện là nền tảng đặt Tour trực tuyến tại Việt Nam.
                     Đồng hành cùng chúng tôi, bạn có những chuyến đi mang đầy
-                    trải nghiệm. Với TRAVEL, việc đặt tour trở nên nhanh
-                    chóng, thuận tiện và dễ dàng.
+                    trải nghiệm. Với TRAVEL, việc đặt tour trở nên nhanh chóng,
+                    thuận tiện và dễ dàng.
                   </div>
                   <div className="download__app-place">
                     <div className="download__app-qr">
@@ -257,7 +266,6 @@ function HomePage() {
                         </a>
                       </div>
                     </div>
-
                   </div>
                 </div>
                 <div className="col l-6 m-12">
@@ -273,9 +281,7 @@ function HomePage() {
             </div>
           </div>
 
-
           <Foot />
-
         </div>
       </div>
     </div>

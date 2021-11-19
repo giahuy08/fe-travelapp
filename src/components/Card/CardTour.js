@@ -1,16 +1,24 @@
 import React from "react";
+import { Link } from "react-router-dom";
 function CardTour(props) {
   return (
     <>
       <div className="cards__item_tour">
         <article>
           <figure class="cards__item__pic-wrap" data-category={props.price}>
-            <a href="/#">
+            <Link
+             to={{
+              pathname: `/tour-item`,
+              state: {
+                id: props.id,
+              },
+            }}
+            >
               <img className="cards__item__img" src={props.img} alt="" />
               <div class="tour_day">
                 <p class="">{props.days}</p>
               </div>
-            </a>
+            </Link>
           </figure>
           <div className="cards__item__info">
             <h5 className="cards__item__text">{props.text}</h5>

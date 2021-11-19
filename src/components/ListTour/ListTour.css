@@ -39,6 +39,7 @@ body {
     position: relative;
     margin: 50px 0 45px;
     width: 100%;
+   
   }
 
   .cards__items_tour {
@@ -46,7 +47,8 @@ body {
     margin-top:24px;
     overflow: hidden; 
     display: flex;
-    flex-flow: row wrap;   
+    flex-flow: row wrap; 
+      
   }
 
   .cards__item_tour {

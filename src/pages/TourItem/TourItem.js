@@ -6,16 +6,26 @@ import CardImage from "../../components/CardImage/CardImage";
 import "./TourItem.css";
 import Comment from "./Comment/Comment";
 import Header from "../../components/Header/Header";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import callApi from "../../api/apiService";
-import ReactDOM from "react-dom";
+import Vote from "./Vote/Vote";
+import Button from "@mui/material/Button";
+import SendIcon from "@mui/icons-material/Send";
+import Stack from "@mui/material/Stack";
 
 function TourItem() {
   const [tour, setTour] = useState({});
   const [image, setImage] = useState([]);
+  const [openRating, setOpenRating] = useState(false);
 
+  const togglePopup = () => {
+    setOpenRating(!openRating);
+  };
+  const location = useLocation();
+
+  const id = location.state.id;
   useEffect(() => {
-    callApi(`tour/getOneTour?id=618e0aef597d514940c4a610`, "GET")
+    callApi(`tour/getOneTour?id=${id}`, "GET")
       .then((res) => {
         setImage(res.data.data.imagesTour);
         setTour(res.data.data);
@@ -24,37 +34,21 @@ function TourItem() {
         console.log(err);
       });
   }, []);
+  var list = [];
 
   return (
     <div>
       <Header />
       <div className="touritem__content">
         <div className="touritem__content-slider">
-          <Carousel show={1.5} slide={1} swiping={true}>
-            {/* <div className="touritem__content-slider-item">
-              <img
-                src={image[0]}
-                alt=""
-                className="touritem__content-slider-img"
-              />
-            </div> */}
-
-            <div className="touritem__content-slider-item">
+          <div className="touritem__content-slider-item">
             <img
               src={image[0]}
               alt=""
               className="touritem__content-slider-img"
             />
           </div>
-          <div className="touritem__content-slider-item">
-            <img
-              src="../images/apartment_1_1625465608.jpg"
-              alt=""
-              className="touritem__content-slider-img"
-            />
-          </div>
-
-          </Carousel>
+          {/* <Carousel show={2} slide={1} swiping={true}></Carousel> */}
         </div>
         <div className="touritem__content-wrap">
           <div className="touritem__content-wrap-info">
@@ -68,7 +62,7 @@ function TourItem() {
 
           <div className="touritem__content-wrap-booking">
             <div className="touritem__content-booking-price">
-              {tour.payment} / {tour.time}
+              {tour.payment} đ/ {tour.time}
             </div>
 
             <div className="touritem__content-booking-vehicle">
@@ -218,11 +212,31 @@ function TourItem() {
         {/* Đánh giá */}
 
         <div className="touritem__content-wrap-feature">
+          <Stack direction="row" spacing={2}>
+            <Button
+              endIcon={<SendIcon />}
+              style={{
+                backgroundColor: "#FF512F",
+                color: "#fff",
+                width: "200px",
+                marginTop: "80px",
+                marginBottom: "80px"
+              }}
+              onClick={() => {
+                setOpenRating(!openRating);
+              }}
+            >
+              Viết đánh giá
+            </Button>
+          </Stack>
+
           <h3 className="touritem-feature__name">Đánh giá</h3>
           <Comment id="1" />
         </div>
+
         {/* ---- */}
       </div>
+      {openRating && <Vote handleClose={togglePopup} />}
     </div>
   );
 }
