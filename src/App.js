@@ -12,6 +12,7 @@ import HomePage from './pages/HomePage/HomePage';
 import Page404 from './pages/404/Page404';
 import TourItem from './pages/TourItem/TourItem';
 import BookTour from './pages/BookTour/BookTour';
+import AllTour from './pages/Tour/AllTour';
 function App() {
   return (
     <Router>
@@ -28,7 +29,7 @@ function App() {
           <Route path= "/404" exact component={Page404}/>
           <Route path= "/tour-item" exact component={TourItem}/>
           <Route path= "/booktour" exact component={BookTour}/>
-
+          <Route path= "/alltour" exact component={AllTour}/>
       </Switch>
     </Router>
   );

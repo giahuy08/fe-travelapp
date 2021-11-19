@@ -101,7 +101,7 @@ const logout = ()=>{
                   </a>
                 </li>
                 <li className="header__item">                
-                  <Link to="/tour" className="header__item-link header__item-link--notify">Tour</Link>
+                  <Link to="/alltour" className="header__item-link header__item-link--notify">Tour</Link>
                 </li>
 
                 <li className="header__item">
@@ -162,11 +162,11 @@ const logout = ()=>{
                 </li>
                 <li className="header__item">
                  
-                  <Link to="/tour" className="header__item-link header__item-link--notify">Tour</Link>
+                  <Link to="/alltour" className="header__item-link header__item-link--notify">Tour</Link>
               
                 </li>
 
-                <div>
+                {/* <div>
                 <li className="header__item"
                   id="basic-button"
                   aria-controls="basic-menu"
@@ -185,11 +185,11 @@ const logout = ()=>{
                     'aria-labelledby': 'basic-button',
                   }}
                 >
-                  <MenuItem onClick={handleClose1}>Biển-Đảo</MenuItem>
-                  <MenuItem onClick={handleClose1}>Vùng Cao</MenuItem>
-                  <MenuItem onClick={handleClose1}>Khác</MenuItem>
+                  <a style={{textDecoration: 'none', color: '#4A4A4A'}} href='/tour?category=1'><MenuItem onClick={handleClose1}>Biển-Đảo</MenuItem></a>
+                  <a style={{textDecoration: 'none', color: '#4A4A4A'}} href='/tour?category=2'><MenuItem onClick={handleClose1}>Vùng Cao</MenuItem></a>
+                  <a style={{textDecoration: 'none', color: '#4A4A4A'}} href='/tour?category=0'><MenuItem onClick={handleClose1}>Khác</MenuItem></a>
                 </Menu>
-              </div>
+              </div> */}
                     
 
             <React.Fragment>
@@ -236,13 +236,13 @@ const logout = ()=>{
       >
         <MenuItem>
           <Avatar />  
-          <Link to="/user/profile">
+          <Link style={{textDecoration: 'none', color: '#4A4A4A'}} to="/user/profile">
           Profile
           </Link>
         </MenuItem>
         <MenuItem>
           <Avatar /> 
-          <Link to="/booktour">
+          <Link style={{textDecoration: 'none', color: '#4A4A4A'}} to="/booktour">
           Book Tour
           </Link>
         </MenuItem>
@@ -263,7 +263,7 @@ const logout = ()=>{
           <ListItemIcon>
             <Logout fontSize="small"/>
           </ListItemIcon>         
-          <a href="/login" onClick={logout}>
+          <a style={{textDecoration: 'none', color: '#4A4A4A'}} href="/login" onClick={logout}>
           Logout
           </a>
         </MenuItem>

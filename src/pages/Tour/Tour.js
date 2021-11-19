@@ -8,20 +8,15 @@ import { useLocation } from 'react-router-dom'
 
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import { LocationCityOutlined } from '@mui/icons-material'
+import { DriveFileRenameOutlineTwoTone, LocationCityOutlined } from '@mui/icons-material'
 
 function Tour() {
     const [allTour, setAllTour] = useState([]);
     const [wordSearch, setwordSearch] = useState('');
     const location = useLocation()
-
-    //console.log('hello'+location.state.type)
-
+    const [all, setAll] = useState([]);
 
 
-    // const params = useParams<{ n: string }>();
-    // const currentPage = parseInt(params.n);
-    const [currentPage, setcurrentPage] = useState(1);
     const [pageNumbers, setPageNumbers] = useState(1);
 
     const [page, setPage] = React.useState(1);
@@ -29,61 +24,49 @@ function Tour() {
         setPage(value);
     };
 
-
-
-    let defaultUrl = 'http://localhost:5000/tour/getAllTour?skip=' + page + '&limit=6'
-    let defaultUrl1 = 'http://localhost:5000/tour/getPageNumbers'
-
-    useEffect(() => {
-        (
-            async () => {
-
-                const response = await fetch(defaultUrl1, {
-                    method: 'GET',
-                    params: { 'limit': 6 },
-                    headers: { 'Content-Type': 'application/json' },
-
-                });
-
-                const content = await response.json();
-                console.log(content.data)
-                if (content.message === 'Successfully Get Page Numbers') {
-                    setPageNumbers(content.data)
-                }
+    const GetURLParameter = (sParam) =>{
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++) {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] == sParam) {
+                return (sParameterName[1].toString());
             }
-        )();
-    }, [])
-
-
+        }
+    }
+    const category = GetURLParameter('category')
+    console.log(category)   
+    let defaultUrl = 'http://localhost:5000/tour/findTourByCategory?category='+category+'&skip=' + page + '&limit=6'
     useEffect(() => {
         (
-            async () => {
-
+            
+            async () => {               
+                
                 const response = await fetch(defaultUrl, {
                     method: 'GET',
                     headers: { 'Content-Type': 'application/json' }
                 });
+               
 
                 const content = await response.json();
                 console.log(content.data)
-                if (content.message === 'Successfully Get All Tour') {
+               
+                    if (content.message === 'Successfully Get List Tour') {
                     setAllTour(content.data)
+                    setPageNumbers((all.length/6+0.5).toFixed())
+                }else{
+                    setAllTour([])
+                    setPageNumbers(1)
                 }
             }
         )();
-    }, [page])
+    }, [page, wordSearch == ''])
 
-    const add = () => {
-        setcurrentPage(currentPage + 1)
-    }
-
-    const minus = () => {
-        setcurrentPage(currentPage - 1)
-    }
 
     const search = async () => {
         if (!wordSearch) {
-            setcurrentPage(1)
+            setPage(1)
+            setwordSearch('')
         } else {
             let link = 'http://localhost:5000/tour/findTourByName?name=' + wordSearch
             const response = await fetch(link, {
@@ -93,11 +76,13 @@ function Tour() {
             });
             const content = await response.json();
             console.log(content.data)
-            if (content.message === 'Successfully Get One Tour') {
+            if (content.message === 'Successfully Get Tour') {
                 setAllTour(content.data)
+                setPageNumbers((all.length/6+0.5).toFixed())
             }
             else {
-                setAllTour()
+                setAllTour([])
+                setPageNumbers(1)
             }
         }
     }
@@ -105,13 +90,15 @@ function Tour() {
     return (
         <div className="tours__container">
             <Header />
-            <h3 className='h3-detail'>Trước khi đặt phòng, hãy kiểm tra những địa điểm bị hạn chế du lịch trong thời gian này. Sức khỏe và sự an toàn của cộng đồng luôn được đặt hàng đầu. Vì vậy, vui lòng làm theo chỉ thị của chính phủ bởi điều đó thực sự cần thiết.</h3>
-            <h2 className='h2-detail'>Các địa điểm du lịch nổi tiếng tại TRAVEL</h2>
+            
             <div className='body'>
 
                 <div className='card'>
+                
 
                     <div className='cards__container_tour'>
+                    <div style={{marginTop: '10px'}} className='h3-detail'>Trước khi đặt phòng, hãy kiểm tra những địa điểm bị hạn chế du lịch trong thời gian này. Sức khỏe và sự an toàn của cộng đồng luôn được đặt hàng đầu. Vì vậy, vui lòng làm theo chỉ thị của chính phủ bởi điều đó thực sự cần thiết.</div>
+                    <h2 style={{textAlign: 'center', margin: 'auto'}} className='h2-detail'>Các địa điểm du lịch nổi tiếng tại TRAVEL</h2>
                         Tìm Kiếm
                         <div>
                             <input className='input-seach' type="text" name="search" placeholder="Nhập ký tự ..." onChange={e => setwordSearch(e.target.value)} />
@@ -137,7 +124,7 @@ function Tour() {
                         </div>
                         <div style={{ margin: 'auto' }}>
                             <Stack spacing={2} >
-                                <Pagination count={10} variant="outlined" page={page} onChange={handleChange} />
+                                <Pagination count={pageNumbers} variant="outlined" page={page} onChange={handleChange} />
                             </Stack>
                         </div>
 

@@ -93,18 +93,12 @@ function HomePage() {
           </div>
 
           <div className="home__pro_place_wrapper">
-            {/* <Carousel show={2.5} slide={2} swiping={true}> */}
-            <Link to={{
-              pathname: `/tour`,
-              state: {
-                type:sea
-              },
-            }}>
+            {/* <Carousel show={2.5} slide={2} swiping={true}> */}          
 
-              <CardImage link="/tour" name="Biển - Đảo" numbers={sea.length} image="/images/biendep.jpg" />
-            </Link>
-            <CardImage name="Vùng cao" numbers={highland.length} image="/images/vungcao.jpg" />
-            <CardImage name="Khác" numbers={others.length} image="/images/dulichkhac.jpg" />
+              <CardImage link="/tour?category=1" name="Biển - Đảo" numbers={sea.length} image="/images/biendep.jpg" />
+
+            <CardImage link="/tour?category=2" name="Vùng cao" numbers={highland.length} image="/images/vungcao.jpg" />
+            <CardImage link="/tour?category=0" name="Khác" numbers={others.length} image="/images/dulichkhac.jpg" />
             {/* </Carousel> */}
           </div>
 
