@@ -1,7 +1,7 @@
 .comment-card{
     width: 800px;
     min-height: 130px;
-    max-height: 160px;
+    max-height: 280px;;
     border: 2px solid #fafafa;
     position: relative;
  
@@ -57,6 +57,7 @@
 }   
 
 .comment-card__body{
+    
     padding: 10px 20px 0px 30px;
 }
 
@@ -68,7 +69,7 @@
 
 .comment-card__body-content{
     margin-bottom: 10px;
-    font-size: 15px;
+        font-size: 15px;
 }
 
 .comment-card__body-reply{
@@ -122,4 +123,10 @@
     margin: 10px 0px;
     
    
+}
+
+.comment-img{
+    width: 127px;
+    height:118px;
+    object-fit:cover;
 }

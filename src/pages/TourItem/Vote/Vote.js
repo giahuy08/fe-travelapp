@@ -18,12 +18,9 @@ const Input = styled("input")({
   display: "none",
 });
 function Vote(props) {
-  const stars = Array(5).fill(0);
-  const [count, setCount] = useState();
-  const [currentValue, setCurrentValue] = useState(0);
   const [comment, setComment] = useState();
-  const [hoverValue, setHoverValue] = useState(undefined);
-  const [files, setFiles] = useState([]);
+
+  const [files, setFiles] = useState();
 
   const [notify, setNotify] = useState({
     isOpen: false,
@@ -32,29 +29,33 @@ function Vote(props) {
   });
   const [value, setValue] = React.useState(2);
   const onChangeInput = (e) => {
-    var files = e.target.files;
+    var files = e.target.files[0];
     console.log(files);
     var filesArr = Array.prototype.slice.call(files);
-    setFiles(filesArr);
+    setFiles(files);
   };
   const buttonSubmitVoting = (e) => {
     e.preventDefault();
-    const data = {
-      idCourse: props.id,
+    const vote = {
+      idTour: props.idTour,
+      star: value,
       comment: comment,
-      point: count,
+      ImagesReview: files,
     };
-    callApi(`EveluateCourse/createEveluateCourse`, "POST", data)
+    let data = new FormData();
+    data.append("idTour", props.idTour);
+    data.append("star", value);
+    data.append("comment", comment);
+    data.append("ImagesReview", files);
+
+    console.log(vote);
+    callApi(`reviewtour/createReviewTour`, "POST", data)
       .then((res) => {
         console.log(res);
 
-        // setNotify({isOpen:true,message:'Bạn đã hoàn thành đánh giá',type:'success'})
         window.location.reload();
       })
       .catch((err) => {
-        if (err.response.data.message === "You Eveluated Course") {
-          // setNotify({isOpen:true,message:'Bạn đã đánh giá rồi',type:'warning'})
-        }
         console.log(err);
       });
   };
@@ -64,7 +65,9 @@ function Vote(props) {
       <div style={styles.wrapper}>
         <div style={styles.rating}>
           <div style={styles.feedback}>
-          <span className="close" onClick={props.handleClose}>x</span>
+            <span className="close" onClick={props.handleClose}>
+              x
+            </span>
             <div>
               {/* <h1>{props.name}</h1> */}
               <h2>Đánh giá tour du lịch này như thế nào ?</h2>
@@ -92,15 +95,14 @@ function Vote(props) {
                 }}
               />
 
-              {console.log(files)}
-              {files &&
-                files.map((file) => (
-                  <img
+           
+             
+                  {files && <img
                     className="vote-file-preview"
-                    src={URL.createObjectURL(file)}
+                    src={URL.createObjectURL(files)}
                     alt=""
-                  />
-                ))}
+                  />}
+              
               <div style={styles.listButton}>
                 <label htmlFor="icon-button-file">
                   <Input
@@ -147,7 +149,6 @@ const styles = {
   rating: {
     width: 800,
     height: 800,
-   
 
     marginLeft: "-200px",
   },

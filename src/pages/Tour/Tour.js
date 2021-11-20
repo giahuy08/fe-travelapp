@@ -115,7 +115,9 @@ function Tour() {
                                             img={tour.imagesTour[0]}
                                             text={tour.name}
                                             days={tour.time}
-                                            price={tour.payment}>
+                                            price={tour.payment}
+                                            id={tour._id}
+                                            >
                                         </CardTour>
                                     })
                                 }

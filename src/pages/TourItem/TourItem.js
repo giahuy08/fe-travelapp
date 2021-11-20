@@ -17,13 +17,25 @@ function TourItem() {
   const [tour, setTour] = useState({});
   const [image, setImage] = useState([]);
   const [openRating, setOpenRating] = useState(false);
-
+  const [comments,setComments] = useState([]);
+  const [images,setImages] = useState([])
   const togglePopup = () => {
     setOpenRating(!openRating);
   };
   const location = useLocation();
 
   const id = location.state.id;
+  const getComment = async () => {
+    await callApi(`reviewtour/getReviewOfTour?idTour=${id}`, "GET")
+    .then((res) => {
+    
+      setComments(res.data.data);
+
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
   useEffect(() => {
     callApi(`tour/getOneTour?id=${id}`, "GET")
       .then((res) => {
@@ -34,6 +46,16 @@ function TourItem() {
         console.log(err);
       });
   }, []);
+
+  useEffect(() => {
+    getComment()
+    // const interval=setInterval(()=>{
+    //   getComment();
+    //  },1000)
+       
+       
+    //  return()=>clearInterval(interval)
+  },[])
   var list = [];
 
   return (
@@ -230,13 +252,17 @@ function TourItem() {
             </Button>
           </Stack>
 
-          <h3 className="touritem-feature__name">Đánh giá</h3>
-          <Comment id="1" />
+          <h3 className="touritem-feature__name">Đánh giá - từ khách hàng</h3>
+          {comments.map((comment,index)=>(
+
+            <Comment key={index} star = {comment.star} imagesReview = {comment.imagesReview} comment={comment.comment}/>
+          ))
+          }
         </div>
 
         {/* ---- */}
       </div>
-      {openRating && <Vote handleClose={togglePopup} />}
+      {openRating && <Vote handleClose={togglePopup} idTour={id} />}
     </div>
   );
 }
