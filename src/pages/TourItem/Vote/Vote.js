@@ -95,14 +95,14 @@ function Vote(props) {
                 }}
               />
 
-           
-             
-                  {files && <img
-                    className="vote-file-preview"
-                    src={URL.createObjectURL(files)}
-                    alt=""
-                  />}
-              
+              {files && (
+                <img
+                  className="vote-file-preview"
+                  src={URL.createObjectURL(files)}
+                  alt=""
+                />
+              )}
+
               <div style={styles.listButton}>
                 <label htmlFor="icon-button-file">
                   <Input
@@ -181,11 +181,12 @@ const styles = {
   },
   buttonvote: {
     color: "#fff",
-    border: "1px solid #a9a9a9",
+   
     borderRadius: 5,
     backgroundColor: "#FF512F",
     width: 200,
     padding: 10,
+    outline: "none"
   },
   buttonquit: {
     color: "#fff",

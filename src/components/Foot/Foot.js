@@ -11,7 +11,7 @@ function Foot() {
                 <div className="home__footer__info-mess-heading">Messenger</div>
                 <div className="home__footer__info-mess-decs">
                   <a
-                    href="http://m.me/luxstay"
+                    href="#"
                     className="home__footer__info-mess-decs-link"
                   >
                     http://travel.com
@@ -145,18 +145,18 @@ function Foot() {
                   </a>
                 </li>
                 <li className="home__footer__item">
-                  <a href="tel:18006586" className="home__footer__item-link">
-                    1800 6586
+                  <a href="tel:00000000" className="home__footer__item-link">
+                    0000 0000
                   </a>
                 </li>
                 <li className="home__footer__item">
-                  <a href="tel:0889866666" className="home__footer__item-link">
-                    +84 8898 66666
+                  <a href="tel:00000000" className="home__footer__item-link">
+                    +84 0000000000
                   </a>
                 </li>
                 <li className="home__footer__item">
                   <a href="" className="home__footer__item-link">
-                    info@luxstay.com
+                    info@traveltour.com
                   </a>
                 </li>
                 <li className="home__footer__item">
@@ -179,7 +179,7 @@ function Foot() {
           </div>
 
           <div className="home__footer__download">
-            <div className="home__footer__heading">TẢI ỨNG DỤNG LUXSTAY</div>
+            <div className="home__footer__heading">TẢI ỨNG DỤNG TRAVELTOUR</div>
             <div className="home__footer__download-app">
               <div className="home__footer__download-app-qr">
                 <img

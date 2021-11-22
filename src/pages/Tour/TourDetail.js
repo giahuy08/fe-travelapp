@@ -16,7 +16,7 @@ function TourDetail() {
         <div className='cards-detail'>
         
            <div className='cards__container_tour'>
-            <div class='price' data-category='5.000.000 đ'/>
+            <div className='price' data-category='5.000.000 đ'/>
             <button className='button-oder' href='#'>Đặt Tour</button>
             <h4>Đánh giá: 4/5 sao</h4>
             <h4>Địa điểm: PHÚ QUỐC</h4>
@@ -24,29 +24,29 @@ function TourDetail() {
             <h4>Nội dung:</h4>
             <div>Đi chơi phải có tiền</div>           
             <div className='list-img'>
-            <div class="cards-detail-1">
+            <div className="cards-detail-1">
         <a href="images/img-3.jpg" target="_blank">
-           <img class="img-detail" src="images/img-3.jpg" alt=""/>
+           <img className="img-detail" src="images/img-3.jpg" alt=""/>
         </a>
-        <div class="desc">Đặt tiêu đề cho hình ảnh tại đây</div>
+        <div className="desc">Đặt tiêu đề cho hình ảnh tại đây</div>
     </div>
-    <div class="cards-detail-1">
+    <div className="cards-detail-1">
         <a className='link-card' href="images/img-3.jpg" target="_blank">
-           <img class="img-detail" src="images/img-3.jpg" alt=""/>
+           <img className="img-detail" src="images/img-3.jpg" alt=""/>
         </a>
-        <div class="desc">Đặt tiêu đề cho hình ảnh tại đây</div>
+        <div className="desc">Đặt tiêu đề cho hình ảnh tại đây</div>
     </div>
-    <div class="cards-detail-1">
+    <div className="cards-detail-1">
         <a href="images/img-3.jpg" target="_blank">
-           <img class="img-detail" src="images/img-3.jpg" alt=""/>
+           <img className="img-detail" src="images/img-3.jpg" alt=""/>
         </a>
-        <div class="desc">Đặt tiêu đề cho hình ảnh tại đây</div>
+        <div className="desc">Đặt tiêu đề cho hình ảnh tại đây</div>
     </div>
-    <div class="cards-detail-1">
+    <div className="cards-detail-1">
         <a href="images/img-3.jpg" target="_blank">
-           <img class="img-detail" src="images/img-3.jpg" alt=""/>
+           <img className="img-detail" src="images/img-3.jpg" alt=""/>
         </a>
-        <div class="desc">Đặt tiêu đề cho hình ảnh tại đây</div>
+        <div className="desc">Đặt tiêu đề cho hình ảnh tại đây</div>
     </div>
             </div>
                 <h3>Đánh Giá: </h3>

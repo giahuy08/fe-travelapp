@@ -111,19 +111,22 @@ function AllTour() {
                         <div>
                             <input className='input-seach' type="text" name="search" placeholder="Nhập ký tự ..." onChange={e => setwordSearch(e.target.value)} />
 
-                            <button class='tiktok' onClick={search}>Tìm</button>
+                            <button className='tiktok' onClick={search}>Tìm</button>
                         </div>
                         <div className='cards__wrapper_tour'>
                             <div className='cards__items_tour'>
 
                                 {
 
-                                    allTour && allTour.map((tour) => {
+                                    allTour && allTour.map((tour,index) => {
                                         return <CardTour
+                                        key={index}
                                             img={tour.imagesTour[0]}
                                             text={tour.name}
                                             days={tour.time}
+                                            id={tour._id}
                                             price={tour.payment}>
+                                                
                                         </CardTour>
                                     })
                                 }

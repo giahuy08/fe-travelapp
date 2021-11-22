@@ -6,36 +6,72 @@ import CardImage from "../../components/CardImage/CardImage";
 import "./TourItem.css";
 import Comment from "./Comment/Comment";
 import Header from "../../components/Header/Header";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation,useHistory } from "react-router-dom";
 import callApi from "../../api/apiService";
 import Vote from "./Vote/Vote";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import Stack from "@mui/material/Stack";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 function TourItem() {
   const [tour, setTour] = useState({});
   const [image, setImage] = useState([]);
   const [openRating, setOpenRating] = useState(false);
-  const [comments,setComments] = useState([]);
-  const [images,setImages] = useState([])
+  const [comments, setComments] = useState([]);
+  const [images, setImages] = useState([]);
+  const [code, setCode] = useState("");
+  const [errorCode, setErrorCode] = useState("");
+  const historyback = useHistory()
+  const handleChangeCode = (event) => {
+    setCode(event.target.value);
+  };
   const togglePopup = () => {
     setOpenRating(!openRating);
   };
   const location = useLocation();
 
   const id = location.state.id;
+
+  const bookTour = async (e) => {
+    e.preventDefault();
+    let data;
+    if(code !=""){
+      data = {
+        idTour: id,
+        codediscount: code,
+      };
+
+    }else{
+      data = {
+        idTour: id
+  
+      };
+    }
+    await callApi(`booktour/bookTour`, "POST", data)
+      .then((res) => {
+        alert("data");
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log(err.response.data.message);
+        if (err.response.data.message === "Code Discount doesn't exist") {
+          setErrorCode("Code không phù hợp");
+        }
+        if (err.response.data.message === "The tour is already booked") {
+          setErrorCode("Tour đã book vui lòng vào history để thanh toán");
+        }
+      });
+  };
   const getComment = async () => {
     await callApi(`reviewtour/getReviewOfTour?idTour=${id}`, "GET")
-    .then((res) => {
-    
-      setComments(res.data.data);
-
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  }
+      .then((res) => {
+        setComments(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   useEffect(() => {
     callApi(`tour/getOneTour?id=${id}`, "GET")
       .then((res) => {
@@ -48,20 +84,20 @@ function TourItem() {
   }, []);
 
   useEffect(() => {
-    getComment()
+    getComment();
     // const interval=setInterval(()=>{
     //   getComment();
     //  },1000)
-       
-       
+
     //  return()=>clearInterval(interval)
-  },[])
+  }, []);
   var list = [];
 
   return (
     <div>
       <Header />
       <div className="touritem__content">
+      
         <div className="touritem__content-slider">
           <div className="touritem__content-slider-item">
             <img
@@ -72,11 +108,23 @@ function TourItem() {
           </div>
           {/* <Carousel show={2} slide={1} swiping={true}></Carousel> */}
         </div>
+        <span
+       onClick={() => {
+        historyback.goBack();
+        }}
+        style={{ cursor: "pointer", fontSize: 15,margin:"10px",display: "block",color:"#fe5a2d"}}
+        
+      >
+        <ArrowBackIosIcon style={{fontSize:'20px',marginBottom:'-4px'}}/>
+        <ArrowBackIosIcon style={{fontSize:'20px',marginBottom:'-4px',marginLeft:'-10px'}}/>
+        
+        Quay lại
+      </span>
         <div className="touritem__content-wrap">
           <div className="touritem__content-wrap-info">
             <h2 className="touritem__name">{tour.name}</h2>
             <div className="touritem__place">
-              <i class="fas fa-map-marker-alt"></i>
+              <i className="fas fa-map-marker-alt"></i>
               {tour.place}
             </div>
             <div className="touritem__detail">{tour.detail}</div>
@@ -99,13 +147,27 @@ function TourItem() {
               label="Mã khuyến mãi"
               name="code"
               autoFocus
+              value={code}
+              onChange={handleChangeCode}
             />
-
+            <div className="touritem__content-booking-errorcode">
+              {errorCode}
+            </div>
             <div className="touritem__content-booking-vehicle">
               Tổng tiền: 200,000đ
             </div>
-            <Link to="/payment">
-              <button className="touritem__content-booking-btn">
+            <Link
+              to={{
+                pathname: `/payment/${id}`,
+                state: {
+                  code: code,
+                },
+              }}
+            >
+              <button
+                className="touritem__content-booking-btn"
+               
+              >
                 Đặt ngay
               </button>
             </Link>
@@ -121,14 +183,14 @@ function TourItem() {
             </div>
             <div className="touritem-feature__list">
               <div className="touritem-feature__item">
-                <i class="fas fa-wifi"></i> Wifi
+                <i className="fas fa-wifi"></i> Wifi
               </div>
               <div className="touritem-feature__item">
-                <i class="fas fa-tv"></i> Tivi
+                <i className="fas fa-tv"></i> Tivi
               </div>
 
               <div className="touritem-feature__item">
-                <i class="fas fa-fan"></i> Air conditioner
+                <i className="fas fa-fan"></i> Air conditioner
               </div>
             </div>
           </div>
@@ -136,14 +198,14 @@ function TourItem() {
             <div className="touritem-feature__name__desc">Tiện ích bếp</div>
             <div className="touritem-feature__list">
               <div className="touritem-feature__item">
-                <i class="fas fa-wifi"></i> Wifi
+                <i className="fas fa-wifi"></i> Wifi
               </div>
               <div className="touritem-feature__item">
-                <i class="fas fa-tv"></i> Tivi
+                <i className="fas fa-tv"></i> Tivi
               </div>
 
               <div className="touritem-feature__item">
-                <i class="fas fa-fan"></i> Air conditioner
+                <i className="fas fa-fan"></i> Air conditioner
               </div>
             </div>
           </div>
@@ -163,48 +225,48 @@ function TourItem() {
           <h3 className="touritem-feature__name">Khách sạn</h3>
 
           <Carousel show={2.5} slide={2} swiping={true} transition={0.5}>
-            <div class="touritem__some__hotel-container">
-              <a href="#" class="touritem__some__hotel-link">
+            <div className="touritem__some__hotel-container">
+              <a href="#" className="touritem__some__hotel-link">
                 <img
                   src="../images/apartment_1_1625465608.jpg"
                   alt=""
-                  class="touritem__some__hotel-img"
+                  className="touritem__some__hotel-img"
                 />
-                <p class="touritem__some__hotel-label">
+                <p className="touritem__some__hotel-label">
                   VI VU NGOẠI THÀNH HÀ NỘI
                 </p>
-                <p class="touritem__some__hotel-decs">
+                <p className="touritem__some__hotel-decs">
                   Trải nghiệm không gian thoáng đãng cho chuyến đi ngay gần Hà
                   Nội
                 </p>
               </a>
             </div>
 
-            <div class="touritem__some__hotel-container">
-              <a href="#" class="touritem__some__hotel-link">
+            <div className="touritem__some__hotel-container">
+              <a href="#" className="touritem__some__hotel-link">
                 <img
                   src="../images/apartment_1_1625465608.jpg"
                   alt=""
-                  class="touritem__some__hotel-img"
+                  className="touritem__some__hotel-img"
                 />
-                <p class="touritem__some__hotel-label">
+                <p className="touritem__some__hotel-label">
                   VI VU NGOẠI THÀNH HÀ NỘI
                 </p>
-                <p class="touritem__some__hotel-decs">
+                <p className="touritem__some__hotel-decs">
                   Trải nghiệm không gian thoáng đãng cho chuyến đi ngay gần Hà
                   Nội
                 </p>
               </a>
             </div>
 
-            <div class="touritem__some__hotel-container">
-              <a href="#" class="touritem__some__hotel-link">
+            <div className="touritem__some__hotel-container">
+              <a href="#" className="touritem__some__hotel-link">
                 <img
                   src="../images/apartment_1_1625465608.jpg"
                   alt=""
-                  class="touritem__some__hotel-img"
+                  className="touritem__some__hotel-img"
                 />
-                <p class="touritem__some__hotel-label">
+                <p className="touritem__some__hotel-label">
                   VI VU NGOẠI THÀNH HÀ NỘI
                 </p>
               </a>
@@ -242,7 +304,7 @@ function TourItem() {
                 color: "#fff",
                 width: "200px",
                 marginTop: "80px",
-                marginBottom: "80px"
+                marginBottom: "80px",
               }}
               onClick={() => {
                 setOpenRating(!openRating);
@@ -253,11 +315,14 @@ function TourItem() {
           </Stack>
 
           <h3 className="touritem-feature__name">Đánh giá - từ khách hàng</h3>
-          {comments.map((comment,index)=>(
-
-            <Comment key={index} star = {comment.star} imagesReview = {comment.imagesReview} comment={comment.comment}/>
-          ))
-          }
+          {comments.map((comment, index) => (
+            <Comment
+              key={index}
+              star={comment.star}
+              imagesReview={comment.imagesReview}
+              comment={comment.comment}
+            />
+          ))}
         </div>
 
         {/* ---- */}

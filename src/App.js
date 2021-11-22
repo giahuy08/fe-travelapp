@@ -14,6 +14,7 @@ import TourItem from './pages/TourItem/TourItem';
 import Payment from './pages/Payment/Payment'
 import BookTour from './pages/BookTour/BookTour';
 import AllTour from './pages/Tour/AllTour';
+import Bill from './pages/Bill/Bill';
 function App() {
   return (
     <Router>
@@ -29,10 +30,12 @@ function App() {
           <Route path= "/booking" exact component={Booking}/>
           <Route path= "/404" exact component={Page404}/>
           <Route path= "/tour-item" exact component={TourItem}/>
-          <Route path= "/payment" exact component={Payment}/>
+          <Route path= "/payment/:id" exact component={Payment}/>
 
           <Route path= "/booktour" exact component={BookTour}/>
           <Route path= "/alltour" exact component={AllTour}/>
+          <Route path= "/booktour/payment" exact component={Bill}/>
+
       </Switch>
     </Router>
   );

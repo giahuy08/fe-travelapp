@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import callApi from "../../api/apiService";
 import { useHistory } from "react-router";
+import Message from "../../components/Message/Message"
 
 function Copyright(props) {
   return (
@@ -32,6 +33,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function LogIn() {
+  const [error,setError] = useState(false)
   const [user, setUser] = useState({
     activeStep: 0,
     labelWidth: 0,
@@ -91,6 +93,7 @@ export default function LogIn() {
 
   const history = useHistory()
   const handleSubmit = (e) => {
+   
     const data = new FormData(e.currentTarget);
     handleNext(e)
     e.preventDefault();
@@ -105,11 +108,15 @@ export default function LogIn() {
           console.log(res);
           console.log(res.data.data.token)
           localStorage.setItem("accessToken", res.data.data.token)
+          localStorage.setItem("avatar",res.data.data.user.avatar)
+          console.log(localStorage.getItem("avatar"))
           history.push("/");
 
         })
         .catch((err) => {
           console.log(err);
+          setError(!error)
+          
         });
     }
   };
@@ -222,6 +229,7 @@ export default function LogIn() {
           </Box>
         </Grid>
       </Grid>
+      {error && <Message open={error} message ="Sai tài khoản hoặc mật khẩu"/>}
     </ThemeProvider>
   );
 }

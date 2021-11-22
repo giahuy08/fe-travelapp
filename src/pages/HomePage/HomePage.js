@@ -108,9 +108,19 @@ function HomePage() {
           <div className="home_some__idea-container-box">
             <div className="home__some__idea">
               {alltours &&
-                alltours.map((tour) => {
+                alltours.map((tour,index) => {
                   return (
-                    <div className="home__some__idea-container">
+                    <Link
+                    to={{
+                     pathname: `/tour-item`,
+                     state: {
+                       id: tour._id,
+                     },
+                   }}
+                   style={{textDecoration: "none"}}
+                   >
+                    <div className="home__some__idea-container" key={index}>
+                      
                       <a href="#" className="home__some__idea-link">
                         <img
                           src={tour.imagesTour[0]}
@@ -127,6 +137,8 @@ function HomePage() {
                         </div>
                       </div>
                     </div>
+                    </Link>
+                
                   );
                 })}
             </div>

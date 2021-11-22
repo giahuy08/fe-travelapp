@@ -165,7 +165,7 @@ function Comment(props) {
               <Rating name="read-only" value={value} readOnly />
             </div>
             {/* {item.idUser === idUser && ( */}
-            <div className="comment-update-icons">
+            {/* <div className="comment-update-icons">
               <EditIcon
                 onClick={() => {
                   setEdit(!edit);
@@ -180,7 +180,7 @@ function Comment(props) {
                 }}
                 style={{ cursor: "pointer", fontSize: 20 }}
               />
-            </div>
+            </div> */}
             {/* )} */}
           </div>
             {
@@ -192,7 +192,7 @@ function Comment(props) {
             {
               props.imagesReview && props.imagesReview.map((image,index)=>(
                 <> 
-                {console.log(image)}
+               
                 <img key={index} className="comment-img" src={image} alt="" />
                 </>
               ))

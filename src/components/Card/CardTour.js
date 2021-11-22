@@ -5,7 +5,7 @@ function CardTour(props) {
     <>
       <div className="cards__item_tour">
         <article>
-          <figure class="cards__item__pic-wrap" data-category={props.price}>
+          <figure className="cards__item__pic-wrap" data-category={props.price}>
             <Link
              to={{
               pathname: `/tour-item`,
@@ -15,8 +15,8 @@ function CardTour(props) {
             }}
             >
               <img className="cards__item__img" src={props.img} alt="" />
-              <div class="tour_day">
-                <p class="">{props.days}</p>
+              <div className="tour_day">
+                <p className="">{props.days}</p>
               </div>
             </Link>
           </figure>
