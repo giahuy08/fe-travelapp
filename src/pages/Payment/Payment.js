@@ -11,6 +11,7 @@ import MoneyIcon from "@mui/icons-material/Money";
 import callApi from "../../api/apiService";
 import { useParams, useLocation, Redirect, Link ,useHistory } from "react-router-dom";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import Message from "../../components/Message/Message"
 import "./Payment.css";
 function Payment() {
   const [tour, setTour] = useState();
@@ -18,6 +19,7 @@ function Payment() {
   const [value, setValue] = React.useState("");
   const [error, setError] = React.useState(false);
   const [errorCode, setErrorCode] = useState("");
+  const [success, setSuccess] = React.useState(false);
   const [helperText, setHelperText] = React.useState(
     "Vui lòng chọn hình thức thanh toán"
   );
@@ -97,7 +99,7 @@ function Payment() {
     }
     callApi(`booktour/bookTour`, "POST", data)
       .then((res) => {
-        alert("data");
+        setSuccess(!success);
       })
       .catch((err) => {
         console.log(err);
@@ -266,7 +268,9 @@ function Payment() {
           </div>
         )}
       </div>
+      {success && <Message open={success} type="success" message ="Thành công. Tour bạn trong trang thái chờ"/>}
     </div>
+
   );
 }
 

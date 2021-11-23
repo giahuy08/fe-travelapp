@@ -3,6 +3,7 @@ import '../../components/ListTour/TourDetail.css';
 
 import Head from '../../components/Head/Head';
 import Foot from '../../components/Foot/Foot';
+import { Link } from 'react-router-dom';
 function TourDetail() {
     return (
         <>
@@ -25,27 +26,27 @@ function TourDetail() {
             <div>Đi chơi phải có tiền</div>           
             <div className='list-img'>
             <div className="cards-detail-1">
-        <a href="images/img-3.jpg" target="_blank">
+        <Link to="images/img-3.jpg" target="_blank">
            <img className="img-detail" src="images/img-3.jpg" alt=""/>
-        </a>
+        </Link> 
         <div className="desc">Đặt tiêu đề cho hình ảnh tại đây</div>
     </div>
     <div className="cards-detail-1">
-        <a className='link-card' href="images/img-3.jpg" target="_blank">
+        <Link className='link-card' href="images/img-3.jpg" target="_blank">
            <img className="img-detail" src="images/img-3.jpg" alt=""/>
-        </a>
+        </Link> 
         <div className="desc">Đặt tiêu đề cho hình ảnh tại đây</div>
     </div>
     <div className="cards-detail-1">
-        <a href="images/img-3.jpg" target="_blank">
+        <Link to="images/img-3.jpg" target="_blank">
            <img className="img-detail" src="images/img-3.jpg" alt=""/>
-        </a>
+        </Link> 
         <div className="desc">Đặt tiêu đề cho hình ảnh tại đây</div>
     </div>
     <div className="cards-detail-1">
-        <a href="images/img-3.jpg" target="_blank">
+        <Link to="images/img-3.jpg" target="_blank">
            <img className="img-detail" src="images/img-3.jpg" alt=""/>
-        </a>
+        </Link> 
         <div className="desc">Đặt tiêu đề cho hình ảnh tại đây</div>
     </div>
             </div>

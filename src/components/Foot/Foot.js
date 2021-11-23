@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom"
 import "./Foot.css";
 function Foot() {
   return (
@@ -10,12 +11,12 @@ function Foot() {
               <div className="home__footer__info-mess-title">
                 <div className="home__footer__info-mess-heading">Messenger</div>
                 <div className="home__footer__info-mess-decs">
-                  <a
-                    href="#"
+                  <Link
+                    to="#"
                     className="home__footer__info-mess-decs-link"
                   >
                     http://travel.com
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -26,12 +27,12 @@ function Foot() {
                   <a href="tel:18006586" className="home__footer__info-phone-link">
                     18000000 (Việt Nam)
                   </a>
-                  <a
+                  <Link
                     href="tel:0889866666"
                     className="home__footer__info-phone-link"
                   >
                     000000000
-                  </a>
+                  </Link> 
                 </div>
               </div>
             </div>
@@ -44,54 +45,54 @@ function Foot() {
               </div>
               <ul className="home__footer__list">
                 <li className="home__footer__item">
-                  <a href="" className="home__footer__item-link">
+                  <Link to="" className="home__footer__item-link">
                     Homestay Đà Lạt
-                  </a>
+                  </Link>
                 </li>
                 <li className="home__footer__item">
-                  <a href="" className="home__footer__item-link">
+                  <Link to="" className="home__footer__item-link">
                     Homestay Hà Nội
-                  </a>
+                  </Link>
                 </li>
                 <li className="home__footer__item">
-                  <a href="" className="home__footer__item-link">
+                  <Link to="" className="home__footer__item-link">
                     Homestay Hồ Chí Minh
-                  </a>
+                  </Link>
                 </li>
                 <li className="home__footer__item">
-                  <a href="" className="home__footer__item-link">
+                  <Link to="" className="home__footer__item-link">
                     Homestay Sapa
-                  </a>
+                  </Link>
                 </li>
                 <li className="home__footer__item">
-                  <a href="" className="home__footer__item-link">
+                  <Link to="" className="home__footer__item-link">
                     Homestay Vũng Tàu
-                  </a>
+                  </Link>
                 </li>
                 <li className="home__footer__item">
-                  <a href="" className="home__footer__item-link">
+                  <Link to="" className="home__footer__item-link">
                     Homestay Tam Đảo
-                  </a>
+                  </Link>
                 </li>
                 <li className="home__footer__item">
-                  <a href="" className="home__footer__item-link">
+                  <Link to="" className="home__footer__item-link">
                     Homestay Hội An
-                  </a>
+                  </Link>
                 </li>
                 <li className="home__footer__item">
-                  <a href="" className="home__footer__item-link">
+                  <Link to="" className="home__footer__item-link">
                     Homestay Đà Nẵng
-                  </a>
+                  </Link>
                 </li>
                 <li className="home__footer__item">
-                  <a href="" className="home__footer__item-link">
+                  <Link to="" className="home__footer__item-link">
                     Homestay Hạ Long
-                  </a>
+                  </Link>
                 </li>
                 <li className="home__footer__item">
-                  <a href="" className="home__footer__item-link">
+                  <Link to="" className="home__footer__item-link">
                     Homestay Phan Thiết
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -102,29 +103,29 @@ function Foot() {
               <div className="home__footer__heading">KHÔNG GIAN ƯA THÍCH</div>
               <ul className="home__footer__list">
                 <li className="home__footer__item">
-                  <a href="" className="home__footer__item-link">
+                  <Link to="" className="home__footer__item-link">
                     Căn hộ dịch vụ
-                  </a>
+                  </Link>
                 </li>
                 <li className="home__footer__item">
-                  <a href="" className="home__footer__item-link">
+                  <Link to="" className="home__footer__item-link">
                     Biệt thự
-                  </a>
+                  </Link>
                 </li>
                 <li className="home__footer__item">
-                  <a href="" className="home__footer__item-link">
+                  <Link to="" className="home__footer__item-link">
                     Nhà riêng
-                  </a>
+                  </Link>
                 </li>
                 <li className="home__footer__item">
-                  <a href="" className="home__footer__item-link">
+                  <Link to="" className="home__footer__item-link">
                     Studio
-                  </a>
+                  </Link>
                 </li>
                 <li className="home__footer__item">
-                  <a href="" className="home__footer__item-link">
+                  <Link to="" className="home__footer__item-link">
                     Travel Guide
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -135,44 +136,44 @@ function Foot() {
               <div className="home__footer__heading">VỀ CHÚNG TÔI</div>
               <ul className="home__footer__list">
                 <li className="home__footer__item">
-                  <a href="" className="home__footer__item-link">
+                  <Link to="" className="home__footer__item-link">
                     Blog
-                  </a>
+                  </Link>
                 </li>
                 <li className="home__footer__item">
-                  <a href="" className="home__footer__item-link">
+                  <Link to="" className="home__footer__item-link">
                     Điều khoản hoạt động
-                  </a>
+                  </Link>
                 </li>
                 <li className="home__footer__item">
-                  <a href="tel:00000000" className="home__footer__item-link">
+                  <a to="tel:00000000" className="home__footer__item-link">
                     0000 0000
                   </a>
                 </li>
                 <li className="home__footer__item">
-                  <a href="tel:00000000" className="home__footer__item-link">
+                  <a to="tel:00000000" className="home__footer__item-link">
                     +84 0000000000
                   </a>
                 </li>
                 <li className="home__footer__item">
-                  <a href="" className="home__footer__item-link">
+                  <Link to="" className="home__footer__item-link">
                     info@traveltour.com
-                  </a>
+                  </Link>
                 </li>
                 <li className="home__footer__item">
-                  <a href="" className="home__footer__item-link">
+                  <Link to="" className="home__footer__item-link">
                     Trang thông tin dành cho chủ nhà
-                  </a>
+                  </Link>
                 </li>
                 <li className="home__footer__item">
-                  <a href="" className="home__footer__item-link">
+                  <Link to="" className="home__footer__item-link">
                     Cơ hội nghề nghiệp
-                  </a>
+                  </Link>
                 </li>
                 <li className="home__footer__item">
-                  <a href="" className="home__footer__item-link">
+                  <Link to="" className="home__footer__item-link">
                     Tạp chí du lịch
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -190,28 +191,28 @@ function Foot() {
               </div>
               <div className="home__footer__download-app-container">
                 <div className="">
-                  <a href="" className="home__footer__download-app-link">
+                  <Link to="" className="home__footer__download-app-link">
                     <img
                       src="./assets/img/apple-store.svg"
                       alt=""
                       className="home__footer__download-app-img"
                     />
-                  </a>
+                  </Link>
                 </div>
-                <a href="" className="home__footer__download-app-link">
+                <Link to="" className="home__footer__download-app-link">
                   <img
                     src="./assets/img/google-play.svg"
                     alt=""
                     className="home__footer__download-app-img"
                   />
-                </a>
-                <a href="" className="home__footer__download-app-link">
+                </Link>
+                <Link to="" className="home__footer__download-app-link">
                   <img
                     src="./assets/img/huawei.svg"
                     alt=""
                     className="home__footer__download-app-img"
                   />
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -250,22 +251,22 @@ function Foot() {
               <div className="home__footer__heading">CERTIFICATION</div>
               <ul className="certification-list">
                 <li className="certification-item">
-                  <a href="" className="certification-item-link">
+                  <Link to="" className="certification-item-link">
                     <img
                       src="../images/bct.png"
                       alt=""
                       className="mr-20 certification-item-img"
                     />
-                  </a>
+                  </Link>
                 </li>
                 <li className="certification-item">
-                  <a href="" className="certification-item-link">
+                  <Link to="" className="certification-item-link">
                     <img
                       src="../images/dmca.png"
                       alt=""
                       className="certification-item-img"
                     />
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

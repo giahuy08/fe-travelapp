@@ -2,6 +2,7 @@ import React from 'react'
 // import 'https://fonts.googleapis.com/css?family=Arvo'
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import './Page404.css'
+import {Link} from "react-router-dom"
 import Foot from '../../components/Foot/Foot'
 function Page404() {
     
@@ -28,7 +29,7 @@ function Page404() {
         
         <p style={{textAlign: 'center'}}>the page you are looking for not avaible!</p>
         
-        <a href="/" className="link_404" >Go to Home</a>
+        <Link to="/" className="link_404" >Go to Home</Link> 
       </div>
         </div>
         </div>

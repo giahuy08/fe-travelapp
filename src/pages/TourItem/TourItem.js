@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Head from "../../components/Head/Head";
 import TextField from "@mui/material/TextField";
-import { Carousel, ScrollingCarousel } from "@trendyol-js/react-carousel";
-import CardImage from "../../components/CardImage/CardImage";
+import { Carousel} from "@trendyol-js/react-carousel";
 import "./TourItem.css";
 import Comment from "./Comment/Comment";
 import Header from "../../components/Header/Header";
@@ -13,14 +11,15 @@ import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import Stack from "@mui/material/Stack";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-
+import Message from "../../components/Message/Message"
 function TourItem() {
   const [tour, setTour] = useState({});
+  const [error,setError] = useState(false)
+
   const [image, setImage] = useState([]);
   const [openRating, setOpenRating] = useState(false);
   const [comments, setComments] = useState([]);
-  const [images, setImages] = useState([]);
-  const [code, setCode] = useState("");
+   const [code, setCode] = useState("");
   const [errorCode, setErrorCode] = useState("");
   const historyback = useHistory()
   const handleChangeCode = (event) => {
@@ -33,36 +32,7 @@ function TourItem() {
 
   const id = location.state.id;
 
-  const bookTour = async (e) => {
-    e.preventDefault();
-    let data;
-    if(code !=""){
-      data = {
-        idTour: id,
-        codediscount: code,
-      };
-
-    }else{
-      data = {
-        idTour: id
   
-      };
-    }
-    await callApi(`booktour/bookTour`, "POST", data)
-      .then((res) => {
-        alert("data");
-      })
-      .catch((err) => {
-        console.log(err);
-        console.log(err.response.data.message);
-        if (err.response.data.message === "Code Discount doesn't exist") {
-          setErrorCode("Code không phù hợp");
-        }
-        if (err.response.data.message === "The tour is already booked") {
-          setErrorCode("Tour đã book vui lòng vào history để thanh toán");
-        }
-      });
-  };
   const getComment = async () => {
     await callApi(`reviewtour/getReviewOfTour?idTour=${id}`, "GET")
       .then((res) => {
@@ -226,7 +196,7 @@ function TourItem() {
 
           <Carousel show={2.5} slide={2} swiping={true} transition={0.5}>
             <div className="touritem__some__hotel-container">
-              <a href="#" className="touritem__some__hotel-link">
+              <Link to="#" className="touritem__some__hotel-link">
                 <img
                   src="../images/apartment_1_1625465608.jpg"
                   alt=""
@@ -239,11 +209,11 @@ function TourItem() {
                   Trải nghiệm không gian thoáng đãng cho chuyến đi ngay gần Hà
                   Nội
                 </p>
-              </a>
+              </Link> 
             </div>
 
             <div className="touritem__some__hotel-container">
-              <a href="#" className="touritem__some__hotel-link">
+              <Link to="#" className="touritem__some__hotel-link">
                 <img
                   src="../images/apartment_1_1625465608.jpg"
                   alt=""
@@ -256,11 +226,11 @@ function TourItem() {
                   Trải nghiệm không gian thoáng đãng cho chuyến đi ngay gần Hà
                   Nội
                 </p>
-              </a>
+              </Link> 
             </div>
 
             <div className="touritem__some__hotel-container">
-              <a href="#" className="touritem__some__hotel-link">
+              <Link to="#" className="touritem__some__hotel-link">
                 <img
                   src="../images/apartment_1_1625465608.jpg"
                   alt=""
@@ -269,7 +239,7 @@ function TourItem() {
                 <p className="touritem__some__hotel-label">
                   VI VU NGOẠI THÀNH HÀ NỘI
                 </p>
-              </a>
+              </Link> 
             </div>
           </Carousel>
         </div>
@@ -321,6 +291,8 @@ function TourItem() {
               star={comment.star}
               imagesReview={comment.imagesReview}
               comment={comment.comment}
+              avatar={comment.avatar}
+              nameUser = {comment.nameUser}
             />
           ))}
         </div>

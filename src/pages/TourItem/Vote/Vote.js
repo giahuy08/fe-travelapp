@@ -1,4 +1,3 @@
-import { auto } from "async";
 import React, { useState } from "react";
 import callApi from "../../../api/apiService";
 import Rating from "@mui/material/Rating";
@@ -9,10 +8,6 @@ import Button from "@mui/material/Button";
 // import Notification from "../../Notification/Notification";
 import { styled } from "@mui/material/styles";
 import "./Vote.css";
-const colors = {
-  orange: "#FFBA5A",
-  grey: "#a9a9a9",
-};
 
 const Input = styled("input")({
   display: "none",

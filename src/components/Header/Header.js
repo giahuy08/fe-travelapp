@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
+import React, {useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 import Box from "@mui/material/Box";
@@ -8,12 +8,10 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
-import Button from "@mui/material/Button";
 import FlightIcon from "@mui/icons-material/Flight";
 function Header() {
   const [user, setUser] = useState("");
@@ -36,6 +34,7 @@ function Header() {
 
   const logout = () => {
     window.localStorage.removeItem("accessToken");
+    window.localStorage.removeItem("avatar");
   };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -48,13 +47,7 @@ function Header() {
   };
 
   const [anchorEl1, setAnchorEl1] = React.useState(null);
-  const open1 = Boolean(anchorEl1);
-  const handleClick1 = (event) => {
-    setAnchorEl1(event.currentTarget);
-  };
-  const handleClose1 = () => {
-    setAnchorEl1(null);
-  };
+ 
   if (!user) {
     return (
       <div className="header__normal">
@@ -71,9 +64,9 @@ function Header() {
             <div className="header__normal__select hide-on-mobile-tablet">
               <ul className="header__normal__list">
                 <li className="header__normal__item">
-                  <a href="#" className="header__normal__item-link">
+                  <Link to="#" className="header__normal__item-link">
                     Guide
-                  </a>
+                  </Link> 
                 </li>
                 <li className="header__normal__item">
                   <Link
@@ -92,9 +85,9 @@ function Header() {
                   <Link to="/login" className="header__normal__item-link">
                     Đăng nhập
                   </Link>
-                  {/* <a href="#" className="header__normal__item-link">
+                  {/* <Link to="#" className="header__normal__item-link">
                   Đăng nhập
-                </a> */}
+                </Link>  */}
                 </li>
               </ul>
             </div>
@@ -118,9 +111,9 @@ function Header() {
             <div className="header__select hide-on-mobile-tablet">
               <ul className="header__list">
                 <li className="header__item">
-                  <a href="#" className="header__item-link">
+                  <Link to="#" className="header__item-link">
                     Guide
-                  </a>
+                  </Link> 
                 </li>
                 <li className="header__item">
                   <Link
@@ -229,13 +222,13 @@ function Header() {
                       <ListItemIcon>
                         <Logout fontSize="small" />
                       </ListItemIcon>
-                      <a
+                      <Link
                         style={{ textDecoration: "none", color: "#4A4A4A" }}
-                        href="/login"
+                        to="/login"
                         onClick={logout}
                       >
                         Logout
-                      </a>
+                      </Link> 
                     </MenuItem>
                   </Menu>
                 </React.Fragment>

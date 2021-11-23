@@ -3,34 +3,25 @@ import React, { useState, useEffect } from "react";
 import "./Comment.css";
 // import callApi from "../../../../api/apiService";
 // import { Form } from "react-bootstrap";
-import { Button } from "@mui/material";
-import SaveIcon from "@mui/icons-material/Save";
+
 // import Notification from "../../../Notification/Notification";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
+
 import Rating from "@mui/material/Rating";
-import Typography from "@mui/material/Typography";
+
 function Comment(props) {
   const [open, setOpen] = useState(false);
   const [answer, setAnswer] = useState();
   const [value, setValue] = React.useState(props.star);
   // Mở form edit
-  const [edit, setEdit] = useState(false);
   const [dataEdit, setDataEdit] = useState();
-  const [listcomment, SetComment] = useState([]);
-  const [content, setContent] = useState();
-  const [Image, setImage] = useState();
-  const [idUser, setIdUser] = useState();
-  const [idCommentCurrent, setIdCommentCurrent] = useState();
+
   const [notify, setNotify] = useState({
     isOpen: false,
     message: "",
     type: "",
   });
 
-  const handleDataEdit = (e) => {
-    setDataEdit(e.target.value);
-  };
+
 
   const handleOpen = () => {
     setOpen(!open);
@@ -47,15 +38,7 @@ function Comment(props) {
     //   });
   };
 
-  const handleInputAnswer = (e) => {
-    setAnswer(e.target.value);
-  };
-  const handleInputContent = (e) => {
-    setContent(e.target.value);
-  };
-  const handleInputImage = (e) => {
-    setImage(e.target.files[0]);
-  };
+
 
   useEffect(() => {
     reloadData();
@@ -142,19 +125,19 @@ function Comment(props) {
         <div className="comment-card">
           <div className="comment-card__header">
             <div className="comment-card__info">
-              {/* {item.urlImage == null && ( */}
+              {props.avatar === null && (
               <img
                 src="https://st3.depositphotos.com/3581215/18899/v/600/depositphotos_188994514-stock-illustration-vector-illustration-male-silhouette-profile.jpg"
                 className="comment-card__img"
               />
-              {/* )} */}
+               )}
 
-              {/* {item.urlImage != null && ( */}
-              {/* <img src={item.urlImage} className="comment-card__img" /> */}
-              {/* )} */}
+              {props.avatar !== null && ( 
+               <img src={props.avatar} className="comment-card__img" />
+               )}
 
               <div className="comment-card__name">
-                <div className="comment-card__name-label">Nguyễn Đức Chánh</div>
+                <div className="comment-card__name-label">{props.nameUser}</div>
                 <div className="comment-card__name-username">
                   {/* {item.user.displayName} */}
                 </div>
@@ -201,7 +184,6 @@ function Comment(props) {
         </div>
 
       </>
-    
 
     </>
   );

@@ -16,7 +16,6 @@ import LockIcon from '@mui/icons-material/Lock';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import HomeIcon from '@mui/icons-material/Home';
-import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
 import { useHistory } from "react-router";
@@ -24,9 +23,9 @@ import callApi from '../../api/apiService';
 
 
 const AccountProfileDetails = (props) => {
-  const [values, setValues] = useState({
-    showPassword: false,
-  });
+  // const [values, setValues] = useState({
+  //   showPassword: false,
+  // });
 
   const [user, setUser] = useState('');
   const [showPassword, setShowPassword] = useState(false)
@@ -55,13 +54,13 @@ const AccountProfileDetails = (props) => {
     });
   };
 
-  const handleClickShowPassword = () => {
+  // const handleClickShowPassword = () => {
 
-    setValues({
-      ...user,
-      showPassword: !values.showPassword,
-    });
-  };
+  //   setValues({
+  //     ...user,
+  //     showPassword: !values.showPassword,
+  //   });
+  // };
 
   const handleClick = () => {
     setShowPassword(!showPassword);
@@ -90,6 +89,7 @@ const AccountProfileDetails = (props) => {
           console.log(res);
           console.log(res.data.data.token)
           localStorage.getItem("accessToken", res.data.data.token)
+          window.location.reload()
           history.push("user/profile");
 
         })

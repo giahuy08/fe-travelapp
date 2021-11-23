@@ -1,19 +1,15 @@
-import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../components/ListTour/ListTour.css";
 import CardTour from "../../components/Card/CardTour";
 import Header from "../../components/Header/Header";
-import Foot from "../../components/Foot/Foot";
-import { useLocation } from "react-router-dom";
-
-
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import { DriveFileRenameOutlineTwoTone, LocationCityOutlined } from '@mui/icons-material'
+
 
 function Tour() {
     const [allTour, setAllTour] = useState([]);
     const [wordSearch, setwordSearch] = useState('');
-    const location = useLocation()
+
     const [all, setAll] = useState([]);
 
 
@@ -30,7 +26,7 @@ function Tour() {
         var sURLVariables = sPageURL.split('&');
         for (var i = 0; i < sURLVariables.length; i++) {
             var sParameterName = sURLVariables[i].split('=');
-            if (sParameterName[0] == sParam) {
+            if (sParameterName[0] === sParam) {
                 return (sParameterName[1].toString());
             }
         }
@@ -62,7 +58,7 @@ function Tour() {
                 }
             }
         )();
-    }, [page, wordSearch == ''])
+    }, [page, wordSearch === ''])
 
 
     const search = async () => {

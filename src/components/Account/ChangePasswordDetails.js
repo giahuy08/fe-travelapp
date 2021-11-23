@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
     Box,
     Button,
@@ -132,7 +132,7 @@ const ChangePasswordDetails = (props) => {
         handleNext(e);
         e.preventDefault();
         console.log(data.get('oldPassword'));
-        if (data.get('newPassword') == data.get('confirmNewPassword')) {
+        if (data.get('newPassword') === data.get('confirmNewPassword')) {
             let user = {
                 oldPassword: data.get('oldPassword'),
                 newPassword: data.get('newPassword'),

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -15,20 +14,6 @@ import callApi from "../../api/apiService";
 import { useHistory } from "react-router";
 import Message from "../../components/Message/Message"
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      <Link color="inherit" href="/">
-        Về Trang chủ
-      </Link>{" "}
-    </Typography>
-  );
-}
 
 const theme = createTheme();
 
@@ -109,6 +94,8 @@ export default function LogIn() {
           console.log(res.data.data.token)
           localStorage.setItem("accessToken", res.data.data.token)
           localStorage.setItem("avatar",res.data.data.user.avatar)
+       
+
           console.log(localStorage.getItem("avatar"))
           history.push("/");
 
@@ -229,7 +216,7 @@ export default function LogIn() {
           </Box>
         </Grid>
       </Grid>
-      {error && <Message open={error} message ="Sai tài khoản hoặc mật khẩu"/>}
+      {error && <Message open={error} type="error" message ="Sai tài khoản hoặc mật khẩu"/>}
     </ThemeProvider>
   );
 }

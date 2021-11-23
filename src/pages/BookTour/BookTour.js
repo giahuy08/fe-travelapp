@@ -41,6 +41,7 @@ function BookTour() {
   const [status, setStatus] = React.useState(4);
   const [open, setOpen] = React.useState(false);
   const [openDialog, setOpenDialog] = React.useState(false);
+  
   const handleChange = (event) => {
     setStatus(event.target.value);
   };
@@ -63,7 +64,7 @@ function BookTour() {
 
   const [history, setHistory] = useState([]);
   let defaultUrl =
-    "http://localhost:5000/booktour/getUserBookTour?skip=1&limit=5";
+    "http://localhost:5000/booktour/getUserBookTour?skip=1&limit=10";
   useEffect(() => {
     (async () => {
       const response = await fetch(defaultUrl, {
@@ -81,7 +82,7 @@ function BookTour() {
   }, []);
 
   const checkStatus = (status) => {
-    if (status == 0)
+    if (status === 0)
       return (
         <>
           <Grid container spacing={2}>
@@ -101,7 +102,7 @@ function BookTour() {
           </Grid>
         </>
       );
-    if (status == 1)
+    if (status === 1)
       return (
         <Chip
           label="Đã đặt"
@@ -110,7 +111,7 @@ function BookTour() {
           icon={<Done />}
         />
       );
-    if (status == 2)
+    if (status === 2)
       return (
         <Chip
           label="Đã hủy"
@@ -159,7 +160,7 @@ function BookTour() {
             </div>
 
             {history.map((tour,index) => {
-              if (status == 4 || status == tour.status)
+              if (status === 4 || status === tour.status)
                 return (
                   <div key={index}>
                     <Paper
@@ -249,6 +250,7 @@ function BookTour() {
         </DialogActions>
       </Dialog>
       <Foot />
+
     </div>
   );
 }

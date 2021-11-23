@@ -4,7 +4,6 @@ import Head from "../../components/Head/Head";
 import CardImage from "../../components/CardImage/CardImage";
 import Foot from "../../components/Foot/Foot";
 import callApi from "../../api/apiService";
-import { Carousel } from "@trendyol-js/react-carousel";
 import { Link } from "react-router-dom";
 
 function HomePage() {
@@ -38,13 +37,13 @@ function HomePage() {
       <div className="home__body">
         <div className="home__slider">
           <div className="home__slider-container">
-            <a href="#" className="home__slider-link">
+            <Link to="#" className="home__slider-link">
               <img
                 src="/images/slider1.png"
                 alt=""
                 className="home__slider-img home__slider-img--animation"
               />
-            </a>
+            </Link> 
           </div>
 
           <div className="home__content grid wide">
@@ -57,16 +56,16 @@ function HomePage() {
                 trên Travel
               </div>
               <span className="home__content__container-auth">
-                <a href="/login" className="home__content__container-auth-link">
+                <Link to="/login" className="home__content__container-auth-link">
                   Đăng nhập
-                </a>
+                </Link> 
                 hoặc
-                <a
+                <Link
                   href="/sign-up"
                   className="home__content__container-auth-link"
                 >
                   Đăng ký
-                </a>
+                </Link> 
                 để trải nghiệm
               </span>
             </div>
@@ -121,13 +120,13 @@ function HomePage() {
                    >
                     <div className="home__some__idea-container" key={index}>
                       
-                      <a href="#" className="home__some__idea-link">
+                      <Link to="#" className="home__some__idea-link">
                         <img
                           src={tour.imagesTour[0]}
                           alt=""
                           className="home__some__idea-img"
                         />
-                      </a>
+                      </Link> 
                       <div className="home__some__idea-info">
                         <div className="home__some__idea-label">
                           {tour.name}
@@ -159,53 +158,53 @@ function HomePage() {
           <div className="home__guide">
             <div className="home__guide-wrap">
               <div className="home__guide-item">
-                <a href="" className="home__guide-item-link">
+                <Link to="" className="home__guide-item-link">
                   <img
                     src="./images/guide1.jpg"
                     alt=""
                     className="home__guide-item-img"
                   />
-                </a>
+                </Link> 
               </div>
 
               <div className="home__guide-item">
-                <a href="" className="home__guide-item-link">
+                <Link to="" className="home__guide-item-link">
                   <img
                     src="./images/guide2.jpg"
                     alt=""
                     className="home__guide-item-img"
                   />
-                </a>
+                </Link> 
               </div>
 
               <div className="home__guide-item">
-                <a href="" className="home__guide-item-link">
+                <Link to="" className="home__guide-item-link">
                   <img
                     src="./images/guide3.jpg"
                     alt=""
                     className="home__guide-item-img"
                   />
-                </a>
+                </Link> 
               </div>
 
               <div className="home__guide-item">
-                <a href="" className="home__guide-item-link">
+                <Link to="" className="home__guide-item-link">
                   <img
                     src="./images/guide4.jpg"
                     alt=""
                     className="home__guide-item-img"
                   />
-                </a>
+                </Link> 
               </div>
 
               <div className="home__guide-item">
-                <a href="home__guide-item-link">
+                <Link to="home__guide-item-link">
                   <img
                     src="./images/guide5.jpg"
                     alt=""
                     className="home__guide-item-img"
                   />
-                </a>
+                </Link> 
               </div>
             </div>
           </div>
@@ -242,20 +241,20 @@ function HomePage() {
                     </div>
                     <div className="download__app-mobile">
                       <div className="download__app-mobile-container">
-                        <a href="" className="download__app-mobile-link">
+                        <Link to="" className="download__app-mobile-link">
                           <img
                             src="./images/google-play.svg"
                             alt=""
                             className="download__app-mobile-img mb-36"
                           />
-                        </a>
-                        <a href="" className="download__app-mobile-link">
+                        </Link> 
+                        <Link to="" className="download__app-mobile-link">
                           <img
                             src="./images/apple-store.svg"
                             alt=""
                             className="download__app-mobile-img"
                           />
-                        </a>
+                        </Link> 
                       </div>
                     </div>
                   </div>

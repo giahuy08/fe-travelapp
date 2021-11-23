@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./head.css";
 import Box from "@mui/material/Box";
@@ -8,12 +8,10 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
-import Button from "@mui/material/Button";
 import FlightIcon from '@mui/icons-material/Flight';
 
 function Head() {
@@ -37,6 +35,8 @@ function Head() {
 
   const logout = () => {
     window.localStorage.removeItem("accessToken");
+    window.localStorage.removeItem("avatar");
+
   
   };
 
@@ -89,9 +89,9 @@ function Head() {
             <div className="header__select hide-on-mobile-tablet">
               <ul className="header__list">
                 <li className="header__item">
-                  <a href="#" className="header__item-link">
+                  <Link to="#" className="header__item-link">
                     Guide
-                  </a>
+                  </Link> 
                 </li>
                 <li className="header__item">
                   <Link
@@ -150,9 +150,9 @@ function Head() {
             <div className="header__select hide-on-mobile-tablet">
               <ul className="header__list">
                 <li className="header__item">
-                  <a href="#" className="header__item-link">
+                  <Link to="#" className="header__item-link">
                     Guide
-                  </a>
+                  </Link> 
                 </li>
                 <li className="header__item">
                   <Link
@@ -256,13 +256,13 @@ function Head() {
                       <ListItemIcon>
                         <Logout fontSize="small" />
                       </ListItemIcon>
-                      <a
+                      <Link
                         style={{ textDecoration: "none", color: "#4A4A4A" }}
                         href="/login"
                         onClick={logout}
                       >
                         Logout
-                      </a>
+                      </Link> 
                     </MenuItem>
                   </Menu>
                 </React.Fragment>

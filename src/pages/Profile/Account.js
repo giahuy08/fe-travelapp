@@ -5,7 +5,6 @@ import {
 } from '@mui/material';
 import AccountProfile from '../../components/Account/AccountProfile';
 import AccountProfileDetails from '../../components/Account/AccountProfileDetails';
-import Head from '../../components/Head/Head';
 import Header from '../../components/Header/Header';
 
 

@@ -1,9 +1,10 @@
 import React from "react";
 import './CardImage.css'
+import {Link} from "react-router-dom"
 function CardImage(props) {
   return (
     <div>
-      <a href={props.link} className="home__pro__place-link">
+      <Link to={props.link} className="home__pro__place-link">
         <img
           src={props.image}
           alt={props.name}
@@ -14,7 +15,7 @@ function CardImage(props) {
           <span className="home__pro__place-decs">{props.numbers} </span>
           <span className="home__pro__place-decs-place">Địa điểm</span>
         </div>
-      </a>
+      </Link> 
     </div>
   );
 }
