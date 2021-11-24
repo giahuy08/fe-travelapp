@@ -7,6 +7,8 @@ import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import Button from "@mui/material/Button";
 // import Notification from "../../Notification/Notification";
 import { styled } from "@mui/material/styles";
+import Message from "../../../components/Message/Message";
+
 import "./Vote.css";
 
 const Input = styled("input")({
@@ -14,7 +16,7 @@ const Input = styled("input")({
 });
 function Vote(props) {
   const [comment, setComment] = useState();
-
+  
   const [files, setFiles] = useState();
 
   const [notify, setNotify] = useState({
@@ -52,6 +54,11 @@ function Vote(props) {
       })
       .catch((err) => {
         console.log(err);
+        if(err.response.data.message ==="BookTour does not exist")
+        {
+          setNotify({isOpen:true, message:'Đặt tour để có thể đánh giá', type:'warning'})
+
+        }
       });
   };
 
@@ -126,7 +133,8 @@ function Vote(props) {
           </div>
         </div>
       </div>
-      {/* <Notification notify={notify} setNotify={setNotify} /> */}
+      <Message notify ={notify} setNotify={setNotify}/>
+
     </>
   );
 }

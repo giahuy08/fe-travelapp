@@ -7,22 +7,22 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 function Message(props) {
-  const [open, setOpen] = React.useState(props.open);
+  const { notify, setNotify } = props;
 
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(!open);
+  const handleClose = () => {
+    
+    setNotify({
+      ...notify,
+      isOpen:false
+    })
   };
 
   return (
     <Stack spacing={2} sx={{ width: "100%" }}>
       
-      <Snackbar open={open}  onClose={handleClose}  anchorOrigin={{ vertical:'bottom',horizontal:'right' }}>
-        <Alert onClose={handleClose} severity={props.type} sx={{ width: "100%" }}>
-          {props.message}
+      <Snackbar open={notify.isOpen} autoHideDuration={2000}  onClose={handleClose}  anchorOrigin={{ vertical:'bottom',horizontal:'right' }}>
+        <Alert onClose={handleClose} severity={notify.type} sx={{ width: "100%" }}>
+        {notify.message}
         </Alert>
       </Snackbar>
       {/* <Alert severity="error">This is an error message!</Alert> */}

@@ -183,10 +183,8 @@ export default function SignUp() {
       console.log(user);
       callApi(`user/register`, "POST", user)
         .then((res) => {
-          console.log(res);
-          console.log(res.data.data.token)
-          localStorage.setItem("accessToken", res.data.data.token)
-          history.push("/");
+         
+          history.push({pathname:"/otp-signup",state:{email: data.get("email")}});
 
         })
         .catch((err) => {

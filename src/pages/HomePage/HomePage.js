@@ -5,7 +5,6 @@ import CardImage from "../../components/CardImage/CardImage";
 import Foot from "../../components/Foot/Foot";
 import callApi from "../../api/apiService";
 import { Link } from "react-router-dom";
-
 function HomePage() {
   const [sea, setSeas] = useState([]);
   const [highland, setHighLands] = useState([]);
@@ -32,8 +31,11 @@ function HomePage() {
   }, []);
 
   return (
+    <>
+     
     <div className="home">
       <Head />
+     
       <div className="home__body">
         <div className="home__slider">
           <div className="home__slider-container">
@@ -51,6 +53,7 @@ function HomePage() {
               <h3 className="home__content__container-heading mb-18">
                 Chào mừng đến với Travel
               </h3>
+              
               <div className="home__content__container-desc mb-10">
                 Đặt chỗ ở, homestay, cho thuê xe, trải nghiệm và nhiều hơn nữa
                 trên Travel
@@ -276,6 +279,7 @@ function HomePage() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

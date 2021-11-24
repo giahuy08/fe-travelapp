@@ -18,7 +18,7 @@ import Message from "../../components/Message/Message"
 const theme = createTheme();
 
 export default function LogIn() {
-  const [error,setError] = useState(false)
+  const [notify,setNotify] = useState({isOpen:false, message:'',type:''})
   const [user, setUser] = useState({
     activeStep: 0,
     labelWidth: 0,
@@ -102,7 +102,7 @@ export default function LogIn() {
         })
         .catch((err) => {
           console.log(err);
-          setError(!error)
+          setNotify({isOpen:true, message:'Tài khoản hoặc mật khẩu không đúng', type:'error'})
           
         });
     }
@@ -216,7 +216,7 @@ export default function LogIn() {
           </Box>
         </Grid>
       </Grid>
-      {error && <Message open={error} type="error" message ="Sai tài khoản hoặc mật khẩu"/>}
+      <Message notify ={notify} setNotify={setNotify}/>
     </ThemeProvider>
   );
 }

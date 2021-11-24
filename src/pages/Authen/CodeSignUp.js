@@ -8,10 +8,12 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import callApi from "../../api/apiService";
-import { useHistory} from "react-router-dom";
+import { useHistory,useLocation} from "react-router-dom";
 import { Link,Redirect } from "react-router-dom";
 import Message from "../../components/Message/Message"
+
 function Copyright(props) {
+    
   return (
     <Typography
       variant="body2"
@@ -31,9 +33,10 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function ForgetPassword() {
+export default function CodeSignUp() {
   const [notify,setNotify] = useState({isOpen:false, message:'',type:''})
- 
+  const location = useLocation()
+  const email = location.state.email
   const [user, setUser] = useState({
     activeStep: 0,
     labelWidth: 0,
@@ -44,28 +47,15 @@ export default function ForgetPassword() {
   const handleNext = (e) => {
     const data = new FormData(e.currentTarget);
     let isError = false;
-    if (data.get("email") === '') {
+    if (data.get("otp") === '') {
       isError = true;
       setUser(prev => ({
         ...prev,
         error: true,
-        errorMessage: { ...prev.errorMessage, email: "Nhập địa chỉ Email của bạn" }
+        errorMessage: { ...prev.errorMessage, otp: "Nhập OTP của bạn" }
       }));
     }
-    else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.get("email"))) {
-      isError = true;
-      setUser(prev => ({
-        ...prev,
-        error: true,
-        errorMessage: { ...prev.errorMessage, email: "Email không hợp lệ" }
-      }));
-    } else {
-      setUser(prev => ({
-        ...prev,
-        error: true,
-        errorMessage: { ...prev.errorMessage, email: "" }
-      }));
-    }
+    
     if (!isError) {
       //add else if for validating other fields (if any)
       setUser(prevState => ({
@@ -81,30 +71,26 @@ export default function ForgetPassword() {
     const data = new FormData(e.currentTarget);
     handleNext(e)
     e.preventDefault();
-    if (data.get("email") !== "") {
-      const email = data.get("email")
-      console.log(user);
-      callApi(`user/forgotPassword?email=` + email.toString(), "GET")
+    if (data.get("otp") !== "") {
+      const otp = data.get("otp")
+      const otpForm = {
+          "otp":otp,
+          "email":email
+      }
+      callApi(`user/verifyUser`, "POST",otpForm)
         .then((res) => {
           console.log(res);
-          history.push({pathname:"/otp",state:{email:email}});
-          // if(res)
-          // {
+         
+          setNotify({isOpen:true, message:'Cập nhật mật khẩu thành công', type:'success'})
+          setTimeout(function() {
 
-          //   <Redirect
-          //   to={{
-          //    pathname: `/otp`,
-          //    state: {
-          //      id: email,
-          //    },
-          //  }}/>
-           
-          // }
+            history.push({pathname:"/login"});
+          }, 3000);
         })
         .catch((err) => {
-          if(err.response.data.message==="Do not email")
+          if(err.response.data.message==="Do not otp")
           {
-            setNotify({isOpen:true, message:'Email không tồn tại', type:'error'})
+            setNotify({isOpen:true, message:'otp không tồn tại', type:'error'})
           }
          
           
@@ -133,7 +119,7 @@ export default function ForgetPassword() {
             />
           </Link>
           <Typography component="h1" variant="h5">
-            Quên mật khẩu
+            OTP
           </Typography>
 
           <Box
@@ -144,23 +130,21 @@ export default function ForgetPassword() {
           >
             <Grid container spacing={2}>
               <Typography component="h3" variant="subtitle1">
-                Quên mật khẩu? Vui lòng nhập địa chỉ Email của bạn. Bạn sẽ nhận
-                được một liên kết để cập nhật mật khẩu mới qua Email, hãy kiểm
-                tra hộp thư đến của bạn.
+                Mã OTP đã được gửi đến email của bạn
               </Typography>
               <Grid item xs={12}>
                 <TextField
-                  error={!!user.errorMessage.email}
+                  error={!!user.errorMessage.otp}
                   helperText={
-                    user.errorMessage.email &&
-                    user.errorMessage.email
+                    user.errorMessage.otp &&
+                    user.errorMessage.otp
                   }
                   required
                   fullWidth
-                  id="email"
-                  label="Email"
-                  name="email"
-                  autoComplete="email"
+                  id="otp"
+                  label="otp"
+                  name="otp"
+                  autoComplete="otp"
                 />
               </Grid>
             </Grid>

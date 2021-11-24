@@ -15,7 +15,7 @@ import Logout from "@mui/icons-material/Logout";
 import FlightIcon from "@mui/icons-material/Flight";
 function Header() {
   const [user, setUser] = useState("");
-  let defaultUrl = "https://app-travelbe.herokuapp.com/user/findUserByToken";
+  let defaultUrl = "http://localhost:5000/user/findUserByToken";
   useEffect(() => {
     (async () => {
       const response = await fetch(defaultUrl, {

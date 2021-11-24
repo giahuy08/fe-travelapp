@@ -15,6 +15,8 @@ import Payment from './pages/Payment/Payment'
 import BookTour from './pages/BookTour/BookTour';
 import AllTour from './pages/Tour/AllTour';
 import Bill from './pages/Bill/Bill';
+import Otp from './pages/Authen/Otp'
+import CodeSignUp from './pages/Authen/CodeSignUp';
 function App() {
   return (
     <Router>
@@ -35,6 +37,10 @@ function App() {
           <Route path= "/booktour" exact component={BookTour}/>
           <Route path= "/alltour" exact component={AllTour}/>
           <Route path= "/booktour/payment" exact component={Bill}/>
+          <Route path= "/otp" exact component={Otp}/>
+          <Route path= "/otp-signup" exact component={CodeSignUp}/>
+
+
 
       </Switch>
     </Router>
