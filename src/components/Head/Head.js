@@ -1,5 +1,5 @@
 import React, {  useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import "./head.css";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
@@ -16,6 +16,7 @@ import FlightIcon from '@mui/icons-material/Flight';
 
 function Head() {
   const [user, setUser] = useState("");
+  const history = useHistory();
   let defaultUrl = "http://localhost:5000/user/findUserByToken";
   useEffect(() => {
     (async () => {
@@ -36,6 +37,7 @@ function Head() {
   const logout = () => {
     window.localStorage.removeItem("accessToken");
     window.localStorage.removeItem("avatar");
+    history.push("/login")
 
   
   };
@@ -230,17 +232,17 @@ function Head() {
                         Profile
                       </Link>
                     </MenuItem>
-                    <MenuItem>
+                    <MenuItem style={{width:226}}>
                       <FlightIcon />
                       <Link
                         style={{ textDecoration: "none", color: "#4A4A4A",marginLeft:"14px" }}
                         to="/booktour"
                       >
-                        Book Tour
+                        Đặt Tour
                       </Link>
                     </MenuItem>
                     <Divider />
-                    <MenuItem>
+                    {/* <MenuItem>
                       <ListItemIcon>
                         <PersonAdd fontSize="small" />
                       </ListItemIcon>
@@ -251,18 +253,18 @@ function Head() {
                         <Settings fontSize="small" />
                       </ListItemIcon>
                       Settings
-                    </MenuItem>
-                    <MenuItem>
+                    </MenuItem> */}
+                    <MenuItem   onClick={logout}>
                       <ListItemIcon>
                         <Logout fontSize="small" />
                       </ListItemIcon>
-                      <Link
+                      {/* <Link
                         style={{ textDecoration: "none", color: "#4A4A4A" }}
-                        href="/login"
+                      
                         onClick={logout}
-                      >
+                      > */}
                         Logout
-                      </Link> 
+                      {/* </Link>  */}
                     </MenuItem>
                   </Menu>
                 </React.Fragment>

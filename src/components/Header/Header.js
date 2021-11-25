@@ -1,5 +1,5 @@
 import React, {useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import "./Header.css";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
@@ -15,6 +15,7 @@ import Logout from "@mui/icons-material/Logout";
 import FlightIcon from "@mui/icons-material/Flight";
 function Header() {
   const [user, setUser] = useState("");
+  const history = useHistory()
   let defaultUrl = "http://localhost:5000/user/findUserByToken";
   useEffect(() => {
     (async () => {
@@ -35,6 +36,7 @@ function Header() {
   const logout = () => {
     window.localStorage.removeItem("accessToken");
     window.localStorage.removeItem("avatar");
+    history.push("/login")
   };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -131,6 +133,7 @@ function Header() {
                       alignItems: "center",
                       textAlign: "center",
                     }}
+                    
                   >
                     <Tooltip title="Account settings">
                       <IconButton
@@ -183,7 +186,7 @@ function Header() {
                     transformOrigin={{ horizontal: "right", vertical: "top" }}
                     anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
                   >
-                    <MenuItem>
+                    <MenuItem style={{width:226}}>
                       <Avatar />
                       <Link
                         style={{ textDecoration: "none", color: "#4A4A4A" }}
@@ -202,11 +205,11 @@ function Header() {
                         }}
                         to="/booktour"
                       >
-                        Book Tour
+                        Đặt Tour
                       </Link>
                     </MenuItem>
                     <Divider />
-                    <MenuItem>
+                    {/* <MenuItem>
                       <ListItemIcon>
                         <PersonAdd fontSize="small" />
                       </ListItemIcon>
@@ -217,18 +220,18 @@ function Header() {
                         <Settings fontSize="small" />
                       </ListItemIcon>
                       Settings
-                    </MenuItem>
-                    <MenuItem>
+                    </MenuItem> */}
+                    <MenuItem  onClick={logout}>
                       <ListItemIcon>
                         <Logout fontSize="small" />
                       </ListItemIcon>
-                      <Link
+                      {/* <Link
                         style={{ textDecoration: "none", color: "#4A4A4A" }}
-                        to="/login"
+                  
                         onClick={logout}
-                      >
+                      > */}
                         Logout
-                      </Link> 
+                      {/* </Link>  */}
                     </MenuItem>
                   </Menu>
                 </React.Fragment>

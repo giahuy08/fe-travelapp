@@ -9,12 +9,23 @@ import Button from "@mui/material/Button";
 import Header from "../../components/Header/Header";
 import MoneyIcon from "@mui/icons-material/Money";
 import callApi from "../../api/apiService";
-import { useParams, useLocation, Redirect, Link ,useHistory } from "react-router-dom";
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import Message from "../../components/Message/Message"
+import {
+  useParams,
+  useLocation,
+  Redirect,
+  Link,
+  useHistory,
+} from "react-router-dom";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import Message from "../../components/Message/Message";
 import "./Payment.css";
 function Payment() {
   const [tour, setTour] = useState();
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
   const [images, setImages] = useState([]);
   const [value, setValue] = React.useState("");
   const [error, setError] = React.useState(false);
@@ -26,7 +37,7 @@ function Payment() {
   const { id } = useParams();
   const location = useLocation();
   const code = location.state.code;
-  const historyback = useHistory()
+  const historyback = useHistory();
 
   useEffect(async () => {
     await callApi(`tour/getOneTour?id=${id}`, "GET")
@@ -68,7 +79,6 @@ function Payment() {
       .then((res) => {
         console.log(res.data.data);
         if (res.data.data) {
-  
           window.open(res.data.data);
         }
       })
@@ -99,7 +109,11 @@ function Payment() {
     }
     callApi(`booktour/bookTour`, "POST", data)
       .then((res) => {
-        setSuccess(!success);
+        setNotify({
+          isOpen: true,
+          message: "Đặt tour thành công vào history để xem",
+          type: "success",
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -141,15 +155,26 @@ function Payment() {
     <div className="payment__container">
       <Header />
       <span
-       onClick={() => {
-        historyback.goBack();
+        onClick={() => {
+          historyback.goBack();
         }}
-        style={{ cursor: "pointer", fontSize: 15,margin:"80px 10px 0px 10px",display: "block",padding:"10px", color:"#fe5a2d"}}
-        
+        style={{
+          cursor: "pointer",
+          fontSize: 15,
+          margin: "80px 10px 0px 10px",
+          display: "block",
+          padding: "10px",
+          color: "#fe5a2d",
+        }}
       >
-        <ArrowBackIosIcon style={{fontSize:'20px',marginBottom:'-4px'}}/>
-        <ArrowBackIosIcon style={{fontSize:'20px',marginBottom:'-4px',marginLeft:'-10px'}}/>
-        
+        <ArrowBackIosIcon style={{ fontSize: "20px", marginBottom: "-4px" }} />
+        <ArrowBackIosIcon
+          style={{
+            fontSize: "20px",
+            marginBottom: "-4px",
+            marginLeft: "-10px",
+          }}
+        />
         Quay lại
       </span>
       <div className="payment__wrapper">
@@ -211,7 +236,12 @@ function Payment() {
                   </div>
                 </RadioGroup>
                 <FormHelperText>{helperText}</FormHelperText>
-                <Button sx={{ mt: 1, mr: 1 }} type="submit" variant="contained" style={{backgroundColor: '#fe5a2d'}}>
+                <Button
+                  sx={{ mt: 1, mr: 1 }}
+                  type="submit"
+                  variant="contained"
+                  style={{ backgroundColor: "#fe5a2d" }}
+                >
                   Xác nhận hình thức thanh toán
                 </Button>
               </FormControl>
@@ -239,16 +269,12 @@ function Payment() {
               <>
                 <div className="payment__tour-code">
                   <div className="payment__tour-price-code">
-                    <div className="payment__tour-title ">
-                      Mã giảm giá
-                    </div>
-                    <div className="payment__tour-price ">
-                      {code}
-                    </div>
+                    <div className="payment__tour-title ">Mã giảm giá</div>
+                    <div className="payment__tour-price ">{code}</div>
                   </div>
-                <div className="payment__tour-price payment__text">
-                  {errorCode}
-                </div>
+                  <div className="payment__tour-price payment__text">
+                    {errorCode}
+                  </div>
                 </div>
               </>
             )}
@@ -268,9 +294,8 @@ function Payment() {
           </div>
         )}
       </div>
-      {success && <Message open={success} type="success" message ="Thành công. Tour bạn trong trang thái chờ"/>}
+      <Message notify={notify} setNotify={setNotify} />{" "}
     </div>
-
   );
 }
 

@@ -1,0 +1,142 @@
+.discounts {
+    --spacing: 25px;
+   
+  
+    --columns: 4;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: calc(-1 * var(--spacing));
+  }
+  @media screen and (max-width: 1023px) {
+    .discounts {
+      --columns: 2;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .discounts {
+      --spacing: 15px;
+      --columns: 1;
+    }
+  }
+  
+  .discount {
+    border-radius: 20px;
+    width:350px;
+   
+    overflow: hidden;
+    background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    width: calc(calc(100% / var(--columns)) - var(--spacing));
+    margin-left: var(--spacing);
+    margin-bottom: var(--spacing);
+  }
+  .discount-image {
+    height: 100px;
+    width: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  .discount-top {
+    padding: 20px 10px 0 10px;
+    text-align: center;
+  }
+  .discount-title {
+    font-weight: 500;
+    margin-bottom: 25px;
+    color: #3bb25e;
+    font-weight: bold;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+  }
+  .discount-user {
+    display: flex;
+    align-items: center;
+  }
+  .discount-user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 100rem;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  .discount-user-info {
+    padding-left: 20px;
+    flex: 1;
+  }
+  .discount-user-top {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2px;
+  }
+  .discount-user-name {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1;
+  }
+  .discount-user-top ion-icon {
+    color: #20e3b2;
+    margin-left: 5px;
+  }
+  .discount-user-game {
+    color: #999;
+    font-weight: 300;
+    font-size: 13px;
+  }
+  .discount-bottom {
+    padding: 10px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .discount-live {
+    color: white;
+    display: flex;
+    width: 80px;
+    height:30px;
+    align-items: center;
+    padding: 5px 15px;
+    border-radius: 10px;
+    background-color: #ff6651;
+  }
+  .discount-live span {
+    margin-left: 10px;
+    font-size: 14px;
+  }
+  .discount-watching {
+      margin-left: 5px;
+    font-size: 13px;
+    color: #999;
+    font-weight: 300;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+  }
+  .discount-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .discount-top {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .discount-user,
+  .discount-bottom {
+    margin-top: auto;
+    flex-shrink: 0;
+  }
+  .discount {
+    display: flex;
+    flex-direction: column;
+  }
