@@ -37,7 +37,29 @@ function Payment() {
   const { id } = useParams();
   const location = useLocation();
   const code = location.state.code;
+    // Hiển thị ngày đi
+  const date = new Date(location.state.date).toLocaleString().slice(10,20).toString();
+  const datadaystart = new Date(location.state.date).toISOString().slice(0, 10)
+
   const historyback = useHistory();
+  const date_format = location.state.date
+
+  const timeTour = location.state.time.toString();
+
+  // Lấy số ngày
+  var numbers = [];
+  timeTour.replace(/(\d[\d\.]*)/g, function( x ) { var n = Number(x); if (x == n) { numbers.push(x); }  })
+  var maxInNumbers = Math.max.apply(Math, numbers);
+
+
+  console.log(maxInNumbers) 
+  const dayend = new Date(date_format.getTime() + maxInNumbers * 24*60*60*1000);
+  const datadayend = new Date(dayend).toISOString().slice(0, 10)
+
+  console.log(datadayend)
+  // Hiển thị ngày về
+  const formatDayEnd = new Date(dayend).toLocaleString().slice(10,20).toString()
+  console.log(formatDayEnd) 
 
   useEffect(async () => {
     await callApi(`tour/getOneTour?id=${id}`, "GET")
@@ -56,24 +78,13 @@ function Payment() {
   };
   const bookTourPayment = (type) => {
     let data;
-    // if(code !=""){
-    //   data = {
-    //     idTour: id,
-    //     codediscount: code,
-    //     typePayment: type
-    //   };
-
-    // }else{
-    //   data = {
-    //     idTour: id,
-    //     typePayment: type
-
-    //   };
-    // }
+    
     data = {
       idTour: id,
       codediscount: code,
       typePayment: type,
+      startDate:datadaystart
+      
     };
     callApi(`booktour/bookTourPayment`, "POST", data)
       .then((res) => {
@@ -101,10 +112,12 @@ function Payment() {
       data = {
         idTour: id,
         codediscount: code,
+        startDate:datadaystart
       };
     } else {
       data = {
         idTour: id,
+        startDate:datadaystart
       };
     }
     callApi(`booktour/bookTour`, "POST", data)
@@ -263,7 +276,17 @@ function Payment() {
             </div>
             <div className="payment__tour-price-wrap">
               <div className="payment__tour-title">Giá tour </div>
-              <div className="payment__tour-price">{tour.payment}₫</div>
+              <div className="payment__tour-price">{(tour.payment).toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</div>
+            </div>
+
+            <div className="payment__tour-price-wrap">
+              <div className="payment__tour-title">Ngày đi</div>
+              <div className="payment__tour-price">{date}</div>
+            </div>
+
+            <div className="payment__tour-price-wrap">
+              <div className="payment__tour-title">Ngày về</div>
+              <div className="payment__tour-price">{formatDayEnd}</div>
             </div>
             {code && (
               <>
@@ -282,7 +305,7 @@ function Payment() {
             <div className="payment__tour-price-wrap">
               <div className="payment__tour-title payment__text">Tổng tiền</div>
               <div className="payment__tour-price payment__text">
-                {tour.payment}₫
+               {(tour.payment).toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}
               </div>
             </div>
             <div className="payment__term">

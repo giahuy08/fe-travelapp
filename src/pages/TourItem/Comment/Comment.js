@@ -166,18 +166,16 @@ function Comment(props) {
             </div> */}
             {/* )} */}
           </div>
-            {
-              console.log(props.imagesReview.length)
-            }
+           
           <div className="comment-card__body">
             {/* <div className="comment-card__body-content">{item.content}</div> */}
             <div className="comment-card__body-content">{props.comment}</div>
             {
               props.imagesReview && props.imagesReview.map((image,index)=>(
-                <> 
+                
                
                 <img key={index} className="comment-img" src={image} alt="" />
-                </>
+                
               ))
             }
           </div>

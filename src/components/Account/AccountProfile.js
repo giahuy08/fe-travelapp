@@ -69,7 +69,7 @@ const AccountProfile = (props) => {
           console.log(res);
           console.log(res.data.data.token)
           localStorage.getItem("accessToken", res.data.data.token)
-          history.push("/user/profile");
+          window.location.reload()
 
         })
         .catch((err) => {

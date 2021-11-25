@@ -159,6 +159,7 @@ function HomePage() {
                   alltours.map((tour, index) => {
                     return (
                       <Link
+                        key={index}
                         to={{
                           pathname: `/tour-item`,
                           state: {

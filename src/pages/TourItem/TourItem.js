@@ -12,10 +12,15 @@ import SendIcon from "@mui/icons-material/Send";
 import Stack from "@mui/material/Stack";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Message from "../../components/Message/Message";
-import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
-import CountertopsIcon from '@mui/icons-material/Countertops';
+import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
+import CountertopsIcon from "@mui/icons-material/Countertops";
+import Rating from "@mui/material/Rating";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DatePicker from "@mui/lab/DatePicker";
 function TourItem() {
-  const [tour, setTour] = useState({});
+  const [value, setValue] = React.useState(null);
+  const [tour, setTour] = useState("");
   const [error, setError] = useState(false);
   const [enterprise, setEnterprise] = useState({});
   const [rooms, setRooms] = useState([]);
@@ -26,6 +31,33 @@ function TourItem() {
   const [tables, setTables] = useState([]);
   const [errorCode, setErrorCode] = useState("");
   const historyback = useHistory();
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
+
+
+  const handlebooking = (e) => {
+    e.preventDefault();
+    if(value){
+
+      historyback.push({
+        pathname: `/payment/${id}`,
+        state: {
+          code: code,
+          date: value,
+          time: tour.time,
+        },
+      });
+    }else{
+      setNotify({
+        isOpen: true,
+        message: "Vui lòng chọn ngày khởi hành",
+        type: "warning",
+      });
+    }
+  };
   const handleChangeCode = (event) => {
     setCode(event.target.value);
   };
@@ -169,24 +201,32 @@ function TourItem() {
               value={code}
               onChange={handleChangeCode}
             />
-            <div className="touritem__content-booking-errorcode">
+            <div
+              className="touritem__content-booking-errorcode"
+              style={{ marginBottom: "10px" }}
+            >
               {errorCode}
             </div>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DatePicker
+                disablePast
+                label="Chọn ngày khởi hành"
+                value={value}
+                onChange={(newValue) => {
+                  setValue(newValue);
+                }}
+                renderInput={(params) => <TextField {...params} fullWidth />}
+              />
+            </LocalizationProvider>
+            {console.log(value)}
             <div className="touritem__content-booking-vehicle">
               Tổng tiền: {tour.payment} đ
             </div>
-            <Link
-              to={{
-                pathname: `/payment/${id}`,
-                state: {
-                  code: code,
-                },
-              }}
-            >
-              <button className="touritem__content-booking-btn">
+           
+              <button className="touritem__content-booking-btn" onClick={handlebooking}>
                 Đặt ngay
               </button>
-            </Link>
+         
           </div>
         </div>
 
@@ -386,7 +426,10 @@ function TourItem() {
         {/* ---- */}
         <div className="feature-flex">
           <div className="touritem__content-wrap-feature">
-            <h3 className="touritem-feature__name"> <MeetingRoomIcon style={{fontSize:30}}/> Phòng</h3>
+            <h3 className="touritem-feature__name">
+              {" "}
+              <MeetingRoomIcon style={{ fontSize: 30 }} /> Phòng
+            </h3>
             {!rooms && (
               <div className="touritem-feature__table-size">
                 Chưa có thông tin phòng
@@ -419,7 +462,10 @@ function TourItem() {
           {/* Tabel */}
 
           <div className="touritem__content-wrap-feature">
-            <h3 className="touritem-feature__name"> <CountertopsIcon style={{fontSize:30}}/>  Bàn</h3>
+            <h3 className="touritem-feature__name">
+              {" "}
+              <CountertopsIcon style={{ fontSize: 30 }} /> Bàn
+            </h3>
             {!tables && (
               <div className="touritem-feature__table-size feature-bold">
                 Chưa có thông tin bàn
@@ -472,6 +518,16 @@ function TourItem() {
           </Stack>
 
           <h3 className="touritem-feature__name">Đánh giá - từ khách hàng</h3>
+          <div className="touritem-feature-star">
+            <div>Đánh giá</div>
+            {console.log("star" + Number(tour.star).toFixed(1))}
+            <Rating
+              name="half-rating-read"
+              value={Number(tour.star).toFixed(1)}
+              readOnly
+              precision={0.1}
+            />
+          </div>
           {comments &&
             comments.map((comment, index) => (
               <Comment
@@ -479,7 +535,7 @@ function TourItem() {
                 star={comment.star}
                 imagesReview={comment.imagesReview}
                 comment={comment.comment}
-                avatar={comment.avatar}
+                avatar={comment.avatarUser}
                 nameUser={comment.nameUser}
               />
             ))}
@@ -489,6 +545,7 @@ function TourItem() {
         {/* ---- */}
       </div>
       {openRating && <Vote handleClose={togglePopup} idTour={id} />}
+      <Message notify={notify} setNotify={setNotify} />{" "}
     </div>
   );
 }
