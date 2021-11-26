@@ -132,14 +132,23 @@ function HomePage() {
             <div className="discount-banner">
               {/* Discover */}
               {discounts &&
-                discounts.map((discount, index) => (
-                  <Discount
-                    key={index}
-                    code={discount.code}
-                    discount={discount.discount}
-                    name={discount.nameTour}
-                  />
-                ))}
+                discounts.map(function (discount, index) {
+                  var date = new Date();
+                  var dateEnd = new Date(discount.endDiscount);
+
+                
+               
+                  if (date < dateEnd) {
+                    return (
+                      <Discount
+                        key={index}
+                        code={discount.code}
+                        discount={discount.discount}
+                        name={discount.nameTour}
+                      />
+                    );
+                  }
+                })}
             </div>
 
             <div className="home__content grid wide">

@@ -25,7 +25,7 @@ function AllTour() {
     };
 
    
-    let defaultUrl1 = 'https://app-travelbe.herokuapp.com/tour/getPageNumbers'
+    let defaultUrl1 = 'http://localhost:5000/tour/getPageNumbers'
     useEffect(() => {
         (          
             async () => {               
@@ -50,7 +50,7 @@ function AllTour() {
         (
             
             async () => {
-                const response = await fetch('https://app-travelbe.herokuapp.com/tour/getAllTour?skip=' + page + '&limit=6', {
+                const response = await fetch('http://localhost:5000/tour/getAllTour?skip=' + page + '&limit=6', {
                     method: 'GET',
                     headers: { 'Content-Type': 'application/json' }
                 });
@@ -76,7 +76,7 @@ function AllTour() {
             setPage(1)
             setwordSearch('')
         } else {
-            let link = 'https://app-travelbe.herokuapp.com/tour/findTourByName?name=' + wordSearch
+            let link = 'http://localhost:5000/tour/findTourByName?name=' + wordSearch
             const response = await fetch(link, {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
