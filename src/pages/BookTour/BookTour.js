@@ -236,14 +236,15 @@ function BookTour() {
                                 variant="body2"
                                 color="text.secondary"
                               >
-                                Ngày đi {new Date(tour.startDate).toLocaleString().slice(10,20).toString()}
+                                
+                                Ngày đi {new Date(tour.startDate).toISOString().split('T')[0]}
                               </Typography>
 
                               <Typography
                                 variant="body2"
                                 color="text.secondary"
                               >
-                                Ngày đến {new Date(tour.endDate).toLocaleString().slice(10,20).toString()}
+                                Ngày đến {new Date(tour.endDate).toISOString().split('T')[0]}
                               </Typography>
                             </Grid>
                             <Grid item>
