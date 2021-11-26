@@ -285,12 +285,12 @@ function Payment() {
 
             <div className="payment__tour-price-wrap">
               <div className="payment__tour-title">Ngày đi</div>
-              <div className="payment__tour-price">{date}</div>
+              <div className="payment__tour-price">{datadaystart}</div>
             </div>
 
             <div className="payment__tour-price-wrap">
               <div className="payment__tour-title">Ngày về</div>
-              <div className="payment__tour-price">{formatDayEnd}</div>
+              <div className="payment__tour-price">{datadayend}</div>
             </div>
             {code && (
               <>
