@@ -23,13 +23,13 @@ import AlarmOn from "@mui/icons-material/AlarmOn";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useState, useEffect } from "react";
 
-
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import callApi from "../../api/apiService";
+import Message from "../../components/Message/Message";
 const Img = styled("img")({
   margin: "auto",
   display: "block",
@@ -41,7 +41,12 @@ function BookTour() {
   const [status, setStatus] = React.useState(4);
   const [open, setOpen] = React.useState(false);
   const [openDialog, setOpenDialog] = React.useState(false);
-  
+  const [idBookTour, setIdBookTour] = React.useState("");
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
   const handleChange = (event) => {
     setStatus(event.target.value);
   };
@@ -54,7 +59,8 @@ function BookTour() {
     setOpen(true);
   };
 
-  const handleClickDialogOpen = () => {
+  const handleClickDialogOpen = (id) => {
+    setIdBookTour(id);
     setOpenDialog(true);
   };
 
@@ -81,7 +87,23 @@ function BookTour() {
     })();
   }, []);
 
-  const checkStatus = (status) => {
+  const cancelTour = (id) => {
+    callApi(`booktour/cancelBookTour?id=${id}`, "POST")
+      .then((res) => {
+        setNotify({isOpen:true, message:'Đã hủy tour', type:'success'})
+        setTimeout(function() {
+
+          window.location.reload();
+        }, 2000);
+       
+        console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const checkStatus = (status, idBookTour) => {
     if (status === 0)
       return (
         <>
@@ -95,7 +117,12 @@ function BookTour() {
               />
             </Grid>
             <Grid item xs={3}>
-              <Button variant="outlined" color="error" startIcon={<DeleteIcon color="error"/>} onClick={handleClickDialogOpen}>
+              <Button
+                variant="outlined"
+                color="error"
+                startIcon={<DeleteIcon color="error" />}
+                onClick={(e)=>{e.preventDefault(); handleClickDialogOpen(idBookTour)}}
+              >
                 Hủy
               </Button>
             </Grid>
@@ -159,7 +186,7 @@ function BookTour() {
               </FormControl>
             </div>
 
-            {history.map((tour,index) => {
+            {history.map((tour, index) => {
               if (status === 4 || status === tour.status)
                 return (
                   <div key={index}>
@@ -205,12 +232,25 @@ function BookTour() {
                               >
                                 {tour.place}
                               </Typography>
+                              <Typography
+                                variant="body2"
+                                color="text.secondary"
+                              >
+                                Ngày đi {new Date(tour.startDate).toLocaleString().slice(10,20).toString()}
+                              </Typography>
+
+                              <Typography
+                                variant="body2"
+                                color="text.secondary"
+                              >
+                                Ngày đến {new Date(tour.endDate).toLocaleString().slice(10,20).toString()}
+                              </Typography>
                             </Grid>
                             <Grid item>
                               {/* <Typography sx={{ cursor: 'pointer' }} variant="body2">
                 Remove
               </Typography> */}
-                              {checkStatus(tour.status)}
+                              {checkStatus(tour.status, tour._id)}
                             </Grid>
                           </Grid>
                           <Grid item>
@@ -232,25 +272,25 @@ function BookTour() {
         onClose={handleClickDialogClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-    
       >
         <DialogTitle id="alert-dialog-title">
           {"Xác nhận hủy tour du lịch?"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-          Bạn muốn hủy tour du lịch này
+            Bạn muốn hủy tour du lịch này
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClickDialogClose}>Hủy</Button>
+          <Button onClick={(e)=>{e.preventDefault(); cancelTour(idBookTour)}}>Hủy</Button>
           <Button onClick={handleClickDialogClose} autoFocus>
             Thoát
           </Button>
         </DialogActions>
       </Dialog>
+      <Message notify={notify} setNotify={setNotify} />
+  
       <Foot />
-
     </div>
   );
 }

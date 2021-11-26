@@ -127,6 +127,10 @@ function Payment() {
           message: "Đặt tour thành công vào history để xem",
           type: "success",
         });
+        setTimeout(function() {
+
+          historyback.push("/booktour");
+        }, 2000);
       })
       .catch((err) => {
         console.log(err);
@@ -317,7 +321,7 @@ function Payment() {
           </div>
         )}
       </div>
-      <Message notify={notify} setNotify={setNotify} />{" "}
+      <Message notify={notify} setNotify={setNotify} />
     </div>
   );
 }
