@@ -72,7 +72,7 @@ function Header() {
                 </li>
                 <li className="header__normal__item">
                   <Link
-                    to="/tour"
+                    to="/alltour"
                     className="header__normal__item-link header__normal__item-link--notify"
                   >
                     Tour
