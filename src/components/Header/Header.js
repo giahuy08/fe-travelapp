@@ -50,7 +50,7 @@ function Header() {
 
   const [anchorEl1, setAnchorEl1] = React.useState(null);
  
-  if (!user) {
+  if (!localStorage.getItem("accessToken")) {
     return (
       <div className="header__normal">
         <div className="header__normal__wrapper">
@@ -186,28 +186,24 @@ function Header() {
                     transformOrigin={{ horizontal: "right", vertical: "top" }}
                     anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
                   >
-                    <MenuItem style={{width:226}}>
-                      <Avatar />
-                      <Link
-                        style={{ textDecoration: "none", color: "#4A4A4A" }}
-                        to="/user/profile"
-                      >
+                    <Link
+                      style={{ textDecoration: "none", color: "#4A4A4A",display: "block"  , width: "100%" }}
+                      to="/user/profile"
+                    >
+                      <MenuItem>
+                        <Avatar style={{marginRight:20}} />
                         Profile
-                      </Link>
-                    </MenuItem>
-                    <MenuItem>
-                      <FlightIcon />
+                      </MenuItem>
+                    </Link>
                       <Link
-                        style={{
-                          textDecoration: "none",
-                          color: "#4A4A4A",
-                          marginLeft: "14px",
-                        }}
+                        style={{ textDecoration: "none", color: "#4A4A4A",display: "block"  , width: "100%" }}
                         to="/booktour"
                       >
+                    <MenuItem style={{ width: 226 }}>
+                      <FlightIcon  style={{marginRight:20}}/>
                         Đặt Tour
-                      </Link>
                     </MenuItem>
+                      </Link>
                     <Divider />
                     {/* <MenuItem>
                       <ListItemIcon>

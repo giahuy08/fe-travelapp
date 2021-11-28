@@ -18,9 +18,11 @@ import Rating from "@mui/material/Rating";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 function TourItem() {
   const [value, setValue] = React.useState(null);
-  const [tour, setTour] = useState("");
+  const [tour, setTour] = useState();
   const [vehicles,setVehicles] = useState([])
   const [error, setError] = useState(false);
   const [enterprise, setEnterprise] = useState({});
@@ -149,6 +151,11 @@ function TourItem() {
   return (
     <div>
       <Header />
+
+      {
+        !tour && <Box sx={{ display: 'flex' }}>
+        <CircularProgress />
+      </Box> || 
       <div className="touritem__content">
         <div className="touritem__content-slider">
           <div className="touritem__content-slider-item">
@@ -588,6 +595,7 @@ function TourItem() {
 
         {/* ---- */}
       </div>
+      }
       {openRating && <Vote handleClose={togglePopup} idTour={id} />}
       <Message notify={notify} setNotify={setNotify} />{" "}
     </div>

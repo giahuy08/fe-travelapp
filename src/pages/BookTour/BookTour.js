@@ -30,6 +30,8 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import callApi from "../../api/apiService";
 import Message from "../../components/Message/Message";
+import CircularProgress from '@mui/material/CircularProgress';
+
 const Img = styled("img")({
   margin: "auto",
   display: "block",
@@ -42,6 +44,7 @@ function BookTour() {
   const [open, setOpen] = React.useState(false);
   const [openDialog, setOpenDialog] = React.useState(false);
   const [idBookTour, setIdBookTour] = React.useState("");
+  const [isLoading, setIsLoading] = useState(true)
   const [notify, setNotify] = useState({
     isOpen: false,
     message: "",
@@ -83,7 +86,12 @@ function BookTour() {
 
       const content = await response.json();
       console.log(content.data);
-      setHistory(content.data);
+      setTimeout(function() {
+
+        setHistory(content.data);
+      }, 1000);
+      
+   
     })();
   }, []);
 
@@ -152,7 +160,10 @@ function BookTour() {
   return (
     <div>
       <Header />
-
+      {
+        history.length===0 && <Box sx={{ display: 'flex' }} style={{marginTop:'150px', marginLeft:'50%',marginBottom:'100px'}}>
+        <CircularProgress />
+      </Box> ||
       <React.Fragment>
         <CssBaseline />
         <Container Width="80%" sx={{ marginTop: "90px" }}>
@@ -268,6 +279,7 @@ function BookTour() {
           </Box>
         </Container>
       </React.Fragment>
+      }
       <Dialog
         open={openDialog}
         onClose={handleClickDialogClose}

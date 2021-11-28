@@ -1,5 +1,5 @@
-import React, {  useEffect, useState } from "react";
-import { Link,useHistory } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import "./head.css";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
@@ -12,7 +12,7 @@ import Tooltip from "@mui/material/Tooltip";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
-import FlightIcon from '@mui/icons-material/Flight';
+import FlightIcon from "@mui/icons-material/Flight";
 
 function Head() {
   const [user, setUser] = useState("");
@@ -37,9 +37,7 @@ function Head() {
   const logout = () => {
     window.localStorage.removeItem("accessToken");
     window.localStorage.removeItem("avatar");
-    history.push("/login")
-
-  
+    history.push("/login");
   };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -59,70 +57,9 @@ function Head() {
   const handleClose1 = () => {
     setAnchorEl1(null);
   };
-  console.log('user' + user)
-  if (!user) {
+  console.log("user" + user);
+  if (!localStorage.getItem("accessToken")) {
     return (
-      <div className="header">
-          <div className="header__wrapper">
-          <nav className="header__navbar">
-            <div className="header__navbar-logo__box">
-              <div className="header__logo hide-on-mobile">
-                <Link to="/" className="header__logo-link">
-                  <img src="./images/logo.png" alt="" className="logo" />
-                </Link>
-              </div>
-              <div className="header__search-box">
-                <div className="header__input">
-                  <i className="fa fa-search"></i>
-
-                  <input
-                    type="text"
-                    placeholder="Tìm kiếm"
-                    className="header__input-search"
-                  />
-                </div>
-
-                <button className="btn header__search-box-btn">
-                  <i className="fa fa-search"></i>
-                </button>
-              </div>
-            </div>
-
-            <div className="header__select hide-on-mobile-tablet">
-              <ul className="header__list">
-                <li className="header__item">
-                  <Link to="/" className="header__item-link">
-                    Trang chủ
-                  </Link> 
-                </li>
-                <li className="header__item">
-                  <Link
-                    to="/alltour"
-                    className="header__item-link header__item-link--notify"
-                  >
-                    Tour
-                  </Link>
-                </li>
-
-                <li className="header__item">
-                  <Link to="/sign-up" className="header__item-link">
-                    Đăng ký
-                  </Link>
-                </li>
-                <li className="header__item">
-                  <Link to="/login" className="header__item-link">
-                    Đăng nhập
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </nav>
-        </div>
-      </div>
-    );
-  } else {
-    return (
-   
       <div className="header">
         <div className="header__wrapper">
           <nav className="header__navbar">
@@ -154,7 +91,67 @@ function Head() {
                 <li className="header__item">
                   <Link to="/" className="header__item-link">
                     Trang chủ
-                  </Link> 
+                  </Link>
+                </li>
+                <li className="header__item">
+                  <Link
+                    to="/alltour"
+                    className="header__item-link header__item-link--notify"
+                  >
+                    Tour
+                  </Link>
+                </li>
+
+                <li className="header__item">
+                  <Link to="/sign-up" className="header__item-link">
+                    Đăng ký
+                  </Link>
+                </li>
+                <li className="header__item">
+                  <Link to="/login" className="header__item-link">
+                    Đăng nhập
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="header">
+        <div className="header__wrapper">
+          <nav className="header__navbar">
+            <div className="header__navbar-logo__box">
+              <div className="header__logo hide-on-mobile">
+                <Link to="/" className="header__logo-link">
+                  <img src="./images/logo.png" alt="" className="logo" />
+                </Link>
+              </div>
+              <div className="header__search-box">
+                <div className="header__input">
+                  <i className="fa fa-search"></i>
+
+                  <input
+                    type="text"
+                    placeholder="Tìm kiếm"
+                    className="header__input-search"
+                  />
+                </div>
+
+                <button className="btn header__search-box-btn">
+                  <i className="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+
+            <div className="header__select hide-on-mobile-tablet">
+              <ul className="header__list">
+                <li className="header__item">
+                  <Link to="/" className="header__item-link">
+                    Trang chủ
+                  </Link>
                 </li>
                 <li className="header__item">
                   <Link
@@ -184,7 +181,15 @@ function Head() {
                         )}
 
                         {localStorage.getItem("avatar") !== null && (
-                           <img src={localStorage.getItem("avatar")} alt="" style={{width:32,height:32,borderRadius:'50%'}} />
+                          <img
+                            src={localStorage.getItem("avatar")}
+                            alt=""
+                            style={{
+                              width: 32,
+                              height: 32,
+                              borderRadius: "50%",
+                            }}
+                          />
                         )}
                       </IconButton>
                     </Tooltip>
@@ -223,24 +228,24 @@ function Head() {
                     transformOrigin={{ horizontal: "right", vertical: "top" }}
                     anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
                   >
-                    <MenuItem>
-                      <Avatar />
-                      <Link
-                        style={{ textDecoration: "none", color: "#4A4A4A" }}
-                        to="/user/profile"
-                      >
+                    <Link
+                      style={{ textDecoration: "none", color: "#4A4A4A",display: "block"  , width: "100%" }}
+                      to="/user/profile"
+                    >
+                      <MenuItem>
+                        <Avatar style={{marginRight:20}} />
                         Profile
-                      </Link>
-                    </MenuItem>
-                    <MenuItem style={{width:226}}>
-                      <FlightIcon />
+                      </MenuItem>
+                    </Link>
                       <Link
-                        style={{ textDecoration: "none", color: "#4A4A4A",marginLeft:"14px" }}
+                        style={{ textDecoration: "none", color: "#4A4A4A",display: "block"  , width: "100%" }}
                         to="/booktour"
                       >
+                    <MenuItem style={{ width: 226 }}>
+                      <FlightIcon  style={{marginRight:20}}/>
                         Đặt Tour
-                      </Link>
                     </MenuItem>
+                      </Link>
                     <Divider />
                     {/* <MenuItem>
                       <ListItemIcon>
@@ -254,7 +259,7 @@ function Head() {
                       </ListItemIcon>
                       Settings
                     </MenuItem> */}
-                    <MenuItem   onClick={logout}>
+                    <MenuItem onClick={logout}>
                       <ListItemIcon>
                         <Logout fontSize="small" />
                       </ListItemIcon>
@@ -263,7 +268,7 @@ function Head() {
                       
                         onClick={logout}
                       > */}
-                        Logout
+                      Logout
                       {/* </Link>  */}
                     </MenuItem>
                   </Menu>
