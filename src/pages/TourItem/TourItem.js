@@ -21,6 +21,7 @@ import DatePicker from "@mui/lab/DatePicker";
 function TourItem() {
   const [value, setValue] = React.useState(null);
   const [tour, setTour] = useState("");
+  const [vehicles,setVehicles] = useState([])
   const [error, setError] = useState(false);
   const [enterprise, setEnterprise] = useState({});
   const [rooms, setRooms] = useState([]);
@@ -84,17 +85,29 @@ function TourItem() {
         getRoomsOfHotel(res.data.data);
         getTableOfHotel(res.data.data);
         getEnterprise(res.data.data);
+       
         setTour(res.data.data);
       })
       .catch((err) => {
         console.log(err);
       });
+      getVehicle();
   }, []);
 
   const getEnterprise = async (tour) => {
     await callApi(`enterprise/getOneEnterprise?id=${tour.idEnterprise}`, "GET")
       .then((res) => {
         setEnterprise(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getVehicle = async () => {
+    await callApi(`vehicle/getAllVehicleOfTour?idTour=${id}`, "GET")
+      .then((res) => {
+        setVehicles(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -131,7 +144,7 @@ function TourItem() {
   useEffect(() => {
     getComment();
   }, []);
-  var list = [];
+ 
 
   return (
     <div>
@@ -457,6 +470,8 @@ function TourItem() {
                   </div>
                 </div>
               ))}
+
+
           </div>
 
           {/* Tabel */}
@@ -489,6 +504,35 @@ function TourItem() {
                   <div className="touritem-feature__table-price feature-bold">
                     Giá: {table.price} đ
                   </div>
+                </div>
+              ))}
+          </div>
+
+          <div className="touritem__content-wrap-feature">
+            <h3 className="touritem-feature__name">
+              {" "}
+              <CountertopsIcon style={{ fontSize: 30 }} /> Phương tiện
+            </h3>
+            {!vehicles && (
+              <div className="touritem-feature__table-size feature-bold">
+                Chưa có thông tin bàn
+              </div>
+            )}
+            {vehicles &&
+              vehicles.map((vehicle, index) => (
+                <div className="touritem-feature__table " key={index}>
+                  <div className="touritem-feature__table-name feature-bold">
+                    Tên: {vehicle.name}
+                  </div>
+                  <div className="touritem-feature__table-size feature-bold">
+                    Biển số: {vehicle.vehicleNumber}
+                  </div>
+                  {(vehicle.imagesVehicle).map((image, index)=>(
+
+                    <img className="touritem-feature__vehicle-img " src={image} alt="" key={index}/>
+                  ))}
+                   
+                 
                 </div>
               ))}
           </div>
