@@ -386,7 +386,7 @@ function TourItem() {
           </div>
           {/* TEs */}
 
-          <Carousel show={2.5} slide={2} swiping={true} transition={0.5}>
+          {/* <Carousel show={2.5} slide={2} swiping={true} transition={0.5}>
             <div className="touritem__some__hotel-container">
               <Link to="#" className="touritem__some__hotel-link">
                 <img
@@ -433,7 +433,7 @@ function TourItem() {
                 </p>
               </Link>
             </div>
-          </Carousel>
+          </Carousel> */}
         </div>
 
         {/* ---- */}

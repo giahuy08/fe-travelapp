@@ -66,8 +66,8 @@ function Header() {
             <div className="header__normal__select hide-on-mobile-tablet">
               <ul className="header__normal__list">
                 <li className="header__normal__item">
-                  <Link to="#" className="header__normal__item-link">
-                    Guide
+                  <Link to="/" className="header__normal__item-link">
+                    Trang chủ
                   </Link> 
                 </li>
                 <li className="header__normal__item">
@@ -113,8 +113,8 @@ function Header() {
             <div className="header__select hide-on-mobile-tablet">
               <ul className="header__list">
                 <li className="header__item">
-                  <Link to="#" className="header__item-link">
-                    Guide
+                  <Link to="/" className="header__item-link">
+                    Trang chủ
                   </Link> 
                 </li>
                 <li className="header__item">

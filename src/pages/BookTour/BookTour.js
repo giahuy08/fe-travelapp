@@ -186,7 +186,7 @@ function BookTour() {
               </FormControl>
             </div>
 
-            {history.map((tour, index) => {
+            {history && history.map((tour, index) => {
               if (status === 4 || status === tour.status)
                 return (
                   <div key={index}>
