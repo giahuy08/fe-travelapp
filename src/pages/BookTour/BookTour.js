@@ -73,7 +73,7 @@ function BookTour() {
 
   const [history, setHistory] = useState([]);
   let defaultUrl =
-    "http://localhost:5000/booktour/getUserBookTour?skip=&limit=";
+    "https://app-travelbe.herokuapp.com/booktour/getUserBookTour?skip=&limit=";
   useEffect(() => {
     (async () => {
       const response = await fetch(defaultUrl, {

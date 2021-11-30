@@ -18,12 +18,12 @@ import Rating from "@mui/material/Rating";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 function TourItem() {
   const [value, setValue] = React.useState(null);
   const [tour, setTour] = useState();
-  const [vehicles,setVehicles] = useState([])
+  const [vehicles, setVehicles] = useState([]);
   const [error, setError] = useState(false);
   const [enterprise, setEnterprise] = useState({});
   const [rooms, setRooms] = useState([]);
@@ -40,20 +40,27 @@ function TourItem() {
     type: "",
   });
 
-
   const handlebooking = (e) => {
     e.preventDefault();
-    if(value){
-
-      historyback.push({
-        pathname: `/payment/${id}`,
-        state: {
-          code: code,
-          date: value,
-          time: tour.time,
-        },
-      });
-    }else{
+    if (value) {
+      if (localStorage.getItem("accessToken") !== null) {
+        historyback.push({
+          pathname: `/payment/${id}`,
+          state: {
+            code: code,
+            date: value,
+            time: tour.time,
+          },
+        });
+      }
+      else{
+        setNotify({
+          isOpen: true,
+          message: "Vui lòng đăng nhập",
+          type: "warning",
+        });
+      }
+    } else {
       setNotify({
         isOpen: true,
         message: "Vui lòng chọn ngày khởi hành",
@@ -87,13 +94,13 @@ function TourItem() {
         getRoomsOfHotel(res.data.data);
         getTableOfHotel(res.data.data);
         getEnterprise(res.data.data);
-       
+
         setTour(res.data.data);
       })
       .catch((err) => {
         console.log(err);
       });
-      getVehicle();
+    getVehicle();
   }, []);
 
   const getEnterprise = async (tour) => {
@@ -146,180 +153,181 @@ function TourItem() {
   useEffect(() => {
     getComment();
   }, []);
- 
 
   return (
     <div>
       <Header />
-
-      {
-        !tour && <Box sx={{ display: 'flex' }}>
-        <CircularProgress />
-      </Box> || 
-      <div className="touritem__content">
-        <div className="touritem__content-slider">
-          <div className="touritem__content-slider-item">
-            <img
-              src={image[0]}
-              alt=""
-              className="touritem__content-slider-img"
-            />
-          </div>
-          {/* <Carousel show={2} slide={1} swiping={true}></Carousel> */}
-        </div>
-        <span
-          onClick={() => {
-            historyback.goBack();
-          }}
-          style={{
-            cursor: "pointer",
-            fontSize: 15,
-            margin: "10px",
-            display: "block",
-            color: "#fe5a2d",
-          }}
-        >
-          <ArrowBackIosIcon
-            style={{ fontSize: "20px", marginBottom: "-4px" }}
-          />
-          <ArrowBackIosIcon
-            style={{
-              fontSize: "20px",
-              marginBottom: "-4px",
-              marginLeft: "-10px",
-            }}
-          />
-          Quay lại
-        </span>
-        <div className="touritem__content-wrap">
-          <div className="touritem__content-wrap-info">
-            <h2 className="touritem__name">{tour.name}</h2>
-            <div className="touritem__place">
-              <i className="fas fa-map-marker-alt"></i>
-              {tour.place}
-            </div>
-            <div className="touritem__detail">{tour.detail}</div>
-          </div>
-
-          <div className="touritem__content-wrap-booking">
-            <div className="touritem__content-booking-price">
-              {tour.payment} đ/ {tour.time}
-            </div>
-
-            <div className="touritem__content-booking-vehicle">
-              Phương tiện: Xe khách
-            </div>
-
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="code"
-              label="Mã khuyến mãi"
-              name="code"
-              autoFocus
-              value={code}
-              onChange={handleChangeCode}
-            />
-            <div
-              className="touritem__content-booking-errorcode"
-              style={{ marginBottom: "10px" }}
-            >
-              {errorCode}
-            </div>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DatePicker
-                disablePast
-                label="Chọn ngày khởi hành"
-                value={value}
-                onChange={(newValue) => {
-                  setValue(newValue);
-                }}
-                renderInput={(params) => <TextField {...params} fullWidth />}
+      {(!tour && (
+        <Box sx={{ display: "flex" }}>
+          <CircularProgress />
+        </Box>
+      )) || (
+        <div className="touritem__content">
+          <div className="touritem__content-slider">
+            <div className="touritem__content-slider-item">
+              <img
+                src={image[0]}
+                alt=""
+                className="touritem__content-slider-img"
               />
-            </LocalizationProvider>
-            {console.log(value)}
-            <div className="touritem__content-booking-vehicle">
-              Tổng tiền: {tour.payment} đ
             </div>
-           
-              <button className="touritem__content-booking-btn" onClick={handlebooking}>
+            {/* <Carousel show={2} slide={1} swiping={true}></Carousel> */}
+          </div>
+          <span
+            onClick={() => {
+              historyback.goBack();
+            }}
+            style={{
+              cursor: "pointer",
+              fontSize: 15,
+              margin: "10px",
+              display: "block",
+              color: "#fe5a2d",
+            }}
+          >
+            <ArrowBackIosIcon
+              style={{ fontSize: "20px", marginBottom: "-4px" }}
+            />
+            <ArrowBackIosIcon
+              style={{
+                fontSize: "20px",
+                marginBottom: "-4px",
+                marginLeft: "-10px",
+              }}
+            />
+            Quay lại
+          </span>
+          <div className="touritem__content-wrap">
+            <div className="touritem__content-wrap-info">
+              <h2 className="touritem__name">{tour.name}</h2>
+              <div className="touritem__place">
+                <i className="fas fa-map-marker-alt"></i>
+                {tour.place}
+              </div>
+              <div className="touritem__detail">{tour.detail}</div>
+            </div>
+
+            <div className="touritem__content-wrap-booking">
+              <div className="touritem__content-booking-price">
+                {tour.payment} đ/ {tour.time}
+              </div>
+
+              <div className="touritem__content-booking-vehicle">
+                Phương tiện: Xe khách
+              </div>
+
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="code"
+                label="Mã khuyến mãi"
+                name="code"
+                autoFocus
+                value={code}
+                onChange={handleChangeCode}
+              />
+              <div
+                className="touritem__content-booking-errorcode"
+                style={{ marginBottom: "10px" }}
+              >
+                {errorCode}
+              </div>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  disablePast
+                  label="Chọn ngày khởi hành"
+                  value={value}
+                  onChange={(newValue) => {
+                    setValue(newValue);
+                  }}
+                  renderInput={(params) => <TextField {...params} fullWidth />}
+                />
+              </LocalizationProvider>
+              {console.log(value)}
+              <div className="touritem__content-booking-vehicle">
+                Tổng tiền: {tour.payment} đ
+              </div>
+
+              <button
+                className="touritem__content-booking-btn"
+                onClick={handlebooking}
+              >
                 Đặt ngay
               </button>
-         
-          </div>
-        </div>
-
-        {/* Others */}
-        <div className="touritem__content-wrap-feature">
-          <div className="touritem__content-wrap-feature-item">
-            <h3 className="touritem-feature__name">Tiện nghi chỗ ở</h3>
-            <div className="touritem-feature__name__desc">
-              Giới thiệu về các tiện nghi và dịch vụ tại nơi lưu trú
-            </div>
-            <div className="touritem-feature__list">
-              <div className="touritem-feature__item">
-                <i className="fas fa-wifi"></i> Wifi
-              </div>
-              <div className="touritem-feature__item">
-                <i className="fas fa-tv"></i> Tivi
-              </div>
-
-              <div className="touritem-feature__item">
-                <i className="fas fa-fan"></i> Air conditioner
-              </div>
             </div>
           </div>
-          <div className="touritem__content-wrap-feature-item">
-            <div className="touritem-feature__name__desc">Tiện ích bếp</div>
-            <div className="touritem-feature__list">
-              <div className="touritem-feature__item">
-                <i className="fas fa-wifi"></i> Wifi
-              </div>
-              <div className="touritem-feature__item">
-                <i className="fas fa-tv"></i> Tivi
-              </div>
 
-              <div className="touritem-feature__item">
-                <i className="fas fa-fan"></i> Air conditioner
+          {/* Others */}
+          <div className="touritem__content-wrap-feature">
+            <div className="touritem__content-wrap-feature-item">
+              <h3 className="touritem-feature__name">Tiện nghi chỗ ở</h3>
+              <div className="touritem-feature__name__desc">
+                Giới thiệu về các tiện nghi và dịch vụ tại nơi lưu trú
               </div>
-            </div>
-          </div>
-          <div className="touritem__content-wrap-feature-item">
-            <h3 className="touritem-feature__name">Giá phòng</h3>
-            <div className="touritem-feature__name__desc">
-              Giá có thể tăng vào cuối tuần hoặc ngày lễ
-            </div>
-            <div className="touritem-feature-price">
-              {tour.payment} / {tour.time}
-            </div>
-          </div>
-        </div>
+              <div className="touritem-feature__list">
+                <div className="touritem-feature__item">
+                  <i className="fas fa-wifi"></i> Wifi
+                </div>
+                <div className="touritem-feature__item">
+                  <i className="fas fa-tv"></i> Tivi
+                </div>
 
-        {/* Hotel */}
-        <div className="touritem__hotel">
-          <h3 className="touritem-hotel__name">Khách sạn</h3>
-          <div className="touritem__content-wrap-hotel">
-            <div className="touritem__hotel-img-wrap">
-              <img
-                src={enterprise.logo}
-                className="touritem__hotelitem-img"
-                alt=""
-              />
-            </div>
-            <div className="touritem__content-wrap-content">
-              <h3 className="touritem-hotelitem__name">{enterprise.name}</h3>
-              <div className="touritem-hotel__table">
-                <div className="touritem-hotel__table-detail">
-                  {enterprise.detail}
+                <div className="touritem-feature__item">
+                  <i className="fas fa-fan"></i> Air conditioner
                 </div>
               </div>
             </div>
+            <div className="touritem__content-wrap-feature-item">
+              <div className="touritem-feature__name__desc">Tiện ích bếp</div>
+              <div className="touritem-feature__list">
+                <div className="touritem-feature__item">
+                  <i className="fas fa-wifi"></i> Wifi
+                </div>
+                <div className="touritem-feature__item">
+                  <i className="fas fa-tv"></i> Tivi
+                </div>
+
+                <div className="touritem-feature__item">
+                  <i className="fas fa-fan"></i> Air conditioner
+                </div>
+              </div>
+            </div>
+            <div className="touritem__content-wrap-feature-item">
+              <h3 className="touritem-feature__name">Giá phòng</h3>
+              <div className="touritem-feature__name__desc">
+                Giá có thể tăng vào cuối tuần hoặc ngày lễ
+              </div>
+              <div className="touritem-feature-price">
+                {tour.payment} / {tour.time}
+              </div>
+            </div>
           </div>
-          {/* TEst */}
-          <div className="cards">
-            {/* <Carousel show={2.5} slide={2} swiping={true} transition={0.5}> */}
-            {/* {enterprises && enterprises.map((enterprise)=>(
+
+          {/* Hotel */}
+          <div className="touritem__hotel">
+            <h3 className="touritem-hotel__name">Khách sạn</h3>
+            <div className="touritem__content-wrap-hotel">
+              <div className="touritem__hotel-img-wrap">
+                <img
+                  src={enterprise.logo}
+                  className="touritem__hotelitem-img"
+                  alt=""
+                />
+              </div>
+              <div className="touritem__content-wrap-content">
+                <h3 className="touritem-hotelitem__name">{enterprise.name}</h3>
+                <div className="touritem-hotel__table">
+                  <div className="touritem-hotel__table-detail">
+                    {enterprise.detail}
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* TEst */}
+            <div className="cards">
+              {/* <Carousel show={2.5} slide={2} swiping={true} transition={0.5}> */}
+              {/* {enterprises && enterprises.map((enterprise)=>(
 
             <div class="card">
               <img
@@ -356,7 +364,7 @@ function TourItem() {
             </div>
             ))} */}
 
-            {/* <div class="card">
+              {/* <div class="card">
               <img
                 src="https://images.unsplash.com/reserve/HgZuGu3gSD6db21T3lxm_San%20Zenone.jpg?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
                 alt=""
@@ -389,11 +397,11 @@ function TourItem() {
                 </div>
               </div>
             </div> */}
-            {/* </Carousel> */}
-          </div>
-          {/* TEs */}
+              {/* </Carousel> */}
+            </div>
+            {/* TEs */}
 
-          {/* <Carousel show={2.5} slide={2} swiping={true} transition={0.5}>
+            {/* <Carousel show={2.5} slide={2} swiping={true} transition={0.5}>
             <div className="touritem__some__hotel-container">
               <Link to="#" className="touritem__some__hotel-link">
                 <img
@@ -441,161 +449,161 @@ function TourItem() {
               </Link>
             </div>
           </Carousel> */}
-        </div>
+          </div>
 
-        {/* ---- */}
-        <div className="feature-flex">
-          <div className="touritem__content-wrap-feature">
-            <h3 className="touritem-feature__name">
-              {" "}
-              <MeetingRoomIcon style={{ fontSize: 30 }} /> Phòng
-            </h3>
-            {!rooms && (
-              <div className="touritem-feature__table-size">
-                Chưa có thông tin phòng
-              </div>
-            )}
-
-            {rooms &&
-              rooms.map((room, index) => (
-                <div className="touritem-feature__table" key={index}>
-                  <div className="touritem-feature__table-size feature-bold">
-                    Size: {room.size}
-                  </div>
-                  <div className="touritem-feature__table-floor feature-bold">
-                    Tầng: {room.floor}
-                  </div>
-                  <div className="touritem-feature__table-floor feature-bold">
-                    Giường: {room.bed}
-                  </div>
-                  <div className="touritem-feature__table-floor feature-bold">
-                    Chi tiết: {room.detail}
-                  </div>
-
-                  <div className="touritem-feature__table-price feature-bold">
-                    Giá: {room.price} đ
-                  </div>
+          {/* ---- */}
+          <div className="feature-flex">
+            <div className="touritem__content-wrap-feature">
+              <h3 className="touritem-feature__name">
+                {" "}
+                <MeetingRoomIcon style={{ fontSize: 30 }} /> Phòng
+              </h3>
+              {!rooms && (
+                <div className="touritem-feature__table-size">
+                  Chưa có thông tin phòng
                 </div>
-              ))}
+              )}
 
+              {rooms &&
+                rooms.map((room, index) => (
+                  <div className="touritem-feature__table" key={index}>
+                    <div className="touritem-feature__table-size feature-bold">
+                      Size: {room.size}
+                    </div>
+                    <div className="touritem-feature__table-floor feature-bold">
+                      Tầng: {room.floor}
+                    </div>
+                    <div className="touritem-feature__table-floor feature-bold">
+                      Giường: {room.bed}
+                    </div>
+                    <div className="touritem-feature__table-floor feature-bold">
+                      Chi tiết: {room.detail}
+                    </div>
 
+                    <div className="touritem-feature__table-price feature-bold">
+                      Giá: {room.price} đ
+                    </div>
+                  </div>
+                ))}
+            </div>
+
+            {/* Tabel */}
+
+            <div className="touritem__content-wrap-feature">
+              <h3 className="touritem-feature__name">
+                {" "}
+                <CountertopsIcon style={{ fontSize: 30 }} /> Bàn
+              </h3>
+              {!tables && (
+                <div className="touritem-feature__table-size feature-bold">
+                  Chưa có thông tin bàn
+                </div>
+              )}
+              {tables &&
+                tables.map((table, index) => (
+                  <div className="touritem-feature__table " key={index}>
+                    <div className="touritem-feature__table-name feature-bold">
+                      Tên: {table.name}
+                    </div>
+                    <div className="touritem-feature__table-size feature-bold">
+                      Size: {table.size}
+                    </div>
+                    <div className="touritem-feature__table-floor feature-bold">
+                      Tầng: {table.floor}
+                    </div>
+                    <div className="touritem-feature__table-detail feature-bold">
+                      Chi tiết: {table.detail}
+                    </div>
+                    <div className="touritem-feature__table-price feature-bold">
+                      Giá: {table.price} đ
+                    </div>
+                  </div>
+                ))}
+            </div>
+
+            <div className="touritem__content-wrap-feature">
+              <h3 className="touritem-feature__name">
+                {" "}
+                <CountertopsIcon style={{ fontSize: 30 }} /> Phương tiện
+              </h3>
+              {!vehicles && (
+                <div className="touritem-feature__table-size feature-bold">
+                  Chưa có thông tin bàn
+                </div>
+              )}
+              {vehicles &&
+                vehicles.map((vehicle, index) => (
+                  <div className="touritem-feature__table " key={index}>
+                    <div className="touritem-feature__table-name feature-bold">
+                      Tên: {vehicle.name}
+                    </div>
+                    <div className="touritem-feature__table-size feature-bold">
+                      Biển số: {vehicle.vehicleNumber}
+                    </div>
+                    {vehicle.imagesVehicle.map((image, index) => (
+                      <img
+                        className="touritem-feature__vehicle-img "
+                        src={image}
+                        alt=""
+                        key={index}
+                      />
+                    ))}
+                  </div>
+                ))}
+            </div>
           </div>
 
-          {/* Tabel */}
+          {/* ---- */}
+
+          {/* Đánh giá */}
 
           <div className="touritem__content-wrap-feature">
-            <h3 className="touritem-feature__name">
-              {" "}
-              <CountertopsIcon style={{ fontSize: 30 }} /> Bàn
-            </h3>
-            {!tables && (
-              <div className="touritem-feature__table-size feature-bold">
-                Chưa có thông tin bàn
-              </div>
-            )}
-            {tables &&
-              tables.map((table, index) => (
-                <div className="touritem-feature__table " key={index}>
-                  <div className="touritem-feature__table-name feature-bold">
-                    Tên: {table.name}
-                  </div>
-                  <div className="touritem-feature__table-size feature-bold">
-                    Size: {table.size}
-                  </div>
-                  <div className="touritem-feature__table-floor feature-bold">
-                    Tầng: {table.floor}
-                  </div>
-                  <div className="touritem-feature__table-detail feature-bold">
-                    Chi tiết: {table.detail}
-                  </div>
-                  <div className="touritem-feature__table-price feature-bold">
-                    Giá: {table.price} đ
-                  </div>
-                </div>
-              ))}
-          </div>
+            <Stack direction="row" spacing={2}>
+              <Button
+                endIcon={<SendIcon />}
+                style={{
+                  backgroundColor: "#FF512F",
+                  color: "#fff",
+                  width: "200px",
+                  marginTop: "80px",
+                  marginBottom: "80px",
+                }}
+                onClick={() => {
+                  setOpenRating(!openRating);
+                }}
+              >
+                Viết đánh giá
+              </Button>
+            </Stack>
 
-          <div className="touritem__content-wrap-feature">
-            <h3 className="touritem-feature__name">
-              {" "}
-              <CountertopsIcon style={{ fontSize: 30 }} /> Phương tiện
-            </h3>
-            {!vehicles && (
-              <div className="touritem-feature__table-size feature-bold">
-                Chưa có thông tin bàn
-              </div>
-            )}
-            {vehicles &&
-              vehicles.map((vehicle, index) => (
-                <div className="touritem-feature__table " key={index}>
-                  <div className="touritem-feature__table-name feature-bold">
-                    Tên: {vehicle.name}
-                  </div>
-                  <div className="touritem-feature__table-size feature-bold">
-                    Biển số: {vehicle.vehicleNumber}
-                  </div>
-                  {(vehicle.imagesVehicle).map((image, index)=>(
-
-                    <img className="touritem-feature__vehicle-img " src={image} alt="" key={index}/>
-                  ))}
-                   
-                 
-                </div>
-              ))}
-          </div>
-        </div>
-
-        {/* ---- */}
-
-        {/* Đánh giá */}
-
-        <div className="touritem__content-wrap-feature">
-          <Stack direction="row" spacing={2}>
-            <Button
-              endIcon={<SendIcon />}
-              style={{
-                backgroundColor: "#FF512F",
-                color: "#fff",
-                width: "200px",
-                marginTop: "80px",
-                marginBottom: "80px",
-              }}
-              onClick={() => {
-                setOpenRating(!openRating);
-              }}
-            >
-              Viết đánh giá
-            </Button>
-          </Stack>
-
-          <h3 className="touritem-feature__name">Đánh giá - từ khách hàng</h3>
-          <div className="touritem-feature-star">
-            <div>Đánh giá</div>
-            {console.log("star" + Number(tour.star).toFixed(1))}
-            <Rating
-              name="half-rating-read"
-              value={Number(tour.star).toFixed(1)}
-              readOnly
-              precision={0.1}
-            />
-          </div>
-          {comments &&
-            comments.map((comment, index) => (
-              <Comment
-                key={index}
-                star={comment.star}
-                imagesReview={comment.imagesReview}
-                comment={comment.comment}
-                avatar={comment.avatarUser}
-                nameUser={comment.nameUser}
+            <h3 className="touritem-feature__name">Đánh giá - từ khách hàng</h3>
+            <div className="touritem-feature-star">
+              <div>Đánh giá</div>
+              {console.log("star" + Number(tour.star).toFixed(1))}
+              <Rating
+                name="half-rating-read"
+                value={Number(tour.star).toFixed(1)}
+                readOnly
+                precision={0.1}
               />
-            ))}
-          {comments.length === 0 && <h3>Chưa có đánh giá nào</h3>}
-        </div>
+            </div>
+            {comments &&
+              comments.map((comment, index) => (
+                <Comment
+                  key={index}
+                  star={comment.star}
+                  imagesReview={comment.imagesReview}
+                  comment={comment.comment}
+                  avatar={comment.avatarUser}
+                  nameUser={comment.nameUser}
+                />
+              ))}
+            {comments.length === 0 && <h3>Chưa có đánh giá nào</h3>}
+          </div>
 
-        {/* ---- */}
-      </div>
-      }
+          {/* ---- */}
+        </div>
+      )}
       {openRating && <Vote handleClose={togglePopup} idTour={id} />}
       <Message notify={notify} setNotify={setNotify} />{" "}
     </div>

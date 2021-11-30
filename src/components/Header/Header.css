@@ -28,7 +28,6 @@
 
 .header__normal__navbar {
     display: flex;
-    height: var(--header__normal-height);
     width: 100%;
     align-items: center;
     justify-content: space-between;

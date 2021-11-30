@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let API_URL="http://localhost:5000";
+let API_URL="https://app-travelbe.herokuapp.com";
 
 export default function callApi(endpoint, method='GET',body){
     return axios({

@@ -17,7 +17,7 @@ import FlightIcon from "@mui/icons-material/Flight";
 function Head() {
   const [user, setUser] = useState("");
   const history = useHistory();
-  let defaultUrl = "http://localhost:5000/user/findUserByToken";
+  let defaultUrl = "https://app-travelbe.herokuapp.com/user/findUserByToken";
   useEffect(() => {
     (async () => {
       const response = await fetch(defaultUrl, {
@@ -69,7 +69,7 @@ function Head() {
                   <img src="./images/logo.png" alt="" className="logo" />
                 </Link>
               </div>
-              <div className="header__search-box">
+              {/* <div className="header__search-box">
                 <div className="header__input">
                   <i className="fa fa-search"></i>
 
@@ -83,7 +83,7 @@ function Head() {
                 <button className="btn header__search-box-btn">
                   <i className="fa fa-search"></i>
                 </button>
-              </div>
+              </div> */}
             </div>
 
             <div className="header__select hide-on-mobile-tablet">
