@@ -34,7 +34,7 @@ function Tour() {
     }
     const category = GetURLParameter('category')
     console.log(category)   
-    let defaultUrl = 'https://app-travelbe.herokuapp.com/tour/findTourByCategory?category='+category+'&skip=' + page + '&limit=6'
+    let defaultUrl = 'https://app-travelbe.herokuapp.com//tour/findTourByCategory?category='+category+'&skip=' + page + '&limit=6'
     useEffect(() => {
         (
             
@@ -66,7 +66,7 @@ function Tour() {
             setPage(1)
             setwordSearch('')
         } else {
-            let link = 'https://app-travelbe.herokuapp.com/tour/findTourByName?name=' + wordSearch
+            let link = 'https://app-travelbe.herokuapp.com//tour/findTourByName?name=' + wordSearch
             const response = await fetch(link, {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },

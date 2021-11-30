@@ -81,7 +81,7 @@ export default function CodeSignUp() {
         .then((res) => {
           console.log(res);
          
-          setNotify({isOpen:true, message:'Cập nhật mật khẩu thành công', type:'success'})
+          setNotify({isOpen:true, message:'Tài khoản được tạo thành công', type:'success'})
           setTimeout(function() {
 
             history.push({pathname:"/login"});
@@ -111,7 +111,7 @@ export default function CodeSignUp() {
             alignItems: "center",
           }}
         >
-          <Link href="/">
+          <Link to="/">
             <img
               src="./images/logo.png"
               alt=""

@@ -1,201 +1,242 @@
-import React, { useState } from 'react';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
-import NativeSelect from '@mui/material/NativeSelect';
+import React, { useState } from "react";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import NativeSelect from "@mui/material/NativeSelect";
 import callApi from "../../api/apiService";
 import { useHistory } from "react-router";
-
+import Message from "../../components/Message/Message";
 
 const theme = createTheme();
-
 
 export default function SignUp() {
   const [user, setUser] = useState({
     activeStep: 0,
     labelWidth: 0,
     error: false, //<---- here
-    errorMessage: {} //<-----here
-  })
-  const [value, setValue] = useState()
+    errorMessage: {}, //<-----here
+  });
+  const [value, setValue] = useState();
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
   const handleValue = (e) => {
-
-    setValue(e.target.value)
-    console.log(e.target.value)
-  }
-
+    setValue(e.target.value);
+    console.log(e.target.value);
+  };
 
   const handleNext = (e) => {
     const data = new FormData(e.currentTarget);
     let isError = false;
-    if (data.get('firstName') === '') {
+    if (data.get("firstName") === "") {
       isError = true;
-      setUser(prev =>({
+      setUser((prev) => ({
         ...prev,
         error: true,
-        errorMessage: { ...prev.errorMessage, firstName: "Không được bỏ trống" }
-      }));
-    }else {
-      setUser(prev =>({
-        ...prev,
-        error: true,
-        errorMessage: { ...prev.errorMessage, firstName: "" }
-      }));
-    }
-    if (data.get('lastName') === '')  {
-      isError = true;
-      setUser(prev =>({
-        ...prev,
-        error: true,
-        errorMessage: { ...prev.errorMessage, lastName: "Không được bỏ trống" }
-      }));
-    }else {
-      setUser(prev =>({
-        ...prev,
-        error: true,
-        errorMessage: { ...prev.errorMessage, lastName: "" }
-      }));
-    }
-    if (data.get("email") === '') {
-      isError = true;
-      setUser(prev => ({
-        ...prev,
-        error: true,
-        errorMessage: { ...prev.errorMessage, email: "Nhập địa chỉ Email của bạn" }
-      }));
-    }
-    else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.get("email"))) {
-      isError = true;
-      setUser(prev => ({
-        ...prev,
-        error: true,
-        errorMessage: { ...prev.errorMessage, email: "Email không hợp lệ" }
+        errorMessage: {
+          ...prev.errorMessage,
+          firstName: "Không được bỏ trống",
+        },
       }));
     } else {
-      setUser(prev => ({
+      setUser((prev) => ({
         ...prev,
         error: true,
-        errorMessage: { ...prev.errorMessage, email: "" }
+        errorMessage: { ...prev.errorMessage, firstName: "" },
       }));
     }
-    
-    if (data.get('phone') === '') {
+    if (data.get("lastName") === "") {
       isError = true;
-      setUser(prev =>({
+      setUser((prev) => ({
         ...prev,
         error: true,
-        errorMessage: { ...prev.errorMessage, phone: "Nhập số điện thoại của bạn" }
+        errorMessage: { ...prev.errorMessage, lastName: "Không được bỏ trống" },
       }));
     } else {
-      setUser(prev =>({
+      setUser((prev) => ({
         ...prev,
         error: true,
-        errorMessage: { ...prev.errorMessage, phone: "" }
+        errorMessage: { ...prev.errorMessage, lastName: "" },
       }));
     }
-    if (data.get('address') === '') {
+    if (data.get("email") === "") {
       isError = true;
-      setUser(prev =>({
+      setUser((prev) => ({
         ...prev,
         error: true,
-        errorMessage: { ...prev.errorMessage, address: "Nhập địa chỉ của bạn" }
+        errorMessage: {
+          ...prev.errorMessage,
+          email: "Nhập địa chỉ Email của bạn",
+        },
       }));
-    }else {
-      setUser(prev =>({
-        ...prev,
-        error: true,
-        errorMessage: { ...prev.errorMessage, address: "" }
-      }));
-    }
-    if (data.get('password') === '') {
+    } else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.get("email"))) {
       isError = true;
-      setUser(prev =>({
+      setUser((prev) => ({
         ...prev,
         error: true,
-        errorMessage: { ...prev.errorMessage, password: "Nhập mật khẩu" }
-      }));
-    }else {
-      setUser(prev =>({
-        ...prev,
-        error: true,
-        errorMessage: { ...prev.errorMessage, password: "" }
-      }));
-    }
-    if (data.get('confirm-password') === '') {
-      isError = true;
-      setUser(prev =>({
-        ...prev,
-        error: true,
-        errorMessage: { ...prev.errorMessage, confirmpassword: "Xác nhận lại mật khẩu" }
-      }));
-    }else if (data.get('confirm-password') !== data.get('password')) {
-      isError = true;
-      setUser(prev =>({
-        ...prev,
-        error: true,
-        errorMessage: { ...prev.errorMessage, confirmpassword: "Xác nhận lại mật khẩu không đúng" }
+        errorMessage: { ...prev.errorMessage, email: "Email không hợp lệ" },
       }));
     } else {
-      setUser(prev =>({
+      setUser((prev) => ({
         ...prev,
         error: true,
-        errorMessage: { ...prev.errorMessage, confirmpassword: ""}
+        errorMessage: { ...prev.errorMessage, email: "" },
       }));
     }
-    if(!isError){
+
+    if (data.get("phone") === "") {
+      isError = true;
+      setUser((prev) => ({
+        ...prev,
+        error: true,
+        errorMessage: {
+          ...prev.errorMessage,
+          phone: "Nhập số điện thoại của bạn",
+        },
+      }));
+    } else {
+      setUser((prev) => ({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, phone: "" },
+      }));
+    }
+    if (data.get("address") === "") {
+      isError = true;
+      setUser((prev) => ({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, address: "Nhập địa chỉ của bạn" },
+      }));
+    } else {
+      setUser((prev) => ({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, address: "" },
+      }));
+    }
+    if (data.get("password") === "") {
+      isError = true;
+      setUser((prev) => ({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, password: "Nhập mật khẩu" },
+      }));
+    } else {
+      setUser((prev) => ({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, password: "" },
+      }));
+    }
+    if (data.get("confirm-password") === "") {
+      isError = true;
+      setUser((prev) => ({
+        ...prev,
+        error: true,
+        errorMessage: {
+          ...prev.errorMessage,
+          confirmpassword: "Xác nhận lại mật khẩu",
+        },
+      }));
+    } else if (data.get("confirm-password") !== data.get("password")) {
+      isError = true;
+      setUser((prev) => ({
+        ...prev,
+        error: true,
+        errorMessage: {
+          ...prev.errorMessage,
+          confirmpassword: "Xác nhận lại mật khẩu không đúng",
+        },
+      }));
+    } else {
+      setUser((prev) => ({
+        ...prev,
+        error: true,
+        errorMessage: { ...prev.errorMessage, confirmpassword: "" },
+      }));
+    }
+    if (!isError) {
       //add else if for validating other fields (if any)
-      setUser(prevState => ({
+      setUser((prevState) => ({
         activeStep: prevState.activeStep + 1,
         error: false,
-        errorMessage: {}
+        errorMessage: {},
       }));
     }
-  }
+  };
 
-  const history = useHistory()
+  const history = useHistory();
   const handleSubmit = (e) => {
-    
     const data = new FormData(e.currentTarget);
     handleNext(e);
     e.preventDefault();
-    console.log(data.get('firstName'));
-    if (data.get('firstName') !== "" && data.get('lastName') !== "" &&
-      data.get("email") !== "" && data.get("password") !== "" &&
-      data.get('phone') !== "" && data.get('address') !== "" &&
-      data.get('password') === data.get('confirm-password')) {
+    console.log(data.get("firstName"));
+    if (
+      data.get("firstName") !== "" &&
+      data.get("lastName") !== "" &&
+      data.get("email") !== "" &&
+      data.get("password") !== "" &&
+      data.get("phone") !== "" &&
+      data.get("address") !== "" &&
+      data.get("password") === data.get("confirm-password")
+    ) {
       let user = {
-        email: data.get('email'),
-        password: data.get('password'),
-        phone: "0" + data.get('phone'),
-        name: data.get('firstName') + " " + data.get('lastName'),
-        address: data.get('address'),
+        email: data.get("email"),
+        password: data.get("password"),
+        phone: "0" + data.get("phone"),
+        name: data.get("firstName") + " " + data.get("lastName"),
+        address: data.get("address"),
       };
       console.log(user);
       callApi(`user/register`, "POST", user)
         .then((res) => {
-         
-          history.push({pathname:"/otp-signup",state:{email: data.get("email")}});
+          setNotify({
+            isOpen: true,
+            message: "Đăng ký thành công",
+            type: "success",
+          });
+          setTimeout(function () {
+            history.push({
+              pathname: "/otp-signup",
+              state: { email: data.get("email") },
+            });
+          }, 3000);
 
+          // if(res.data.data.message ==='Email already exists'){
+          //   setNotify({isOpen:true, message:'Tài khoản đã tồn tại', type:'warning'})
+          //   history.push({pathname:"/otp-signup",state:{email: data.get("email")}});
+          // }
         })
         .catch((err) => {
           console.log(err);
+          if (err.response.data.statusCode === 300) {
+            setNotify({
+              isOpen: true,
+              message: "Tài khoản đã tồn tại",
+              type: "warning",
+            });
+            // history.push({pathname:"/otp-signup",state:{email: data.get("email")}});
+          }
         });
     }
   };
 
   return (
-    <ThemeProvider theme={theme} >
-      <Container component="main" maxWidth="xs" >
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
@@ -226,8 +267,7 @@ export default function SignUp() {
                 <TextField
                   error={!!user.errorMessage.firstName}
                   helperText={
-                    user.errorMessage.firstName &&
-                    user.errorMessage.firstName
+                    user.errorMessage.firstName && user.errorMessage.firstName
                   }
                   autoComplete="given-name"
                   name="firstName"
@@ -242,8 +282,7 @@ export default function SignUp() {
                 <TextField
                   error={!!user.errorMessage.lastName}
                   helperText={
-                    user.errorMessage.lastName &&
-                    user.errorMessage.lastName
+                    user.errorMessage.lastName && user.errorMessage.lastName
                   }
                   required
                   fullWidth
@@ -257,8 +296,7 @@ export default function SignUp() {
                 <TextField
                   error={!!user.errorMessage.email}
                   helperText={
-                    user.errorMessage.email &&
-                    user.errorMessage.email
+                    user.errorMessage.email && user.errorMessage.email
                   }
                   required
                   fullWidth
@@ -515,8 +553,7 @@ export default function SignUp() {
                 <TextField
                   error={!!user.errorMessage.phone}
                   helperText={
-                    user.errorMessage.phone &&
-                    user.errorMessage.phone
+                    user.errorMessage.phone && user.errorMessage.phone
                   }
                   type="number"
                   autoComplete="given-phone"
@@ -526,15 +563,13 @@ export default function SignUp() {
                   id="phone"
                   label="Số điện thoại"
                   autoFocus
-                  
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   error={!!user.errorMessage.address}
                   helperText={
-                    user.errorMessage.address &&
-                    user.errorMessage.address
+                    user.errorMessage.address && user.errorMessage.address
                   }
                   required
                   fullWidth
@@ -549,8 +584,7 @@ export default function SignUp() {
                 <TextField
                   error={!!user.errorMessage.password}
                   helperText={
-                    user.errorMessage.password &&
-                    user.errorMessage.password
+                    user.errorMessage.password && user.errorMessage.password
                   }
                   required
                   fullWidth
@@ -597,13 +631,14 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/login" variant="body2">
+                <Link to="/login" variant="body2">
                   Bạn đã có tài khoản rồi? Đăng nhập ngay
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
+        <Message notify={notify} setNotify={setNotify} />
       </Container>
     </ThemeProvider>
   );
