@@ -101,8 +101,8 @@ function Payment() {
           setHelperText("Code không phù hợp");
         }
         if (err.response.data.message === "The tour is already booked") {
-          setErrorCode("Tour đã book vui lòng vào history để thanh toán");
-          setHelperText("Tour đã book vui lòng vào history để thanh toán");
+          setErrorCode("Tour đã book vui lòng vào Đặt tour để thanh toán");
+          setHelperText("Tour đã book vui lòng vào Đặt tour để thanh toán");
         }
       });
   };
@@ -124,7 +124,7 @@ function Payment() {
       .then((res) => {
         setNotify({
           isOpen: true,
-          message: "Đặt tour thành công vào history để xem",
+          message: "Đặt tour thành công vào Đặt tour để xem",
           type: "success",
         });
         setTimeout(function() {
@@ -140,8 +140,8 @@ function Payment() {
           setHelperText("Code không phù hợp");
         }
         if (err.response.data.message === "The tour is already booked") {
-          setErrorCode("Tour đã book vui lòng vào history để thanh toán");
-          setHelperText("Tour đã book vui lòng vào history để thanh toán");
+          setErrorCode("Tour đã book vui lòng vào Đặt tour để thanh toán");
+          setHelperText("Tour đã book vui lòng vào Đặt tour để thanh toán");
         }
       });
   };
