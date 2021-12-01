@@ -16,7 +16,7 @@ import FlightIcon from "@mui/icons-material/Flight";
 function Header() {
   const [user, setUser] = useState("");
   const history = useHistory()
-  let defaultUrl = "https://app-travelbe.herokuapp.com//user/findUserByToken";
+  let defaultUrl = "https://app-travelbe.herokuapp.com/user/findUserByToken";
   useEffect(() => {
     (async () => {
       const response = await fetch(defaultUrl, {
