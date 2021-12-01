@@ -222,7 +222,7 @@ export default function SignUp() {
         })
         .catch((err) => {
           console.log(err);
-          if (err.response.data.statusCode === 300) {
+          if (err.response.data.message === 'Email already exists') {
             setNotify({
               isOpen: true,
               message: "Tài khoản đã tồn tại",
