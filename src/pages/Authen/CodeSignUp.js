@@ -155,7 +155,7 @@ export default function CodeSignUp() {
               style={{ backgroundColor: "#F1786a" }}
               sx={{ mt: 3, mb: 2 }}
             >
-              Cập nhật mật khẩu
+              Xác nhận mã otp
             </Button>
           </Box>
         </Box>

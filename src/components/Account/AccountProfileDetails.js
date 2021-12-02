@@ -84,7 +84,7 @@ const AccountProfileDetails = (props) => {
         phone: data.get('phone'),
       }
       console.log(user);
-      callApi(`/user/editProfile`, "PUT", user)
+      callApi(`user/editProfile`, "PUT", user)
         .then((res) => {
           console.log(res);
           console.log(res.data.data.token)

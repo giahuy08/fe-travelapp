@@ -143,7 +143,7 @@ const ChangePasswordDetails = (props) => {
                     console.log(res);
                     console.log(res.data.data.token)
                     localStorage.getItem("accessToken", res.data.data.token)
-                    history.push("/");
+                    window.location.reload()
 
                 })
                 .catch((err) => {

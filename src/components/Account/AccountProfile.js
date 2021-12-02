@@ -42,6 +42,7 @@ const AccountProfile = (props) => {
             console.log(res);
             console.log(res.data.data.token)
             localStorage.getItem("accessToken", res.data.data.token)
+            localStorage.setItem("avatar",res.data.data.avatar)
             setUser(res.data.data);
           })
           .catch((err) => {

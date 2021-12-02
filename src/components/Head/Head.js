@@ -18,21 +18,21 @@ function Head() {
   const [user, setUser] = useState("");
   const history = useHistory();
   let defaultUrl = "https://app-travelbe.herokuapp.com/user/findUserByToken";
-  useEffect(() => {
-    (async () => {
-      const response = await fetch(defaultUrl, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
-        },
-      });
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await fetch(defaultUrl, {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: "Bearer " + localStorage.getItem("accessToken"),
+  //       },
+  //     });
 
-      const content = await response.json();
-      console.log(content.data.name);
-      setUser(content.data.name);
-    })();
-  }, []);
+  //     const content = await response.json();
+  //     console.log(content.data.name);
+  //     setUser(content.data.name);
+  //   })();
+  // }, []);
 
   const logout = () => {
     window.localStorage.removeItem("accessToken");
